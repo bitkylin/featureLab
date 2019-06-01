@@ -35,4 +35,5 @@ dependencies {
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.57'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.3'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.12'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
