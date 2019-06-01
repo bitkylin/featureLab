@@ -1,7 +1,7 @@
 package cc.bitky.demo.featurelab.tools.aoplock;
 
 import cc.bitky.demo.featurelab.tools.aoplock.bo.DistributedLock;
-import cc.bitky.demo.featurelab.util.KyLogger;
+import cc.bitky.demo.featurelab.util.PayLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class AopLockAspect {
+
+    private static final PayLog PAY_LOG = PayLog.of(log);
 
     private final AnnotationResolver annotationResolver;
 
@@ -43,7 +45,7 @@ public class AopLockAspect {
         String fixed = annotationResolver.resolver(joinPoint, aopLock.fixed());
         String updated = annotationResolver.resolver(joinPoint, aopLock.updated());
         if (StringUtils.isBlank(updated) || StringUtils.isBlank(fixed)) {
-            KyLogger.getInstance().logError(null, "分布式锁构建失败 " + ",fixed: " + fixed + ",updated: " + updated);
+            PAY_LOG.error(null, "分布式锁构建失败 " + ",fixed: " + fixed + ",updated: " + updated);
             return joinPoint.proceed();
         } else {
             String lockStr = "BIT_KY:" + fixed + ":" + updated;

@@ -1,6 +1,6 @@
 package cc.bitky.demo.featurelab.tools.aoplock;
 
-import cc.bitky.demo.featurelab.util.KyLogger;
+import cc.bitky.demo.featurelab.util.PayLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -16,6 +16,8 @@ import java.lang.reflect.Method;
 @Component
 @Slf4j
 public class AnnotationResolver {
+
+    private static final PayLog PAY_LOG = PayLog.of(log);
     /**
      * 复杂表达式解析器
      * 能解析类似 #{pojo.field} 或者 {pojoParent.pojoChild.field} 的表达式<p>
@@ -100,7 +102,7 @@ public class AnnotationResolver {
                     value = simpleResolver(joinPoint, newStr);
                 }
             } catch (Exception e) {
-                KyLogger.getInstance().logError(e, "自定义注解AopLock表达式解析失败");
+                PAY_LOG.error(e, "自定义注解AopLock表达式解析失败");
             }
         } else {
             // 作为普通字符串

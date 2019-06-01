@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogBo {
-    private String traceId;
-    private String uid;
-    private String msg;
+public class LogPackage {
+    private String traceNo;
+    private String id;
+    private Object msg;
 }
