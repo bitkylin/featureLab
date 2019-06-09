@@ -1,6 +1,6 @@
 package cc.bitky.demo.featurelab.tools.aoplock.bo;
 
-import cc.bitky.demo.featurelab.util.PayLog;
+import cc.bitky.demo.featurelab.util.KyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DistributedLock {
 
-    private static final PayLog PAY_LOG = PayLog.of(log);
+    private static final KyLog PAY_LOG = KyLog.of(log);
 
     public void lock(String str) {
         PAY_LOG.info(null, "已加锁，key:" + str);

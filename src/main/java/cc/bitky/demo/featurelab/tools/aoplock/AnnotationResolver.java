@@ -1,6 +1,6 @@
 package cc.bitky.demo.featurelab.tools.aoplock;
 
-import cc.bitky.demo.featurelab.util.PayLog;
+import cc.bitky.demo.featurelab.util.KyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class AnnotationResolver {
 
-    private static final PayLog PAY_LOG = PayLog.of(log);
+    private static final KyLog PAY_LOG = KyLog.of(log);
     /**
      * 复杂表达式解析器
      * 能解析类似 #{pojo.field} 或者 {pojoParent.pojoChild.field} 的表达式<p>

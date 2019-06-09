@@ -9,16 +9,16 @@ import org.slf4j.Logger;
 /**
  * @author limingliang
  */
-public class PayLog {
+public class KyLog {
 
     private final Logger log;
 
-    private PayLog(Logger logger) {
+    private KyLog(Logger logger) {
         log = logger;
     }
 
-    public static PayLog of(Logger logger) {
-        return new PayLog(logger);
+    public static KyLog of(Logger logger) {
+        return new KyLog(logger);
     }
 
     public void error(Throwable e, Object errorMsg) {
@@ -31,7 +31,6 @@ public class PayLog {
 
     /**
      * 打印 error 日志
-     * 注：根据异常进行判断，智能降低报警级别，所以可能最终打印 warn 日志
      */
     public void error(Throwable e, Object errorMsg, String id, String traceId) {
         LogPackage logBo = LogPackage.builder()

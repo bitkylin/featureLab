@@ -1,7 +1,7 @@
 package cc.bitky.demo.featurelab.tools.aoplock;
 
 import cc.bitky.demo.featurelab.tools.aoplock.bo.DistributedLock;
-import cc.bitky.demo.featurelab.util.PayLog;
+import cc.bitky.demo.featurelab.util.KyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopLockAspect {
 
-    private static final PayLog PAY_LOG = PayLog.of(log);
+    private static final KyLog PAY_LOG = KyLog.of(log);
 
     private final AnnotationResolver annotationResolver;
 

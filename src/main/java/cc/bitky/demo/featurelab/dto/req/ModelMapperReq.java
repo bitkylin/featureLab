@@ -1,6 +1,5 @@
 package cc.bitky.demo.featurelab.dto.req;
 
-import cc.bitky.demo.featurelab.constants.StatusEnum;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
