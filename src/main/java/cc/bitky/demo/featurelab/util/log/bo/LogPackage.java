@@ -1,4 +1,4 @@
-package cc.bitky.demo.featurelab.util.bo;
+package cc.bitky.demo.featurelab.util.log.bo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

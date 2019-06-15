@@ -1,7 +1,7 @@
-package cc.bitky.demo.featurelab.util;
+package cc.bitky.demo.featurelab.util.log;
 
-import cc.bitky.demo.featurelab.util.bo.LogPackage;
-import cc.bitky.demo.featurelab.util.bo.LogPayLoad;
+import cc.bitky.demo.featurelab.util.log.bo.LogPackage;
+import cc.bitky.demo.featurelab.util.log.bo.LogPayLoad;
 import cc.bitky.demo.featurelab.util.threadlocal.KyThreadLocal;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;

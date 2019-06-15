@@ -1,6 +1,6 @@
 package cc.bitky.demo.featurelab.tools.aoplock;
 
-import cc.bitky.demo.featurelab.util.KyLog;
+import cc.bitky.demo.featurelab.util.log.KyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
