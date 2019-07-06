@@ -4,19 +4,19 @@ package cc.bitky.demo.featurelab.constants;
  * @author liMingLiang
  * @date 2019-05-03
  */
-public enum StatusEnum {
+public enum TestStatusEnum {
     /**
      *
      */
     SUCCESS("成功"),
     FAILURE("失败"),
-    PROCESSING("处理中"),
-    UNKNOWN("未知"),
+    PROCESS("处理中"),
+    UNKNOWN2("未知"),
     ;
 
     private String caption;
 
-    StatusEnum(String caption) {
+    TestStatusEnum(String caption) {
         this.caption = caption;
     }
 }

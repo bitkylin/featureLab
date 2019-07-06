@@ -1,7 +1,9 @@
 package cc.bitky.demo.featurelab;
 
+import cc.bitky.demo.featurelab.tools.validator.PayPropertyValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,8 +11,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class FeaturelabApplicationTests {
 
+    @Autowired
+    private PayPropertyValidator validator;
+
     @Test
     public void contextLoads() {
+        validator.requireVerified(null);
     }
 
 }

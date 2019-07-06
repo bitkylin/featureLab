@@ -1,19 +1,28 @@
 package cc.bitky.demo.featurelab.dto.input;
 
 import cc.bitky.demo.featurelab.constants.StatusEnum;
-import com.alibaba.fastjson.JSONObject;
+import cc.bitky.demo.featurelab.dto.bo.Work;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.Date;
 
 /**
  * @author liMingLiang
  * @date 2019-05-03
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ModelMapperInput {
 
-    private Instant expireDate;
+    private Date expireDate;
+
+    private Instant expireInstant;
 
     private String name;
 
@@ -21,7 +30,11 @@ public class ModelMapperInput {
 
     private String category;
 
-    private JSONObject extend;
+    private String extend;
 
-    private StatusEnum status;
+    private Work work;
+
+    private StatusEnum status1;
+
+    private StatusEnum status2;
 }
