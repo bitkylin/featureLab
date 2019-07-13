@@ -14,7 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LogPayLoad {
+
+    /**
+     * 简短描述
+     */
     private String msg;
+
+    /**
+     * 对象负载
+     */
     private Object load;
 
     public static LogPayLoad of(String msg, Object load) {

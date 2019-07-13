@@ -29,9 +29,6 @@ public class KyLog {
         error(e, errorMsg, id, getDefaultTraceNo());
     }
 
-    /**
-     * 打印 error 日志
-     */
     public void error(Throwable e, Object errorMsg, String id, String traceId) {
         LogPackage logBo = LogPackage.builder()
                 .traceNo(traceId)
