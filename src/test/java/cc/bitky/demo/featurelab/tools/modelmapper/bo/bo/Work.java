@@ -1,4 +1,4 @@
-package cc.bitky.demo.featurelab.dto.bo;
+package cc.bitky.demo.featurelab.tools.modelmapper.bo.bo;
 
 import cc.bitky.demo.featurelab.constants.StatusEnum;
 import cc.bitky.demo.featurelab.constants.WorkType;

@@ -1,8 +1,8 @@
-package cc.bitky.demo.featurelab.dto.req;
+package cc.bitky.demo.featurelab.tools.modelmapper.bo.req;
 
 import cc.bitky.demo.featurelab.constants.CategoryEnum;
 import cc.bitky.demo.featurelab.constants.TestStatusEnum;
-import cc.bitky.demo.featurelab.dto.bo.Work;
+import cc.bitky.demo.featurelab.tools.modelmapper.bo.bo.Work;
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

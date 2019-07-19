@@ -1,4 +1,4 @@
-package cc.bitky.demo.featurelab.dto.resp;
+package cc.bitky.demo.featurelab.tools.modelmapper.bo.resp;
 
 import lombok.Data;
 
