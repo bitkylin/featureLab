@@ -1,10 +1,10 @@
 package cc.bitky.demo.featurelab.controller;
 
-import cc.bitky.demo.featurelab.tools.modelmapper.bo.input.ModelMapperInput;
-import cc.bitky.demo.featurelab.tools.modelmapper.bo.req.ModelMapperReq;
-import com.alibaba.fastjson.JSON;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -23,8 +23,7 @@ public class AopController {
     }
 
     @PostMapping("/lock")
-    public String aopLock(@Valid @RequestBody ModelMapperReq req) {
-        ModelMapperInput input = modelMapper.map(req, ModelMapperInput.class);
-        return JSON.toJSONString(input);
+    public String aopLock(@Valid @RequestBody Object req) {
+        return null;
     }
 }
