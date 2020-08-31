@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FeaturelabApplication {
+public class FeatureLabApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FeaturelabApplication.class, args);
+        SpringApplication.run(FeatureLabApplication.class, args);
     }
-
 }

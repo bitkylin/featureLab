@@ -1,5 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'org.springframework.boot' version '2.3.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
 }
 
@@ -15,7 +16,12 @@ configurations {
     }
 }
 repositories {
-    mavenCentral()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+//  maven { url 'http://registry.caijj.net/repository/maven-public/' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+//    mavenCentral()
 }
 
 dependencies {
@@ -29,11 +35,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    compile group: 'com.google.guava', name: 'guava', version: '27.1-jre'
+    compile group: 'org.mockito', name: 'mockito-core', version: '3.5.0'
+    compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.3'
-    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.57'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.60'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.12'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.13'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }

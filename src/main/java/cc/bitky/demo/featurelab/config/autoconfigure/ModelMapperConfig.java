@@ -1,4 +1,4 @@
-package cc.bitky.demo.featurelab.config;
+package cc.bitky.demo.featurelab.config.autoconfigure;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

@@ -1,39 +1,63 @@
 package cc.bitky.demo.featurelab.service.guavalab;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
-
-import static java.util.stream.Collectors.groupingBy;
-
 /**
  * @author liMingLiang
  * @date 2019-05-11
  */
 public class MyGuava {
-    public static void paramCheck() {
-        Preconditions.checkState(true);
-        Preconditions.checkNotNull("");
-    }
 
     public static void main(String[] args) {
-        sub(Long.MAX_VALUE, 500);
-        sub(Long.MAX_VALUE / 100, 500);
-
+        int[] a1 = {1, 6, 3, 8, 2, 7};
+        int[] a = {54, 35, 48, 36, 27, 12, 44, 44, 8, 14, 26, 17, 28};
+        new MyGuava().quickSort(a, 0, a.length - 1);
         System.out.println();
-
-        sub(456000L, 500);
-        sub(343278456495347L, 500);
     }
 
-    private static void sub(Long aLong, int sub) {
-        Double aDouble = aLong.doubleValue();
-        aDouble = aDouble - sub;
-        System.out.println(aLong - aDouble);
-
-        Long bLong = aDouble.longValue();
-        System.out.println(aLong - bLong);
+    private void swap(int[] a, int i, int j) {
+        int k = a[i];
+        a[i] = a[j];
+        a[j] = k;
     }
 
-    public void test() {
+    private void quickSort(int[] a, int left, int right) {
+        if (right - left <= 1) {
+            sort(a, left, right);
+            return;
+        }
+
+        int p = middleByThree(a, left, right);
+        quickSort(a, left, p - 1);
+        quickSort(a, p, right);
+    }
+
+    private int middleByThree(int[] a, int left, int right) {
+        int middle = (left + right) / 2;
+
+        sort(a, left, middle, right);
+        int temp = a[middle];
+        swap(a, middle, --right);
+
+        while (true) {
+            while (a[++left] < temp) ;
+            while (a[--right] > temp) ;
+            if (left >= right) {
+                break;
+            } else {
+                swap(a, left, right);
+            }
+        }
+        return left;
+    }
+
+    private void sort(int[] a, int x, int y) {
+        if (a[x] > a[y]) {
+            swap(a, x, y);
+        }
+    }
+
+    private void sort(int[] a, int x, int y, int z) {
+        sort(a, x, y);
+        sort(a, x, z);
+        sort(a, y, z);
     }
 }
