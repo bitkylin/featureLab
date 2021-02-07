@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="casper-lab:main" external.linked.project.path="$MODULE_DIR$/../../casper-lab" external.root.project.path="$MODULE_DIR$/../../casper-lab" external.system.id="GRADLE" external.system.module.group="cc.bitky.featurelab" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../casper-lab">
+      <excludeFolder url="file://$MODULE_DIR$/../../casper-lab/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../casper-lab/build" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
