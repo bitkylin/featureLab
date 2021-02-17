@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 public class AnnotationResolver {
 
     private static final KyLog PAY_LOG = KyLog.of(log);
+
     /**
      * 复杂表达式解析器
      * 能解析类似 #{pojo.field} 或者 {pojoParent.pojoChild.field} 的表达式<p>
@@ -37,7 +38,7 @@ public class AnnotationResolver {
 
     private static String getValue(Object obj, int index, String[] strs) throws Exception {
         while (obj != null && index < strs.length - 1) {
-            Method method = obj.getClass().getDeclaredMethod(getMethodName(strs[index + 1]), null);
+            Method method = obj.getClass().getDeclaredMethod(getMethodName(strs[index + 1]));
             obj = method.invoke(obj);
             index++;
         }
