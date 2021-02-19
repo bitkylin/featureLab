@@ -1,23 +1,23 @@
 # 分布式消息-其他MQ与动手写MQ
 
+仿照Kafka，从零开始自实现 MQ，实现了 Kafka 中 80% 的基础功能。学习 Kafka 的话如果只是看文章和源码，可能不久就会忘了，还是自己实现一个「精简版」的 Kafka 吧，
+
 ## 实现功能概览
 
-已实现版本一、二、三所有的需求：
-
-#### 1、基于内存Queue实现生产和消费API
+1、基于内存Queue实现生产和消费API
 
 - [X] 1） 创建内存Queue， 作为底层消息存储
 - [X] 2） 定义Topic， 支持多个Topic
 - [X] 3） 定义Producer， 支持Send消息
 - [X] 4） 定义Consumer， 支持Poll消息
 
-#### 2、设计自定义Queue，实现消息确认和消费offset
+2、设计自定义Queue，实现消息确认和消费offset
 
 - [X] 1） 自定义内存Message数组模拟Queue。
 - [X] 2） 使用指针记录当前消息写入位置。
 - [X] 3） 对于每个命名消费者， 用指针记录消费位置
 
-#### 3、拆分broker和client(包括producer和consumer)
+3、拆分broker和client(包括producer和consumer)
 
 - [X] 1） 将Queue保存到web server端
 - [X] 2） 设计消息读写API接口， 确认接口， 提交offset接口
@@ -53,7 +53,7 @@
 
 ![mq-broker](./photo/mq-broker.jpg)
 
-## client
+### client
 
 1. 客户端通过topic名生产消息
 2. 客户端根据消费者组名和topic名消费消息
