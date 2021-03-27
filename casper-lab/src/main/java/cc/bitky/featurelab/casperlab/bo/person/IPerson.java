@@ -7,7 +7,10 @@ import cc.bitky.featurelab.casperlab.bo.work.Work;
  * @date 2019-07-13
  */
 public interface IPerson {
+
     String getName();
+
+    String getAlias();
 
     int getAge();
 

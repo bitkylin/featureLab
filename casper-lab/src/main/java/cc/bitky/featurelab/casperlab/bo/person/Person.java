@@ -23,4 +23,16 @@ abstract class Person implements IPerson {
         this.name = name;
         this.age = age;
     }
+
+    @Override
+    public Work getWork() {
+        System.out.println("不应该被调用");
+        return work;
+    }
+
+    @Override
+    public String getAlias() {
+        getWork();
+        return "DemoAlias";
+    }
 }

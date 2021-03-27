@@ -16,6 +16,12 @@ public class Student extends Person {
 
     @Override
     public Work getWork() {
+        System.out.println("hello");
         return work;
+    }
+
+    @Override
+    public String getAlias() {
+        return "alias:" + super.getAlias();
     }
 }
