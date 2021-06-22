@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="baseUser-alias1,baseUser-alias2" id="baseUser"
+          class="cc.bitky.demo.spring.beanlifecycle.domain.BaseUser">
+        <property name="id" value="520"/>
+        <property name="name" value="bitkylin"/>
+        <property name="age" value="8"/>
+    </bean>
+
+    <!-- 普通 beanDefinition GenericBeanDefinition -->
+    <!-- 合并后 GenericBeanDefinition 变成 RootBeanDefinition，并且覆盖 parent 相关配置-->
+    <!-- primary = true , 增加了一个 address 属性 -->
+    <bean id="user" class="cc.bitky.demo.spring.beanlifecycle.domain.User" parent="baseUser"
+          primary="true">
+        <property name="address" value="shangHai"/>
+        <property name="age" value="18"/>
+    </bean>
+
+    <bean id="userHolder" class="cc.bitky.demo.spring.beanlifecycle.domain.UserHolder"
+          init-method="init" destroy-method="doDestroy">
+        <property name="user" ref="user"/>
+    </bean>
+
+</beans>

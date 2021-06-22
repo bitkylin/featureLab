@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/dubbo-with-hmily/pom.xml" />
         <option value="$PROJECT_DIR$/bitkylin-mq/pom.xml" />
         <option value="$PROJECT_DIR$/bitkylin-kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/bitkylin-spring/pom.xml" />
       </list>
     </option>
   </component>
