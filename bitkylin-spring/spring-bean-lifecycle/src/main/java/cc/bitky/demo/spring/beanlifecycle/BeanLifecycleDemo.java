@@ -50,13 +50,13 @@ public class BeanLifecycleDemo {
         KyLog.log("");
 
         // 执行 Bean 销毁（容器内）
-        beanFactory.destroyBean("userHolder", userHolder);
+        //  beanFactory.destroyBean("userHolder", userHolder);
+
+        // 销毁 BeanFactory 中的单例 Bean，其中会调用方法 {beanFactory.destroyBean}
+        beanFactory.destroySingletons();
 
         // Bean 销毁并不意味着 Bean 垃圾回收了
         KyLog.log(userHolder);
-
-        // 销毁 BeanFactory 中的单例 Bean
-        beanFactory.destroySingletons();
 
         KyLog.log("");
         KyLog.log("--- gc ---");
