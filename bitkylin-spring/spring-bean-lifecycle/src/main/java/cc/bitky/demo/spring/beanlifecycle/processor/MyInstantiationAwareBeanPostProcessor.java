@@ -1,6 +1,6 @@
-package cc.bitky.demo.spring.beanlifecycle.beanpostprocessor;
+package cc.bitky.demo.spring.beanlifecycle.processor;
 
-import cc.bitky.demo.spring.beanlifecycle.domain.UserHolder;
+import cc.bitky.demo.spring.beanlifecycle.entity.UserHolder;
 import cc.bitky.demo.spring.beanlifecycle.util.KyLog;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;

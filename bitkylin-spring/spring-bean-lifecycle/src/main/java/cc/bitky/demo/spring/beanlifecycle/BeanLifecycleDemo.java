@@ -1,16 +1,60 @@
 package cc.bitky.demo.spring.beanlifecycle;
 
-import cc.bitky.demo.spring.beanlifecycle.beanpostprocessor.MyDestructionAwareBeanPostProcessor;
-import cc.bitky.demo.spring.beanlifecycle.beanpostprocessor.MyInstantiationAwareBeanPostProcessor;
-import cc.bitky.demo.spring.beanlifecycle.domain.BaseUser;
-import cc.bitky.demo.spring.beanlifecycle.domain.User;
-import cc.bitky.demo.spring.beanlifecycle.domain.UserHolder;
+import cc.bitky.demo.spring.beanlifecycle.processor.MyDestructionAwareBeanPostProcessor;
+import cc.bitky.demo.spring.beanlifecycle.processor.MyInstantiationAwareBeanPostProcessor;
+import cc.bitky.demo.spring.beanlifecycle.entity.BaseUser;
+import cc.bitky.demo.spring.beanlifecycle.entity.User;
+import cc.bitky.demo.spring.beanlifecycle.entity.UserHolder;
 import cc.bitky.demo.spring.beanlifecycle.util.KyLog;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 
 /**
+ * LifeCycle「11」InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation
+ * <p>
+ * --- 执行：bean实例化 ---
+ * <p>
+ * LifeCycle「12」InstantiationAwareBeanPostProcessor#postProcessAfterInstantiation
+ * <p>
+ * LifeCycle「13」InstantiationAwareBeanPostProcessor#postProcessProperties
+ * <p>
+ * --- 执行：bean属性赋值 ---
+ * <p>
+ * --- 注：一堆aware方法 ---
+ * <p>
+ * LifeCycle「21」BeanNameAware#setBeanName
+ * LifeCycle「22」BeanClassLoaderAware#setBeanClassLoader
+ * LifeCycle「23」BeanFactoryAware#setBeanFactory
+ * <p>
+ * LifeCycle「31」BeanPostProcessor#postProcessBeforeInitialization
+ * <p>
+ * --- 注：一堆初始化方法 ---
+ * <p>
+ * LifeCycle「41」@PostConstruct - CommonAnnotationBeanPostProcessor
+ * LifeCycle「42」InitializingBean#afterPropertiesSet
+ * LifeCycle「43」xml: init-method="init"
+ * <p>
+ * LifeCycle「51」BeanPostProcessor#postProcessAfterInitialization
+ * <p>
+ * --- 注：准备进行收尾 ---
+ * <p>
+ * LifeCycle「61」SmartInitializingSingleton#afterSingletonsInstantiated
+ * <p>
+ * --- 注：bean初始化完成 ---
+ * <p>
+ * BaseUser(id=520, name=bitkylin, age=8)
+ * User(super=BaseUser(id=520, name=bitkylin, age=18), address=shangHai)
+ * UserHolder(user=User(super=BaseUser(id=520, name=bitkylin, age=18), address=shangHai))
+ * <p>
+ * --- 执行：bean销毁 ---
+ * <p>
+ * LifeCycle「71」DestructionAwareBeanPostProcessor#postProcessBeforeDestruction
+ * <p>
+ * LifeCycle「81」@PreDestroy - CommonAnnotationBeanPostProcessor
+ * LifeCycle「82」DisposableBean#destroy
+ * LifeCycle「83」xml: destroy-method="doDestroy"
+ *
  * @author bitkylin
  */
 public class BeanLifecycleDemo {

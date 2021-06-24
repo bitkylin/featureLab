@@ -1,4 +1,4 @@
-package cc.bitky.demo.spring.beanlifecycle.domain;
+package cc.bitky.demo.spring.beanlifecycle.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

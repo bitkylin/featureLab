@@ -1,4 +1,4 @@
-package cc.bitky.demo.spring.beanlifecycle.domain;
+package cc.bitky.demo.spring.beanlifecycle.entity;
 
 import cc.bitky.demo.spring.beanlifecycle.util.KyLog;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package cc.bitky.demo.spring.beanlifecycle;
 
-import cc.bitky.demo.spring.beanlifecycle.domain.BaseUser;
+import cc.bitky.demo.spring.beanlifecycle.entity.BaseUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -10,6 +10,9 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import java.util.Map;
 
 /**
+ * 1. 基于XML，注册所有的BeanDefinition
+ * 2. 基于类型进行依赖查找
+ *
  * @author bitkylin
  */
 @Slf4j
