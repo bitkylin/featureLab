@@ -15,7 +15,7 @@
     <!-- 普通 beanDefinition GenericBeanDefinition -->
     <!-- 合并后 GenericBeanDefinition 变成 RootBeanDefinition，并且覆盖 parent 相关配置-->
     <!-- primary = true , 增加了一个 address 属性 -->
-    <bean id="user" class="cc.bitky.demo.spring.beanlifecycle.entity.User" parent="baseUser"
+    <bean name="user,user-alias1,user-alias2" class="cc.bitky.demo.spring.beanlifecycle.entity.User" parent="baseUser"
           primary="true">
         <property name="address" value="shangHai"/>
         <property name="age" value="18"/>

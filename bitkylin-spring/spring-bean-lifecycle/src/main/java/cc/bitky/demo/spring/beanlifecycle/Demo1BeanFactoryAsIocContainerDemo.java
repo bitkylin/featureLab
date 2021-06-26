@@ -7,11 +7,13 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
  * 1. 基于XML，注册所有的BeanDefinition
  * 2. 基于类型进行依赖查找
+ * 3. Bean 的id、name、alias「别名」
  *
  * @author bitkylin
  */
@@ -38,7 +40,7 @@ public class Demo1BeanFactoryAsIocContainerDemo {
             String[] alias = listableBeanFactory.getAliases("baseUser");
             String[] alias2 = listableBeanFactory.getAliases("baseUser-alias1");
             log.info("查找到的所有的 User 集合对象：" + users);
-            log.info(alias + " : " + alias2);
+            log.info("别名：" + Arrays.toString(alias) + " : " + Arrays.toString(alias2));
         }
     }
 

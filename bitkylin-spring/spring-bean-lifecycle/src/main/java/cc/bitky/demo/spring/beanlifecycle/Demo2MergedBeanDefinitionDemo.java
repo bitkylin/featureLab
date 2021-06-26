@@ -11,7 +11,7 @@ import org.springframework.core.io.support.EncodedResource;
 /**
  * 获取bean"user"时，进行了BeanDefinition合并
  */
-public class Demo3MergedBeanDefinitionDemo {
+public class Demo2MergedBeanDefinitionDemo {
 
     public static void main(String[] args) {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();

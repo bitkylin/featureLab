@@ -1,16 +1,25 @@
 package cc.bitky.demo.spring.beanlifecycle;
 
 import cc.bitky.demo.spring.beanlifecycle.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
 
 /**
  * 1. 基于注解注册BeanDefinition
  * 2. 基于BeanName进行依赖查找
  */
 @Configuration
+@Getter
+@Setter
 public class Demo4AnnotatedBeanDefinitionParsingDemo {
+
+    @Resource(name = "userTest")
+    private User userAutowired;
 
     public static void main(String[] args) {
         // 创建 BeanFactory 容器
@@ -31,6 +40,7 @@ public class Demo4AnnotatedBeanDefinitionParsingDemo {
         User userTest = applicationContext.getBean("userTest", User.class);
         System.out.println(demo);
         System.out.println(userTest);
+        System.out.println("userTest == userAutowired = " + (userTest == demo.getUserAutowired()));
     }
 
     @Bean

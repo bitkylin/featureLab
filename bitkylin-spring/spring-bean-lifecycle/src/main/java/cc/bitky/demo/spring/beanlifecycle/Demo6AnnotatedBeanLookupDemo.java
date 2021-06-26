@@ -5,6 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 
 /**
+ * 基于@Bean注解，与XML配置Bean的异同
  * @author bitkylin
  */
 public class Demo6AnnotatedBeanLookupDemo {

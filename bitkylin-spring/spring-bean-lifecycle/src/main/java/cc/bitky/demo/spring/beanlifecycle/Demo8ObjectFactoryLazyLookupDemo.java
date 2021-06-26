@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Lazy;
  * @see ObjectProvider
  */
 //@ImportResource("META-INF/dependency-lookup-context.xml")
-public class Demo7ObjectFactoryLazyLookupDemo {
+public class Demo8ObjectFactoryLazyLookupDemo {
 
     @Autowired
     private ObjectFactory<User> userObjectFactory;
@@ -36,12 +36,12 @@ public class Demo7ObjectFactoryLazyLookupDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // 注册 Configuration Class
-        context.register(Demo7ObjectFactoryLazyLookupDemo.class);
+        context.register(Demo8ObjectFactoryLazyLookupDemo.class);
 
         // 启动 Spring 应用上下文
         context.refresh();
 
-        Demo7ObjectFactoryLazyLookupDemo objectFactoryLazyLookupDemo = context.getBean(Demo7ObjectFactoryLazyLookupDemo.class);
+        Demo8ObjectFactoryLazyLookupDemo objectFactoryLazyLookupDemo = context.getBean(Demo8ObjectFactoryLazyLookupDemo.class);
 
 //        // 代理对象
         ObjectFactory<User> userObjectFactory = objectFactoryLazyLookupDemo.userObjectFactory;

@@ -2,15 +2,15 @@ package cc.bitky.demo.spring.beanlifecycle;
 
 import cc.bitky.demo.spring.beanlifecycle.entity.User;
 import cc.bitky.demo.spring.beanlifecycle.entity.UserContainer;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
 /**
- * {@link ObjectFactory} 延迟依赖查找示例
+ * 延迟依赖查找
+ * Spring启动时并不进行Bean的装配，在首次依赖查找时进行Bean的装配
  */
-public class Demo8LazyLookupDemo {
+public class Demo7LazyLookupDemo {
 
     @Bean
     @Lazy
@@ -22,6 +22,7 @@ public class Demo8LazyLookupDemo {
     }
 
     @Bean
+    @Lazy
     public static UserContainer userContainer() {
         return new UserContainer();
     }
@@ -29,7 +30,7 @@ public class Demo8LazyLookupDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // 注册 Configuration Class
-        context.register(Demo8LazyLookupDemo.class);
+        context.register(Demo7LazyLookupDemo.class);
 
         // 启动 Spring 应用上下文
         context.refresh();
