@@ -57,7 +57,7 @@ import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
  *
  * @author bitkylin
  */
-public class BeanLifecycleDemo {
+public class Demo5BeanLifecycleDemo {
 
     public static void main(String[] args) throws InterruptedException {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
