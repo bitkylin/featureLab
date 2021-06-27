@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * 1. 直接将指定类注册BeanDefinition
  * 2. 基于BeanName进行依赖查找
  */
-@Configuration
 public class Demo3BeanDefinitionRegisterDemo {
 
     public static void main(String[] args) {

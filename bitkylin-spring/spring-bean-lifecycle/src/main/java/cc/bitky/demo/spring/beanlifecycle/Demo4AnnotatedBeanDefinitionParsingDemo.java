@@ -3,9 +3,11 @@ package cc.bitky.demo.spring.beanlifecycle;
 import cc.bitky.demo.spring.beanlifecycle.entity.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Resource;
 
@@ -44,6 +46,7 @@ public class Demo4AnnotatedBeanDefinitionParsingDemo {
     }
 
     @Bean
+//    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public User userTest() {
         User user = new User();
         user.setName("userTest");
