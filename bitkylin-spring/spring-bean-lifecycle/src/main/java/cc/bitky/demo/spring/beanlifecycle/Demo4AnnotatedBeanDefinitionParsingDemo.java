@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * 1. 基于注解注册BeanDefinition
  * 2. 基于BeanName进行依赖查找
  */
-@Configuration
+//@Configuration
 @Getter
 @Setter
 public class Demo4AnnotatedBeanDefinitionParsingDemo {
