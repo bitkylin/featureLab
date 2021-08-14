@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/bitkylin-mq/pom.xml" />
         <option value="$PROJECT_DIR$/bitkylin-kafka/pom.xml" />
         <option value="$PROJECT_DIR$/bitkylin-spring/pom.xml" />
+        <option value="$PROJECT_DIR$/bitkylin-spring-boot/pom.xml" />
+        <option value="$PROJECT_DIR$/bitkylin-spring-boot/bitkylin-print-spring-boot-starter/pom.xml" />
       </list>
     </option>
   </component>

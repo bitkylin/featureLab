@@ -15,18 +15,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bitkylin-mq-client-consumer" />
-        <module name="bitky-demo-order" />
         <module name="spring-bean-lifecycle" />
+        <module name="bitkylin-mq-client-consumer" />
         <module name="bitkylin-mq-client-producer" />
-        <module name="bitky-demo-api" />
-        <module name="bitkylin-mq-api" />
         <module name="bitky-demo-account-common" />
-        <module name="bitkylin-kafka" />
+        <module name="bitkylin-mq-api" />
         <module name="bitky-demo-common" />
+        <module name="bitkylin-mq-server" />
+        <module name="bitkylin-print-spring-boot-starter" />
+        <module name="bitky-demo-order" />
+        <module name="bitky-demo-api" />
+        <module name="bitkylin-kafka" />
         <module name="bitky-demo-account-b" />
         <module name="bitky-demo-account-a" />
-        <module name="bitkylin-mq-server" />
+        <module name="bitkylin-spring-boot-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />
@@ -44,7 +46,9 @@
       <module name="bitkylin-mq-client-consumer" options="-parameters" />
       <module name="bitkylin-mq-client-producer" options="-parameters" />
       <module name="bitkylin-mq-server" options="-parameters" />
+      <module name="bitkylin-print-spring-boot-starter" options="-parameters" />
       <module name="bitkylin-spring" options="" />
+      <module name="bitkylin-spring-boot-demo" options="-parameters" />
     </option>
   </component>
 </project>
