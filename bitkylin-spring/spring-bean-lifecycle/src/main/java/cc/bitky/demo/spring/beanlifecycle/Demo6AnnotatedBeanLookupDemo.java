@@ -3,6 +3,7 @@ package cc.bitky.demo.spring.beanlifecycle;
 import cc.bitky.demo.spring.beanlifecycle.entity.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 基于@Bean注解，与XML配置Bean的异同
