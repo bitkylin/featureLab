@@ -29,75 +29,54 @@ public class ThreeSum {
 
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * 双指针法，两遍夹逼 O(n2)
+     * 简单解法「hash法」，内含很多冗余结果，故用 Set 去重
+     * 双指针法，外层循环 + 内层夹逼：O(n^2)
      */
     class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
             Arrays.sort(nums);
-            List<List<Integer>> list = new ArrayList<>();
-            for (int i = 0; i < nums.length - 2; i++) {
-                if (nums[i] > 0) {
-                    continue;
-                }
-                if (i > 0 && nums[i - 1] == nums[i]) {
-                    continue;
-                }
-                int j = i + 1, k = nums.length - 1;
-                while (j < k) {
-                    int sum = nums[i] + nums[j] + nums[k];
-                    if (sum < 0) {
-                        j++;
-                    } else if (sum > 0) {
-                        k--;
-                    } else {
-                        list.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
-                        while (j < k && nums[j] == nums[++j]) ;
-                        while (j < k && nums[k] == nums[--k]) ;
-                    }
+            Set<List<Integer>> res = new HashSet<>();
+            for (int k = 0; k < nums.length - 2; k++) {
+                for (int i = k + 1, j = nums.length - 1, sum = -nums[k]; i < j; ) {
+                    if (nums[i] + nums[j] == sum) {
+                        res.add(Arrays.asList(nums[k], nums[i++], nums[j--]));
+                    } else if (nums[i] + nums[j] > sum) j--;
+                    else i++;
                 }
             }
-            return list;
+            return new ArrayList<>(res);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * hash法，测试用例大部分通过，剩下的超时
+     * 根据上面的简单解法改进，去除所有重复结果，从而去除 Set
+     * 双指针法，外层循环 + 内层夹逼：O(n^2)
      */
     class Solution2 {
         public List<List<Integer>> threeSum(int[] nums) {
-            if (nums == null || nums.length < 3) {
-                return new ArrayList<>();
-            }
+            Arrays.sort(nums);
             List<List<Integer>> res = new ArrayList<>();
-            Set<String> memo = new HashSet<>();
-            for (int i = 0; i < nums.length; i++) {
-                int sum = -nums[i];
-                Set<Integer> set = new HashSet<>();
-                for (int j = i + 1; j < nums.length; j++) {
-                    if (!set.contains(sum - nums[j])) {
-                        set.add(nums[j]);
-                    } else {
-                        List<Integer> list = new ArrayList<>();
-                        list.add(nums[i]);
-                        list.add(nums[j]);
-                        list.add(sum - nums[j]);
-                        Collections.sort(list);
-                        StringBuilder builder = new StringBuilder();
-                        for (Integer value : list) {
-                            builder.append(value).append("#");
-                        }
-                        if (!memo.contains(builder.toString())) {
-                            memo.add(builder.toString());
-                            res.add(list);
-                        }
+            for (int k = 0; k < nums.length - 2; k++) {
+                if (k == 0 || nums[k] != nums[k - 1]) {
+                    if (nums[k] > 0) {
+                        continue;
+                    }
+                    for (int i = k + 1, j = nums.length - 1, sum = -nums[k]; i < j; ) {
+                        if (nums[i] + nums[j] == sum) {
+                            res.add(Arrays.asList(nums[k], nums[i], nums[j]));
+                            while (i < j && nums[i] == nums[++i]) ;
+                            while (i < j && nums[j] == nums[--j]) ;
+                        } else if (nums[i] + nums[j] > sum) j--;
+                        else i++;
                     }
                 }
             }
             return res;
         }
     }
+//leetcode submit region end(Prohibit modification and deletion)
+
 }

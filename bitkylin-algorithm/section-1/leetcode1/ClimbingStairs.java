@@ -32,26 +32,29 @@ public class ClimbingStairs {
         Solution solution = new ClimbingStairs().new Solution();
     }
 
+    /**
+     * 「斐波那契数列」正向求解
+     */
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int climbStairs(int n) {
             if (n <= 2) {
                 return n;
             }
-            int z = 0;
-            for (int i = 3, x = 1, y = 2; i <= n; i++) {
-                z = x + y;
-                x = y;
-                y = z;
+            int val = 0;
+            for (int i = 1, j = 2, k = 3; k <= n; k++) {
+                val = i + j;
+                i = j;
+                j = val;
             }
-            return z;
+            return val;
         }
     }
 
     //leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * 递归 + 存储中间计算结果
+     * 「斐波那契数列」递归 + 存储中间计算结果
      */
     class Solution2 {
         public int climbStairs(int n) {
@@ -72,7 +75,7 @@ public class ClimbingStairs {
     }
 
     /**
-     * DP
+     * 「斐波那契数列」DP
      */
     class Solution3 {
         public int climbStairs(int n) {
