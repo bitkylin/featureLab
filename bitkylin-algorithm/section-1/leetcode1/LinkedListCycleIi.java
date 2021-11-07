@@ -67,33 +67,31 @@ public class LinkedListCycleIi {
     /**
      * 快慢指针「比较难」
      * 快慢指针第一次相遇后：
-     * 1. fast指向head
-     * 2. fast==slow即返回
-     * 3. fast、slow匀速走
+     * 1. fast 指向 head
+     * 2. fast、slow 匀速走
+     * 3. fast == slow 即返回
      */
     public class Solution {
         public ListNode detectCycle(ListNode head) {
             if (head == null || head.next == null) {
                 return null;
             }
-            if (head == head.next) {
-                return head;
-            }
             ListNode slow = head.next;
             ListNode fast = head.next.next;
-            while (slow != fast) {
-                if (fast == null || fast.next == null) {
-                    return null;
+
+            while (fast != null && fast.next != null) {
+                if (slow == fast) {
+                    fast = head;
+                    while (slow != fast) {
+                        slow = slow.next;
+                        fast = fast.next;
+                    }
+                    return fast;
                 }
                 slow = slow.next;
                 fast = fast.next.next;
             }
-            fast = head;
-            while (slow != fast) {
-                slow = slow.next;
-                fast = fast.next;
-            }
-            return slow;
+            return null;
         }
     }
 
@@ -108,10 +106,9 @@ public class LinkedListCycleIi {
             while (head != null) {
                 if (set.contains(head)) {
                     return head;
-                } else {
-                    set.add(head);
-                    head = head.next;
                 }
+                set.add(head);
+                head = head.next;
             }
             return null;
         }

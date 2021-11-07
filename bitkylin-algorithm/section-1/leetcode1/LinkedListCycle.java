@@ -74,14 +74,14 @@ public class LinkedListCycle {
             ListNode slow = head.next;
             ListNode fast = head.next.next;
 
-            while (slow != fast) {
-                if (fast == null || fast.next == null) {
-                    return false;
+            while (fast != null && fast.next != null) {
+                if (slow == fast) {
+                    return true;
                 }
                 slow = slow.next;
                 fast = fast.next.next;
             }
-            return true;
+            return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -96,10 +96,9 @@ public class LinkedListCycle {
             while (head != null) {
                 if (set.contains(head)) {
                     return true;
-                } else {
-                    set.add(head);
-                    head = head.next;
                 }
+                set.add(head);
+                head = head.next;
             }
             return false;
         }

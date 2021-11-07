@@ -32,20 +32,21 @@ public class SwapNodesInPairs {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 懵逼的话，要画图，就容易理解和记忆了
      * 非递归
      */
     class Solution {
         public ListNode swapPairs(ListNode head) {
             ListNode prev = new ListNode(0);
             prev.next = head;
-            ListNode tail = prev;
-            while (tail.next != null && tail.next.next != null) {
-                ListNode a = tail.next;
-                ListNode b = tail.next.next;
+            head = prev;
+            while (head.next != null && head.next.next != null) {
+                ListNode a = head.next;
+                ListNode b = head.next.next;
                 a.next = b.next;
                 b.next = a;
-                tail.next = b;
-                tail = a;
+                head.next = b;
+                head = a;
             }
             return prev.next;
         }

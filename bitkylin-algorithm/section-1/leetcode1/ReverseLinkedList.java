@@ -30,6 +30,9 @@ public class ReverseLinkedList {
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
+    /**
+     * 懵逼的话，画个图，理解理解
+     */
     class Solution {
         public ListNode reverseList(ListNode head) {
             ListNode prev = null;
