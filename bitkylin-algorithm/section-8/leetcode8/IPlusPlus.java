@@ -1,5 +1,7 @@
 package leetcode8;
 
+import java.util.Arrays;
+
 /**
  * @author limingliang
  */
@@ -63,6 +65,16 @@ public class IPlusPlus {
         // 响应：1:2
         log("j + : + i");
         log(j + ":" + i);
+
+        i = 0;
+        j = 0;
+        k = 0;
+        int[] arr = new int[]{0, 1, 2, 3, 4};
+        arr[test(i++)] = arr[test(i++)];
+        // 就算是在表达式中，也是先计算表达式左边，再计算表达式右边
+        // 响应：[1, 1, 2, 3, 4]
+        log("Arrays.toString(arr)");
+        log(Arrays.toString(arr));
     }
 
     private static void log(Object msg) {
