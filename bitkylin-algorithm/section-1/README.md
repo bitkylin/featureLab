@@ -102,6 +102,7 @@ head -> node -> tail
 | 206. 反转链表 | [ReverseLinkedList](leetcode1/ReverseLinkedList.java) | [reverse-linked-list](https://leetcode-cn.com/problems/reverse-linked-list/) |
 | 141. 环形链表 | [LinkedListCycle](leetcode1/LinkedListCycle.java) | [linked-list-cycle](https://leetcode-cn.com/problems/linked-list-cycle/) |
 | 142. 环形链表 II | [LinkedListCycleIi](leetcode1/LinkedListCycleIi.java) | [linked-list-cycle-ii](https://leetcode-cn.com/problems/linked-list-cycle-ii/) |
+| 25. K个一组翻转链表 | [ReverseNodesInKGroup](leetcode1/ReverseNodesInKGroup.java) | [reverse-nodes-in-k-group](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/) |
 | 24. 两两交换链表中的节点 | [SwapNodesInPairs](leetcode1/SwapNodesInPairs.java) | [swap-nodes-in-pairs](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) |
 
 ### 栈和队列
