@@ -84,6 +84,7 @@ public class SlidingWindowMaximum {
     /**
      * 大顶堆，O(NlogK),数量庞大时执行超时
      * 不过看起来能通过简单的用例
+     * 注：暂时放弃
      */
     class Solution3 {
         public int[] maxSlidingWindow(int[] nums, int k) {
@@ -106,6 +107,7 @@ public class SlidingWindowMaximum {
 
     /**
      * 暴力遍历
+     * 注：暂时放弃
      */
     class Solution2 {
         public int[] maxSlidingWindow(int[] nums, int k) {
