@@ -84,6 +84,10 @@ public class ReverseNodesInKGroup {
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
+    /**
+     * 参考题解，画图看一看就懂了，挺简单
+     * https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/tu-jie-kge-yi-zu-fan-zhuan-lian-biao-by-user7208t/
+     */
     class Solution {
         public ListNode reverseKGroup(ListNode head, int k) {
             ListNode prev = new ListNode(-1);

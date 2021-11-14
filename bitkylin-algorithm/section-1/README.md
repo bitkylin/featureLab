@@ -68,7 +68,7 @@ head -> node -> tail
 
 | 优先队列 | 时间复杂度 | 空间复杂度 |
 |---|---|---|
-| 插入 | O(1) | O(n) |
+| 插入 | O(log n) | O(n) |
 | 取出 | O(log n) | O(n) |
 
 ## 心得
@@ -92,6 +92,7 @@ head -> node -> tail
 | 70. 爬楼梯 | [ClimbingStairs](leetcode1/ClimbingStairs.java) | [climbing-stairs](https://leetcode-cn.com/problems/climbing-stairs/) |
 | 66. 加一 | [PlusOne](leetcode1/PlusOne.java) | [plus-one](https://leetcode-cn.com/problems/plus-one/) |
 | 189. 轮转数组 | [RotateArray](leetcode1/RotateArray.java) | [rotate-array](https://leetcode-cn.com/problems/rotate-array/) |
+| 88. 合并两个有序数组 | [MergeSortedArray](leetcode1/MergeSortedArray.java) | [merge-sorted-array](https://leetcode-cn.com/problems/merge-sorted-array/) |
 |---|||
 | 16. 最接近的三数之和 | [ThreeSumClosest](leetcode1/ThreeSumClosest.java) | [3sum-closest](https://leetcode-cn.com/problems/3sum-closest/) |
 | 18. 四数之和 | [FourSum](leetcode1/FourSum.java) | [4sum](https://leetcode-cn.com/problems/4sum/) |
@@ -100,10 +101,11 @@ head -> node -> tail
 | 题目 | 项目链接 | leetcode |
 |---|---|---|
 | 206. 反转链表 | [ReverseLinkedList](leetcode1/ReverseLinkedList.java) | [reverse-linked-list](https://leetcode-cn.com/problems/reverse-linked-list/) |
+| 21. 合并两个有序链表 | [MergeTwoSortedLists](leetcode1/MergeTwoSortedLists.java) | [merge-two-sorted-lists](https://leetcode-cn.com/problems/merge-two-sorted-lists/) |
 | 141. 环形链表 | [LinkedListCycle](leetcode1/LinkedListCycle.java) | [linked-list-cycle](https://leetcode-cn.com/problems/linked-list-cycle/) |
 | 142. 环形链表 II | [LinkedListCycleIi](leetcode1/LinkedListCycleIi.java) | [linked-list-cycle-ii](https://leetcode-cn.com/problems/linked-list-cycle-ii/) |
-| 25. K个一组翻转链表 | [ReverseNodesInKGroup](leetcode1/ReverseNodesInKGroup.java) | [reverse-nodes-in-k-group](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/) |
 | 24. 两两交换链表中的节点 | [SwapNodesInPairs](leetcode1/SwapNodesInPairs.java) | [swap-nodes-in-pairs](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) |
+| 25. K个一组翻转链表 | [ReverseNodesInKGroup](leetcode1/ReverseNodesInKGroup.java) | [reverse-nodes-in-k-group](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/) |
 
 ### 栈和队列
 | 题目 | 项目链接 | leetcode |
