@@ -112,6 +112,7 @@ head -> node -> tail
 |---|---|---|
 | 20. 有效的括号 | [ValidParentheses](leetcode1/ValidParentheses.java) | [valid-parentheses](https://leetcode-cn.com/problems/valid-parentheses/) |
 | 678. 有效的括号字符串 | [ValidParenthesisString](leetcode1/ValidParenthesisString.java) | [valid-parenthesis-string](https://leetcode-cn.com/problems/valid-parenthesis-string/) |
+| 155. 最小栈 | [MinStack](leetcode1/MinStack1.java) | [min-stack](https://leetcode-cn.com/problems/min-stack/) |
 | 84. 柱状图中最大的矩形 | [LargestRectangleInHistogram](leetcode1/LargestRectangleInHistogram.java) | [largest-rectangle-in-histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/) |
 | 239. 滑动窗口最大值 | [SlidingWindowMaximum](../section-2/leetcode2/SlidingWindowMaximum.java) | [sliding-window-maximum](https://leetcode-cn.com/problems/sliding-window-maximum/) |
 | 42. 接雨水 | [TrappingRainWater](leetcode1/TrappingRainWater.java) | [trapping-rain-water](https://leetcode-cn.com/problems/trapping-rain-water/) |

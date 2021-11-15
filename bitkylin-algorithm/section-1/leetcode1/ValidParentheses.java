@@ -72,9 +72,7 @@ public class ValidParentheses {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         Map<Character, Character> map = new HashMap<Character, Character>() {{
-            put('{', '}');
-            put('[', ']');
-            put('(', ')');
+            put('{', '}');put('[', ']');put('(', ')');
         }};
 
         public boolean isValid(String s) {
