@@ -33,17 +33,17 @@ public class GroupAnagrams {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 方案一：极快
      * 字符数组排序 + hash
      */
     class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
             Map<String, List<String>> map = new HashMap<>();
-            for (int i = 0; i < strs.length; i++) {
-                char[] array = strs[i].toCharArray();
-                Arrays.sort(array);
-                String s = String.valueOf(array);
-                List<String> list = map.computeIfAbsent(s, key -> new ArrayList<>());
-                list.add(strs[i]);
+            for (String str : strs) {
+                char[] arr = str.toCharArray();
+                Arrays.sort(arr);
+                String s = String.valueOf(arr);
+                map.computeIfAbsent(s, key -> new ArrayList<>()).add(str);
             }
             return new ArrayList<>(map.values());
         }
@@ -51,19 +51,19 @@ public class GroupAnagrams {
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
+     * 方案二：较慢
      * 字符数组统计每个字母数量 + hash
      */
     class Solution2 {
         public List<List<String>> groupAnagrams(String[] strs) {
             Map<String, List<String>> map = new HashMap<>();
-            for (int i = 0; i < strs.length; i++) {
-                int[] array = new int[26];
-                for (char c : strs[i].toCharArray()) {
-                    array[c - 'a']++;
+            for (String str : strs) {
+                int[] arr = new int[26];
+                for (char c : str.toCharArray()) {
+                    arr[c - 'a']++;
                 }
-                String s = Arrays.toString(array);
-                List<String> list = map.computeIfAbsent(s, key -> new ArrayList<>());
-                list.add(strs[i]);
+                String s = Arrays.toString(arr);
+                map.computeIfAbsent(s, key -> new ArrayList<>()).add(str);
             }
             return new ArrayList<>(map.values());
         }

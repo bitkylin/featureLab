@@ -22,9 +22,9 @@
 
 package leetcode2;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.LongAdder;
 
 public class ValidAnagram {
 
@@ -35,49 +35,53 @@ public class ValidAnagram {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 解法一：
      * 数组模拟hash
      */
     class Solution {
         public boolean isAnagram(String s, String t) {
-            int[] memo = new int[26];
+            int[] arr = new int[26];
             for (char c : s.toCharArray()) {
-                memo[c - 'a']++;
+                arr[c - 'a']++;
             }
             for (char c : t.toCharArray()) {
-                memo[c - 'a']--;
+                arr[c - 'a']--;
             }
-            for (int i : memo) {
-                if (i != 0) {
-                    return false;
-                }
-            }
-            return true;
+            return Arrays.stream(arr).allMatch(value -> value == 0);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
+     * 解法二：
      * hash 法
      */
     class Solution2 {
-        public boolean isAnagram(String s, String t) {
-            Map<Character, LongAdder> map = new HashMap<>();
-            for (char c : s.toCharArray()) {
-                LongAdder longAdder = map.computeIfAbsent(c, key -> new LongAdder());
-                longAdder.increment();
-            }
-            for (char c : t.toCharArray()) {
-                LongAdder longAdder = map.get(c);
-                if (longAdder == null) {
-                    return false;
+        class Solution {
+            public boolean isAnagram(String s, String t) {
+                Map<Character, Integer> map = new HashMap<>();
+                for (char c : s.toCharArray()) {
+                    map.merge(c, 1, Integer::sum);
                 }
-                longAdder.decrement();
+                for (char c : t.toCharArray()) {
+                    map.merge(c, -1, Integer::sum);
+                }
+                return map.values().stream().noneMatch(integer -> integer != 0);
             }
-            if (map.values().stream().anyMatch(a -> a.intValue() != 0)) {
-                return false;
-            }
-            return true;
         }
     }
 
+    /**
+     * 解法三：
+     * 排序后比较
+     */
+    class Solution3 {
+        public boolean isAnagram(String s, String t) {
+            char[] a = s.toCharArray();
+            char[] b = t.toCharArray();
+            Arrays.sort(a);
+            Arrays.sort(b);
+            return Arrays.toString(a).equals(Arrays.toString(b));
+        }
+    }
 }
