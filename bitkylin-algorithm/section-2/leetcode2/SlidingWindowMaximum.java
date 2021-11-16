@@ -41,8 +41,8 @@
 
 package leetcode2;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class SlidingWindowMaximum {
@@ -54,24 +54,25 @@ public class SlidingWindowMaximum {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 双端队列,O(n)
+     * 双端队列, O(n)
+     * 1. 队首始终保持最大
+     * 2. 遍历到第 k 个元素时，往结果数组中设值
+     * 3. 移除队首溢出的元素
      */
     class Solution {
         public int[] maxSlidingWindow(int[] nums, int k) {
-            Deque<Integer> deque = new LinkedList<>();
-            if (nums == null || nums.length < 2) {
-                return nums;
-            }
+            Deque<Integer> deque = new ArrayDeque<>(k);
             int[] res = new int[nums.length - k + 1];
             int j = 0;
             for (int i = 0; i < nums.length; i++) {
                 while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
-                    deque.pollLast();
+                    deque.removeLast();
                 }
                 deque.addLast(i);
-                if (i >= k - 1) {
-                    res[j++] = nums[deque.peekFirst()];
+                if (i + 1 < k) {
+                    continue;
                 }
+                res[j++] = nums[deque.peekFirst()];
                 if (i - deque.peekFirst() + 1 >= k) {
                     deque.removeFirst();
                 }
