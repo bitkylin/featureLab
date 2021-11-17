@@ -115,6 +115,8 @@ head -> node -> tail
 | 155. 最小栈 | [MinStack](leetcode1/MinStack1.java) | [min-stack](https://leetcode-cn.com/problems/min-stack/) |
 | 84. 柱状图中最大的矩形 | [LargestRectangleInHistogram](leetcode1/LargestRectangleInHistogram.java) | [largest-rectangle-in-histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/) |
 | 239. 滑动窗口最大值 | [SlidingWindowMaximum](../section-2/leetcode2/SlidingWindowMaximum.java) | [sliding-window-maximum](https://leetcode-cn.com/problems/sliding-window-maximum/) |
+| 71. 简化路径 | [SimplifyPath](leetcode1/SimplifyPath.java) | [simplify-path](https://leetcode-cn.com/problems/simplify-path/) |
+| 150. 逆波兰表达式求值 | [EvaluateReversePolishNotation](leetcode1/EvaluateReversePolishNotation.java) | [evaluate-reverse-polish-notation](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/) |
 | 42. 接雨水 | [TrappingRainWater](leetcode1/TrappingRainWater.java) | [trapping-rain-water](https://leetcode-cn.com/problems/trapping-rain-water/) |
 
 ## 参考资料

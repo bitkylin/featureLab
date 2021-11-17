@@ -71,7 +71,7 @@ public class IPlusPlus {
         k = 0;
         int[] arr = new int[]{0, 1, 2, 3, 4};
         arr[test(i++)] = arr[test(i++)];
-        // 就算是在表达式中，也是先计算表达式左边，再计算表达式右边
+        // 就算是在表达式中，也是先计算等号左边，再计算等号右边
         // 响应：[1, 1, 2, 3, 4]
         log("Arrays.toString(arr)");
         log(Arrays.toString(arr));
