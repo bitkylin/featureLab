@@ -66,6 +66,7 @@ public class TrappingRainWater {
 
         /**
          * 直接从左到右遍历，有一定技巧性
+         * 注：注意 {if (height[i] >= h)} 的条件判断，不要漏了条件
          */
         public int trap2(int[] height) {
             int max = calcMax(height);
@@ -98,9 +99,10 @@ public class TrappingRainWater {
 
     /**
      * 方法二：
-     * 按列求 + 动态规划，O(n)
+     * 按列求 + 动态规划，O(n)，空间复杂度：O(n)
      * 左侧最大值方程：dp[n] = max(dp[n - 1], height[n - 1])
      * 右侧最大值方程：dp[n] = max(dp[n + 1], height[n + 1])
+     * 注：注意循环的边界条件
      */
     class Solution2 {
         public int trap(int[] height) {
@@ -123,7 +125,8 @@ public class TrappingRainWater {
 
     /**
      * 方法三：
-     * 双指针法：
+     * 双指针法，O(n)，空间复杂度：O(1)
+     * 可看作动态规划版本的优化，不必记录中间结果
      * 两侧各一个高度，高度最低值可累计到res中
      */
     class Solution3 {
