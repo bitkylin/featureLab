@@ -41,12 +41,68 @@ public class TrappingRainWater {
     }
 
     /**
+     * 方法一：
+     * 按行求，几乎通过所有用例，最后的用例超时，O(n * maxHeight)
+     * 1. 算出最大高度
+     * 2. 从下到上遍历
+     * 3. 累计各层的值
+     */
+    class Solution {
+        /**
+         * 选出左右边界，然后统计其中的空格
+         */
+        public int trap(int[] height) {
+            int max = calcMax(height);
+            int res = 0;
+            for (int h = 1; h <= max; h++) {
+                int left = 0;
+                int right = height.length - 1;
+                while (height[left++] < h) ;
+                while (height[right--] < h) ;
+                while (left <= right) res += height[left++] < h ? 1 : 0;
+            }
+            return res;
+        }
+
+        /**
+         * 直接从左到右遍历，有一定技巧性
+         */
+        public int trap2(int[] height) {
+            int max = calcMax(height);
+            int res = 0;
+            for (int h = 1; h <= max; h++) {
+                int temp = 0;
+                boolean open = false;
+                for (int i = 0; i < height.length; i++) {
+                    if (open && height[i] < h) {
+                        temp++;
+                    }
+                    if (height[i] >= h) {
+                        res += temp;
+                        open = true;
+                        temp = 0;
+                    }
+                }
+            }
+            return res;
+        }
+
+        private int calcMax(int[] height) {
+            int max = 0;
+            for (int i : height) {
+                max = Math.max(max, i);
+            }
+            return max;
+        }
+    }
+
+    /**
      * 方法二：
      * 按列求 + 动态规划，O(n)
      * 左侧最大值方程：dp[n] = max(dp[n - 1], height[n - 1])
      * 右侧最大值方程：dp[n] = max(dp[n + 1], height[n + 1])
      */
-    class Solution {
+    class Solution2 {
         public int trap(int[] height) {
             int res = 0;
             int n = height.length;
@@ -95,61 +151,5 @@ public class TrappingRainWater {
      * 可参考这个题 {@link LargestRectangleInHistogram}
      */
     class Solution4 {
-    }
-
-    /**
-     * 方法一：
-     * 按行求，几乎通过所有用例，最后的用例超时，O(n * maxHeight)
-     * 1. 算出最大高度
-     * 2. 从下到上遍历
-     * 3. 累计各层的值
-     */
-    class Solution2 {
-        /**
-         * 选出左右边界，然后统计其中的空格
-         */
-        public int trap(int[] height) {
-            int max = calcMax(height);
-            int res = 0;
-            for (int h = 1; h <= max; h++) {
-                int left = 0;
-                int right = height.length - 1;
-                while (height[left++] < h) ;
-                while (height[right--] < h) ;
-                while (left <= right) res += height[left++] < h ? 1 : 0;
-            }
-            return res;
-        }
-
-        /**
-         * 直接从左到右遍历，有一定技巧性
-         */
-        public int trap2(int[] height) {
-            int max = calcMax(height);
-            int res = 0;
-            for (int h = 1; h <= max; h++) {
-                int temp = 0;
-                boolean open = false;
-                for (int i = 0; i < height.length; i++) {
-                    if (open && height[i] < h) {
-                        temp++;
-                    }
-                    if (height[i] >= h) {
-                        res += temp;
-                        open = true;
-                        temp = 0;
-                    }
-                }
-            }
-            return res;
-        }
-
-        private int calcMax(int[] height) {
-            int max = 0;
-            for (int i : height) {
-                max = Math.max(max, i);
-            }
-            return max;
-        }
     }
 }
