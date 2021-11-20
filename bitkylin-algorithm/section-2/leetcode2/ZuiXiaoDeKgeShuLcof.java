@@ -38,7 +38,8 @@ public class ZuiXiaoDeKgeShuLcof {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 小顶堆，O(NlogK)
+     * 小顶堆，O(nlog(k))
+     * 其他解法：排序后取前K个，O(nlog(n))
      */
     class Solution {
         public int[] getLeastNumbers(int[] arr, int k) {

@@ -1,24 +1,54 @@
-//给定一个 N 叉树，返回其节点值的前序遍历。
-//
-// 例如，给定一个 3叉树 :
-//
-//
-//
-//
-//
-//
-//
-// 返回其前序遍历: [1,3,5,6,2,4]。
-//
-//
-//
-// 说明: 递归法很简单，你可以使用迭代法完成此题吗? Related Topics 树
-// 👍 101 👎 0
-
+/**
+ * <p>给定一个 N 叉树，返回其节点值的<strong> 前序遍历</strong> 。</p>
+ *
+ * <p>N 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 <code>null</code> 分隔（请参见示例）。</p>
+ *
+ * <div class="original__bRMd">
+ * <div>
+ * <p> </p>
+ *
+ * <p><strong>进阶：</strong></p>
+ *
+ * <p>递归法很简单，你可以使用迭代法完成此题吗?</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <p><img src="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png" style="width: 100%; max-width: 300px;" /></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = [1,null,3,2,4,null,5,6]
+ * <strong>输出：</strong>[1,3,5,6,2,4]
+ * </pre>
+ * <strong>示例 2：</strong>
+ *
+ * <p><img alt="" src="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png" style="width: 296px; height: 241px;" /></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
+ * <strong>输出：</strong>[1,2,3,6,7,11,14,4,8,12,5,9,13,10]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li>N 叉树的高度小于或等于 <code>1000</code></li>
+ * <li>节点总数在范围 <code>[0, 10^4]</code> 内</li>
+ * </ul>
+ * </div>
+ * </div>
+ * <div><div>Related Topics</div><div><li>栈</li><li>树</li><li>深度优先搜索</li></div></div><br><div><li>👍 190</li><li>👎 0</li></div>
+ */
 
 package leetcode2;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class NAryTreePreorderTraversal {
 
@@ -43,96 +73,82 @@ public class NAryTreePreorderTraversal {
         }
     }
 
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
      * 栈 - 仅存放 node
+     * 对于每一个Node：res末尾添加val，子节点列表倒序后入栈
      */
     class Solution {
         public List<Integer> preorder(Node root) {
-            LinkedList<Integer> res = new LinkedList<>();
-            if (root == null) {
-                return res;
+            List<Integer> res = new ArrayList<>();
+            ArrayDeque<Node> stack = new ArrayDeque<>();
+            if (root != null) {
+                stack.push(root);
             }
-            Deque<Node> deque = new LinkedList<>();
-            deque.push(root);
-
-            while (!deque.isEmpty()) {
-                Node node = deque.removeFirst();
-                res.add(node.val);
-                if (node.children != null) {
-                    Collections.reverse(node.children);
-                    for (Node child : node.children) {
-                        deque.addFirst(child);
+            while (!stack.isEmpty()) {
+                Node obj = stack.pop();
+                res.add(obj.val);
+                if (obj.children != null) {
+                    Collections.reverse(obj.children);
+                    for (Node child : obj.children) {
+                        stack.push(child);
                     }
                 }
             }
             return res;
         }
-
-
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 栈 - 存放 node + value
      */
-    class Solution3 {
+    class Solution2 {
         public List<Integer> preorder(Node root) {
             List<Integer> res = new ArrayList<>();
-            if (root == null) {
-                return res;
+            ArrayDeque<Object> stack = new ArrayDeque<>();
+            if (root != null) {
+                stack.push(root);
             }
-            Deque<Object> stack = new ArrayDeque<>();
-            stack.push(root);
             while (!stack.isEmpty()) {
-                resolve(stack, res);
+                Object obj = stack.pop();
+                if (obj instanceof Node) {
+                    if (((Node) obj).children != null) {
+                        Collections.reverse(((Node) obj).children);
+                        for (Node child : ((Node) obj).children) {
+                            stack.push(child);
+                        }
+                    }
+                    stack.push(((Node) obj).val);
+                } else if (obj instanceof Integer) {
+                    res.add((Integer) obj);
+                }
             }
             return res;
-        }
-
-        private void resolve(Deque<Object> stack, List<Integer> list) {
-            Object obj = stack.poll();
-            if (obj instanceof Node) {
-                push(stack, ((Node) obj).children);
-                stack.push(((Node) obj).val);
-            } else if (obj instanceof Integer) {
-                list.add((Integer) obj);
-            }
-        }
-
-        private void push(Deque<Object> stack, List<Node> list) {
-            if (list == null) {
-                return;
-            }
-            Collections.reverse(list);
-            for (Node node : list) {
-                stack.push(node);
-            }
         }
     }
 
     /**
      * 递归
      */
-    class Solution2 {
+    class Solution3 {
         public List<Integer> preorder(Node root) {
             List<Integer> res = new ArrayList<>();
-            resolve(root, res);
+            solve(root, res);
             return res;
         }
 
-        private void resolve(Node node, List<Integer> list) {
-            if (node == null) {
+        private void solve(Node root, List<Integer> res) {
+            if (root == null) {
                 return;
             }
-            list.add(node.val);
-            if (node.children == null) {
+            res.add(root.val);
+            if (root.children == null) {
                 return;
             }
-
-            for (Node child : node.children) {
-                resolve(child, list);
+            for (Node child : root.children) {
+                solve(child, res);
             }
         }
     }

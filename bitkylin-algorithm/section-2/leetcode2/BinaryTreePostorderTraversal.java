@@ -1,26 +1,26 @@
-//给定一个二叉树，返回它的 后序 遍历。
-//
-// 示例:
-//
-// 输入: [1,null,2,3]
-//   1
-//    \
-//     2
-//    /
-//   3
-//
-//输出: [3,2,1]
-//
-// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
-// Related Topics 栈 树
-// 👍 395 👎 0
-
+/**
+ * <p>给定一个二叉树，返回它的 <em>后序&nbsp;</em>遍历。</p>
+ *
+ * <p><strong>示例:</strong></p>
+ *
+ * <pre><strong>输入:</strong> [1,null,2,3]
+ * 1
+ * \
+ * 2
+ * /
+ * 3
+ *
+ * <strong>输出:</strong> [3,2,1]</pre>
+ *
+ * <p><strong>进阶:</strong>&nbsp;递归算法很简单，你可以通过迭代算法完成吗？</p>
+ * <div><div>Related Topics</div><div><li>栈</li><li>树</li><li>深度优先搜索</li><li>二叉树</li></div></div><br><div><li>👍 710</li><li>👎 0</li></div>
+ */
 
 package leetcode2;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BinaryTreePostorderTraversal {
@@ -48,7 +48,7 @@ public class BinaryTreePostorderTraversal {
         }
     }
 
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
      * 手动模拟递归栈
@@ -56,33 +56,25 @@ public class BinaryTreePostorderTraversal {
     class Solution {
         public List<Integer> postorderTraversal(TreeNode root) {
             List<Integer> res = new ArrayList<>();
-            if (root == null) {
-                return res;
-            }
-            Deque<Object> stack = new LinkedList<>();
-            stack.add(root);
+            ArrayDeque<Object> stack = new ArrayDeque<>();
+            push(stack, root);
             while (!stack.isEmpty()) {
-                resolve(stack, res);
+                Object obj = stack.pop();
+                if (obj instanceof TreeNode) {
+                    push(stack, ((TreeNode) obj).val);
+                    push(stack, ((TreeNode) obj).right);
+                    push(stack, ((TreeNode) obj).left);
+                } else {
+                    res.add((Integer) obj);
+                }
             }
             return res;
         }
 
-        private void resolve(Deque<Object> stack, List<Integer> res) {
-            Object obj = stack.poll();
-            if (obj instanceof TreeNode) {
-                push(stack, ((TreeNode) obj).val);
-                push(stack, ((TreeNode) obj).right);
-                push(stack, ((TreeNode) obj).left);
-            } else if (obj instanceof Integer) {
-                res.add((Integer) obj);
+        private void push(Deque<Object> deque, Object obj) {
+            if (obj != null) {
+                deque.push(obj);
             }
-        }
-
-        private void push(Deque<Object> stack, Object obj) {
-            if (obj == null) {
-                return;
-            }
-            stack.push(obj);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
@@ -92,18 +84,18 @@ public class BinaryTreePostorderTraversal {
      */
     class Solution2 {
         public List<Integer> postorderTraversal(TreeNode root) {
-            List<Integer> list = new ArrayList<>();
-            resolve(root, list);
-            return list;
+            List<Integer> res = new ArrayList<>();
+            solve(root, res);
+            return res;
         }
 
-        private void resolve(TreeNode node, List<Integer> list) {
-            if (node == null) {
+        private void solve(TreeNode root, List<Integer> res) {
+            if (root == null) {
                 return;
             }
-            resolve(node.left, list);
-            resolve(node.right, list);
-            list.add(node.val);
+            solve(root.left, res);
+            solve(root.right, res);
+            res.add(root.val);
         }
     }
 }

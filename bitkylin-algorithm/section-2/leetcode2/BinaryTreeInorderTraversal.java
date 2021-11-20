@@ -1,20 +1,57 @@
-//给定一个二叉树，返回它的中序 遍历。
-//
-// 示例:
-//
-// 输入: [1,null,2,3]
-//   1
-//    \
-//     2
-//    /
-//   3
-//
-//输出: [1,3,2]
-//
-// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
-// Related Topics 栈 树 哈希表
-// 👍 714 👎 0
-
+/**
+ * <p>给定一个二叉树的根节点 <code>root</code> ，返回它的 <strong>中序</strong> 遍历。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg" style="width: 202px; height: 324px;" />
+ * <pre>
+ * <strong>输入：</strong>root = [1,null,2,3]
+ * <strong>输出：</strong>[1,3,2]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = []
+ * <strong>输出：</strong>[]
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = [1]
+ * <strong>输出：</strong>[1]
+ * </pre>
+ *
+ * <p><strong>示例 4：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/09/15/inorder_5.jpg" style="width: 202px; height: 202px;" />
+ * <pre>
+ * <strong>输入：</strong>root = [1,2]
+ * <strong>输出：</strong>[2,1]
+ * </pre>
+ *
+ * <p><strong>示例 5：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/09/15/inorder_4.jpg" style="width: 202px; height: 202px;" />
+ * <pre>
+ * <strong>输入：</strong>root = [1,null,2]
+ * <strong>输出：</strong>[1,2]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li>树中节点数目在范围 <code>[0, 100]</code> 内</li>
+ * <li><code>-100 <= Node.val <= 100</code></li>
+ * </ul>
+ *
+ * <p> </p>
+ *
+ * <p><strong>进阶:</strong> 递归算法很简单，你可以通过迭代算法完成吗？</p>
+ * <div><div>Related Topics</div><div><li>栈</li><li>树</li><li>深度优先搜索</li><li>二叉树</li></div></div><br><div><li>👍 1168</li><li>👎 0</li></div>
+ */
 
 package leetcode2;
 
@@ -26,13 +63,10 @@ import java.util.List;
 public class BinaryTreeInorderTraversal {
 
     public static void main(String[] args) {
-        TreeNode node3 = new TreeNode(3);
-        TreeNode node2 = new TreeNode(2, node3, null);
-        TreeNode node1 = new TreeNode(1, null, node2);
-        new BinaryTreeInorderTraversal().new Solution().inorderTraversal(node1);
+        Solution solution = new BinaryTreeInorderTraversal().new Solution();
     }
 
-    public static class TreeNode {
+    public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -58,33 +92,28 @@ public class BinaryTreeInorderTraversal {
      */
     class Solution {
         public List<Integer> inorderTraversal(TreeNode root) {
-            Deque<Object> stack = new ArrayDeque<>();
-            if (root != null) {
-                stack.push(root);
-            }
-            List<Integer> list = new ArrayList<>();
+            List<Integer> res = new ArrayList<>();
+            ArrayDeque<Object> stack = new ArrayDeque<>();
+            push(stack, root);
             while (!stack.isEmpty()) {
-                resolve(stack, list);
+                Object obj = stack.pop();
+                if (obj instanceof TreeNode) {
+                    push(stack, ((TreeNode) obj).right);
+                    push(stack, ((TreeNode) obj).val);
+                    push(stack, ((TreeNode) obj).left);
+                } else {
+                    res.add((Integer) obj);
+                }
             }
-            return list;
+            return res;
         }
 
-        private void resolve(Deque<Object> stack, List<Integer> list) {
-            Object obj = stack.poll();
-            if (obj instanceof TreeNode) {
-                if (((TreeNode) obj).right != null) {
-                    stack.push(((TreeNode) obj).right);
-                }
-                stack.push(((TreeNode) obj).val);
-                if (((TreeNode) obj).left != null) {
-                    stack.push(((TreeNode) obj).left);
-                }
-            } else if (obj instanceof Integer) {
-                list.add((Integer) obj);
+        private void push(Deque<Object> deque, Object obj) {
+            if (obj != null) {
+                deque.push(obj);
             }
         }
     }
-
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
@@ -92,18 +121,18 @@ public class BinaryTreeInorderTraversal {
      */
     class Solution2 {
         public List<Integer> inorderTraversal(TreeNode root) {
-            List<Integer> list = new ArrayList<>();
-            resolve(root, list);
-            return list;
+            List<Integer> res = new ArrayList<>();
+            solve(root, res);
+            return res;
         }
 
-        private void resolve(TreeNode node, List<Integer> list) {
-            if (node == null) {
+        private void solve(TreeNode root, List<Integer> res) {
+            if (root == null) {
                 return;
             }
-            resolve(node.left, list);
-            list.add(node.val);
-            resolve(node.right, list);
+            solve(root.left, res);
+            res.add(root.val);
+            solve(root.right, res);
         }
     }
 }
