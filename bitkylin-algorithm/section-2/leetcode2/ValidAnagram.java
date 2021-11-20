@@ -57,6 +57,25 @@ public class ValidAnagram {
      * hash 法
      */
     class Solution2 {
+        public boolean isAnagram(String s, String t) {
+            Map<Character, Integer> map = new HashMap<>();
+            for (char c : s.toCharArray()) {
+                Integer val = map.get(c);
+                map.put(c, val == null ? 1 : val + 1);
+            }
+            for (char c : t.toCharArray()) {
+                Integer val = map.get(c);
+                map.put(c, val == null ? -1 : val - 1);
+            }
+            return map.values().stream().allMatch(val -> val == 0);
+        }
+    }
+
+    /**
+     * 解法二「优化」：
+     * hash 法
+     */
+    class Solution21 {
         class Solution {
             public boolean isAnagram(String s, String t) {
                 Map<Character, Integer> map = new HashMap<>();

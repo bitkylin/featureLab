@@ -34,6 +34,8 @@
 
 package leetcode1;
 
+import java.util.ArrayDeque;
+
 public class TrappingRainWater {
 
     public static void main(String[] args) {
@@ -150,9 +152,25 @@ public class TrappingRainWater {
     }
 
     /**
-     * 单调栈「递增」，解法后续再考虑，有些难度
-     * 可参考这个题 {@link LargestRectangleInHistogram}
+     * 单调栈「递减」，两题解法一致
+     * 单调栈「递增」可参考这个题 {@link LargestRectangleInHistogram}
      */
     class Solution4 {
+        public int trap(int[] height) {
+            int res = 0;
+            ArrayDeque<Integer> stack = new ArrayDeque<>(height.length);
+            for (int i = 0; i < height.length; i++) {
+                while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
+                    int prev = stack.pop();
+                    if (stack.isEmpty()) {
+                        continue;
+                    }
+                    int h = Math.min(height[stack.peek()], height[i]) - height[prev];
+                    res += h * (i - stack.peek() - 1);
+                }
+                stack.push(i);
+            }
+            return res;
+        }
     }
 }
