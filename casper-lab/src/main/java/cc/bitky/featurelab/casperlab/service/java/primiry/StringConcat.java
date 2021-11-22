@@ -15,13 +15,14 @@ import java.util.concurrent.TimeUnit;
  * - java虚拟机预热开始
  * - java虚拟机预热结束
  * - 开始测试：
- * - plus: 1260
- * - stringBuilderCapacity: 1597
- * - stringBuilder: 1614
- * - String.join: 1486
- * - stringJoiner: 1431
- * - loop-Plus: 169
- * - loop-StringBuilder: 243
+ * - loop-plus: 974
+ * - loop-stringBuilderCapacity: 285
+ * - loop-stringBuilder: 1968
+ * - loop-String.join: 1313
+ * - loop-stringJoiner: 1238
+ * - simple-Plus: 812
+ * - simple-StringBuilder: 840
+ * - simple-StringBuffer: 857
  *
  * @author limingliang
  */
@@ -31,59 +32,66 @@ public class StringConcat {
     @SneakyThrows
     public static void main(String[] args) {
         log.info("java虚拟机预热开始");
-        String[] strs = new String[8000000];
+        String[] strs = new String[6000000];
         for (int i = 0; i < strs.length; i++) {
             strs[i] = id();
         }
-        stringJoiner(strs);
-        stringJoin(strs);
-        stringBuilder(strs);
+        loopStringJoiner(strs);
+        loopStringJoin(strs);
+        loopStringBuilder(strs);
         log.info("java虚拟机预热结束");
         Thread.sleep(1000);
         log.info("开始测试：");
 
         Thread.sleep(1000);
-        Stopwatch stopwatchPlus = Stopwatch.createStarted();
-        plus(strs);
-        log.info("plus: " + stopwatchPlus.elapsed(TimeUnit.MILLISECONDS));
-
-        Thread.sleep(1000);
-        Stopwatch stringBuilderCapacity = Stopwatch.createStarted();
-        stringBuilderCapacity(strs);
-        log.info("stringBuilderCapacity: " + stringBuilderCapacity.elapsed(TimeUnit.MILLISECONDS));
-
-        Thread.sleep(1000);
-        Stopwatch stopwatchStringBuilder = Stopwatch.createStarted();
-        stringBuilder(strs);
-        log.info("stringBuilder: " + stopwatchStringBuilder.elapsed(TimeUnit.MILLISECONDS));
-
-        Thread.sleep(1000);
-        Stopwatch stopwatchJoin = Stopwatch.createStarted();
-        stringJoin(strs);
-        log.info("String.join: " + stopwatchJoin.elapsed(TimeUnit.MILLISECONDS));
-
-        Thread.sleep(1000);
-        Stopwatch stopwatchStringJoin = Stopwatch.createStarted();
-        stringJoiner(strs);
-        log.info("stringJoiner: " + stopwatchStringJoin.elapsed(TimeUnit.MILLISECONDS));
-
-        Thread.sleep(1000);
         Stopwatch stopwatchLoopPlus = Stopwatch.createStarted();
-        for (int i = 0; i < 100000; i++) {
-            loopPlus(id(), id(), id());
-        }
-        log.info("loop-Plus: " + stopwatchLoopPlus.elapsed(TimeUnit.MILLISECONDS));
+        loopPlus(strs);
+        log.info("loop-plus: " + stopwatchLoopPlus.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchLoopStringBuilderCapacity = Stopwatch.createStarted();
+        loopStringBuilderCapacity(strs);
+        log.info("loop-stringBuilderCapacity: " + stopwatchLoopStringBuilderCapacity.elapsed(TimeUnit.MILLISECONDS));
 
         Thread.sleep(1000);
         Stopwatch stopwatchLoopStringBuilder = Stopwatch.createStarted();
-        for (int i = 0; i < 100000; i++) {
-            loopStringBuilder(id(), id(), id());
+        loopStringBuilder(strs);
+        log.info("loop-stringBuilder: " + stopwatchLoopStringBuilder.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchLoopJoin = Stopwatch.createStarted();
+        loopStringJoin(strs);
+        log.info("loop-String.join: " + stopwatchLoopJoin.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchLoopStringJoiner = Stopwatch.createStarted();
+        loopStringJoiner(strs);
+        log.info("loop-stringJoiner: " + stopwatchLoopStringJoiner.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchSimplePlus = Stopwatch.createStarted();
+        for (int i = 0; i < 500000; i++) {
+            simplePlus(id(), id(), id());
         }
-        log.info("loop-StringBuilder: " + stopwatchLoopStringBuilder.elapsed(TimeUnit.MILLISECONDS));
+        log.info("simple-Plus: " + stopwatchSimplePlus.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchSimpleStringBuilder = Stopwatch.createStarted();
+        for (int i = 0; i < 500000; i++) {
+            simpleStringBuilder(id(), id(), id());
+        }
+        log.info("simple-StringBuilder: " + stopwatchSimpleStringBuilder.elapsed(TimeUnit.MILLISECONDS));
+
+        Thread.sleep(1000);
+        Stopwatch stopwatchSimpleStringBuffer = Stopwatch.createStarted();
+        for (int i = 0; i < 500000; i++) {
+            simpleStringBuffer(id(), id(), id());
+        }
+        log.info("simple-StringBuffer: " + stopwatchSimpleStringBuffer.elapsed(TimeUnit.MILLISECONDS));
 
     }
 
-    private static String plus(String[] strs) {
+    private static String loopPlus(String[] strs) {
         String str = "";
         for (String s : strs) {
             str = "+" + s;
@@ -91,7 +99,7 @@ public class StringConcat {
         return str;
     }
 
-    private static String stringBuilder(String[] strs) {
+    private static String loopStringBuilder(String[] strs) {
         StringBuilder str = new StringBuilder();
         for (String s : strs) {
             str.append("+");
@@ -100,7 +108,7 @@ public class StringConcat {
         return str.toString();
     }
 
-    private static String stringBuilderCapacity(String[] strs) {
+    private static String loopStringBuilderCapacity(String[] strs) {
         StringBuilder str = new StringBuilder(strs[0].length() * strs.length);
         for (String s : strs) {
             str.append("+");
@@ -109,7 +117,7 @@ public class StringConcat {
         return str.toString();
     }
 
-    private static String stringJoin(String[] strs) {
+    private static String loopStringJoin(String[] strs) {
         StringJoiner joiner = new StringJoiner("+");
         for (String str : strs) {
             joiner.add(str);
@@ -117,15 +125,15 @@ public class StringConcat {
         return joiner.toString();
     }
 
-    private static String stringJoiner(String[] strs) {
+    private static String loopStringJoiner(String[] strs) {
         return String.join("+", strs);
     }
 
-    private static String loopPlus(String a, String b, String c) {
+    private static String simplePlus(String a, String b, String c) {
         return a + "+" + b + "+" + c;
     }
 
-    private static String loopStringBuilder(String a, String b, String c) {
+    private static String simpleStringBuilder(String a, String b, String c) {
         StringBuilder builder = new StringBuilder();
         builder.append(a);
         builder.append("+");
@@ -133,6 +141,16 @@ public class StringConcat {
         builder.append("+");
         builder.append(c);
         return builder.toString();
+    }
+
+    private static String simpleStringBuffer(String a, String b, String c) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(a);
+        buffer.append("+");
+        buffer.append(b);
+        buffer.append("+");
+        buffer.append(c);
+        return buffer.toString();
     }
 
     private static String id() {
