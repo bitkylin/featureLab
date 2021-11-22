@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * - java虚拟机预热开始
  * - java虚拟机预热结束
  * - 开始测试：
- * - loop-plus: 974
+ * - loop-plus: 超时
  * - loop-stringBuilderCapacity: 285
  * - loop-stringBuilder: 1968
  * - loop-String.join: 1313
@@ -45,7 +45,7 @@ public class StringConcat {
 
         Thread.sleep(1000);
         Stopwatch stopwatchLoopPlus = Stopwatch.createStarted();
-        loopPlus(strs);
+//        loopPlus(strs);
         log.info("loop-plus: " + stopwatchLoopPlus.elapsed(TimeUnit.MILLISECONDS));
 
         Thread.sleep(1000);
@@ -94,7 +94,7 @@ public class StringConcat {
     private static String loopPlus(String[] strs) {
         String str = "";
         for (String s : strs) {
-            str = "+" + s;
+            str = str + "+" + s;
         }
         return str;
     }
