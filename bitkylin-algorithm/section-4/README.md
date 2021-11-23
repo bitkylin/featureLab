@@ -158,7 +158,7 @@ if (arr[mid] <= target) {
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 102. 二叉树的层序遍历 | [BinaryTreeLevelOrderTraversal](leetcode4/BinaryTreeLevelOrderTraversal.java) | [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/) | DFS、BFS |
-| 22. 括号生成 | [GenerateParentheses](leetcode4/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 可用递归、DFS、BFS |
+| 22. 括号生成 | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 可用递归、DFS、BFS |
 | 515. 在每个树行中找最大值 | [FindLargestValueInEachTreeRow](leetcode4/FindLargestValueInEachTreeRow.java) | [find-largest-value-in-each-tree-row/](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/) | DFS、BFS |
 | 433. 最小基因变化 | [MinimumGeneticMutation](leetcode4/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) |   |
 | 200. 岛屿数量 | [NumberOfIslands](leetcode4/NumberOfIslands.java) | [number-of-islands](https://leetcode-cn.com/problems/number-of-islands/) | DFS、BFS |

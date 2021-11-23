@@ -46,10 +46,10 @@ public class GenerateParentheses {
         }
 
         private void solve(String val, int left, int right, int n, List<String> res) {
-            if (right > left || right > n || left > n) {
+            if (right > left || left > n) {
                 return;
             }
-            if (left == n && right == n) {
+            if (right == n) {
                 res.add(val);
                 return;
             }

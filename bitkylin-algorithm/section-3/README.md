@@ -67,7 +67,7 @@ public class Test {
 ### 递归
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
-| 22. 括号生成 | [GenerateParentheses](leetcode3/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 递归 + 剪枝  |
+| 22. 括号生成 | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 递归 + 剪枝  |
 | 226. 翻转二叉树 | [InvertBinaryTree](leetcode3/InvertBinaryTree.java) | [invert-binary-tree](https://leetcode-cn.com/problems/invert-binary-tree/) | 递归模板实现即可，还可以使用DFS、BFS两者代码基本一致  |
 | 98. 验证二叉搜索树 | [ValidateBinarySearchTree](leetcode3/ValidateBinarySearchTree.java) | [validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/) | 二叉搜索树的中序遍历是单调递增的 |
 | 104. 二叉树的最大深度 | [MaximumDepthOfBinaryTree](leetcode3/MaximumDepthOfBinaryTree.java) | [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | 由逐层计算深度，由上到下、由下到上均可  |
