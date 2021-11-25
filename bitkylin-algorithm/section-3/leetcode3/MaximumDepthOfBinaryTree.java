@@ -1,24 +1,27 @@
-//给定一个二叉树，找出其最大深度。 
-//
-// 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 
-//
-// 说明: 叶子节点是指没有子节点的节点。 
-//
-// 示例： 
-//给定二叉树 [3,9,20,null,null,15,7]， 
-//
-//     3
-//   / \
-//  9  20
-//    /  \
-//   15   7 
-//
-// 返回它的最大深度 3 。 
-// Related Topics 树 深度优先搜索 
-// 👍 705 👎 0
-
+/**
+ * <p>给定一个二叉树，找出其最大深度。</p>
+ *
+ * <p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+ *
+ * <p><strong>说明:</strong>&nbsp;叶子节点是指没有子节点的节点。</p>
+ *
+ * <p><strong>示例：</strong><br>
+ * 给定二叉树 <code>[3,9,20,null,null,15,7]</code>，</p>
+ *
+ * <pre>    3
+ * / \
+ * 9  20
+ * /  \
+ * 15   7</pre>
+ *
+ * <p>返回它的最大深度&nbsp;3 。</p>
+ * <div><div>Related Topics</div><div><li>树</li><li>深度优先搜索</li><li>广度优先搜索</li><li>二叉树</li></div></div><br><div><li>👍 1042</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class MaximumDepthOfBinaryTree {
 
@@ -31,53 +34,64 @@ public class MaximumDepthOfBinaryTree {
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 由下到上逐层计算高度，进而求得最大高度
+     * 「递归」
      */
     class Solution {
         public int maxDepth(TreeNode root) {
-            return resolve(root);
-        }
-
-        private int resolve(TreeNode root) {
             if (root == null) {
                 return 0;
             }
-            int left = resolve(root.left);
-            int right = resolve(root.right);
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
             return Math.max(left, right) + 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
-
     /**
-     * 逐层下探，找寻最大深度并更新局部变量
+     * 「循环」「BFS」「广度优先遍历」
      */
     class Solution2 {
-        int max = 0;
-
         public int maxDepth(TreeNode root) {
-            resolve(root, 1);
+            if (root == null) {
+                return 0;
+            }
+            Deque<TreeNode> deque = new ArrayDeque<>();
+            deque.offer(root);
+            int max = 0;
+            while (!deque.isEmpty()) {
+                max++;
+                int size = deque.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = deque.poll();
+                    offer(deque, node.left);
+                    offer(deque, node.right);
+                }
+            }
             return max;
         }
 
-        private void resolve(TreeNode root, int depth) {
-            if (root == null) {
-                return;
+        private void offer(Deque<TreeNode> deque, TreeNode node) {
+            if (node != null) {
+                deque.offer(node);
             }
-            if (max < depth) {
-                max = depth;
-            }
-            resolve(root.left, depth + 1);
-            resolve(root.right, depth + 1);
         }
     }
 }
