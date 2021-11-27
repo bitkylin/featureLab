@@ -1,43 +1,59 @@
-//序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方
-//式重构得到原数据。 
-//
-// 请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串
-//反序列化为原始的树结构。 
-//
-// 示例: 
-//
-// 你可以将以下二叉树：
-//
-//    1
-//   / \
-//  2   3
-//     / \
-//    4   5
-//
-//序列化为 "[1,2,3,null,null,4,5]" 
-//
-// 提示: 这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这
-//个问题。 
-//
-// 说明: 不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。 
-// Related Topics 树 设计 
-// 👍 358 👎 0
-
+/**
+ * <p>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。</p>
+ *
+ * <p>请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</p>
+ *
+ * <p><strong>提示: </strong>输入输出格式与 LeetCode 目前使用的方式一致，详情请参阅 <a href="/faq/#binary-tree">LeetCode 序列化二叉树的格式</a>。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/09/15/serdeser.jpg" style="width: 442px; height: 324px;" />
+ * <pre>
+ * <strong>输入：</strong>root = [1,2,3,null,null,4,5]
+ * <strong>输出：</strong>[1,2,3,null,null,4,5]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = []
+ * <strong>输出：</strong>[]
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = [1]
+ * <strong>输出：</strong>[1]
+ * </pre>
+ *
+ * <p><strong>示例 4：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>root = [1,2]
+ * <strong>输出：</strong>[1,2]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li>树中结点数在范围 <code>[0, 10<sup>4</sup>]</code> 内</li>
+ * <li><code>-1000 <= Node.val <= 1000</code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>树</li><li>深度优先搜索</li><li>广度优先搜索</li><li>设计</li><li>字符串</li><li>二叉树</li></div></div><br><div><li>👍 691</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SerializeAndDeserializeBinaryTree {
 
     public static void main(String[] args) {
-        String str1 = "[1,2,3,null,null,4]";
-        TreeNode root = new SerializeAndDeserializeBinaryTree().new Codec().deserialize(str1);
-        String str2 = new SerializeAndDeserializeBinaryTree().new Codec().serialize(root);
-        System.out.println(str1 + ":" + str2);
+        new SerializeAndDeserializeBinaryTree();
     }
 
     public class TreeNode {
@@ -50,12 +66,58 @@ public class SerializeAndDeserializeBinaryTree {
         }
     }
 
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 使用DFS「深度优先遍历『前序遍历』」
+     * 注：序列化后字符串末尾会多一个","，不过不受影响
+     * 注：与示例中序列化后字符串不同
+     * 注：示例使用BFS，方法较难，暂不研究
+     */
+    public class Codec {
+
+        // Encodes a tree to a single string.
+        public String serialize(TreeNode root) {
+            StringBuilder builder = new StringBuilder();
+            solve(root, builder);
+            return builder.substring(0, builder.length() - 1);
+        }
+
+        private void solve(TreeNode node, StringBuilder builder) {
+            if (node == null) {
+                builder.append("null,");
+                return;
+            }
+            builder.append(node.val).append(",");
+            solve(node.left, builder);
+            solve(node.right, builder);
+        }
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            Deque<String> deque = new ArrayDeque<>(Arrays.asList(data.split(",")));
+            return parse(deque);
+        }
+
+        private TreeNode parse(Deque<String> deque) {
+            if (deque.isEmpty()) {
+                return null;
+            }
+            String val = deque.poll();
+            if ("null".equals(val)) {
+                return null;
+            }
+            TreeNode node = new TreeNode(Integer.parseInt(val));
+            node.left = parse(deque);
+            node.right = parse(deque);
+            return node;
+        }
+    }
 
     /**
      * 序列化结果与示例一致
      */
-    public class Codec {
+    public class Codec2 {
 
         // Encodes a tree to a single string.
         public String serialize(TreeNode root) {
