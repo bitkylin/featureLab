@@ -116,6 +116,7 @@ public class SerializeAndDeserializeBinaryTree {
 
     /**
      * 序列化结果与示例一致
+     * 注：方法较难，放弃
      */
     public class Codec2 {
 
