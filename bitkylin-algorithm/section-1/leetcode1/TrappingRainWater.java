@@ -35,6 +35,7 @@
 package leetcode1;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class TrappingRainWater {
 
@@ -67,7 +68,8 @@ public class TrappingRainWater {
         }
 
         /**
-         * 直接从左到右遍历，有一定技巧性
+         * 「不推荐」
+         * 整体从下到上，局部从左到右遍历，有一定技巧性
          * 注：注意 {if (height[i] >= h)} 的条件判断，不要漏了条件
          */
         public int trap2(int[] height) {
@@ -126,7 +128,7 @@ public class TrappingRainWater {
     }
 
     /**
-     * 方法三：
+     * 方法三：「不推荐」
      * 双指针法，O(n)，空间复杂度：O(1)
      * 可看作动态规划版本的优化，不必记录中间结果
      * 两侧各一个高度，高度最低值可累计到res中
@@ -158,7 +160,7 @@ public class TrappingRainWater {
     class Solution4 {
         public int trap(int[] height) {
             int res = 0;
-            ArrayDeque<Integer> stack = new ArrayDeque<>(height.length);
+            Deque<Integer> stack = new ArrayDeque<>(height.length);
             for (int i = 0; i < height.length; i++) {
                 while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
                     int prev = stack.pop();

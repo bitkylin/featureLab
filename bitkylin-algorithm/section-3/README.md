@@ -73,7 +73,7 @@ public class Test {
 | 104. 二叉树的最大深度 | [MaximumDepthOfBinaryTree](leetcode3/MaximumDepthOfBinaryTree.java) | [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | 由逐层计算深度，由上到下、由下到上均可  |
 | 111. 二叉树的最小深度 | [MinimumDepthOfBinaryTree](leetcode3/MinimumDepthOfBinaryTree.java) | [minimum-depth-of-binary-tree](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) |   |
 | 297. 二叉树的序列化与反序列化 | [SerializeAndDeserializeBinaryTree](leetcode3/SerializeAndDeserializeBinaryTree.java) | [serialize-and-deserialize-binary-tree](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/) | 不遵循示例，直接用DFS |
-| 236. 二叉树的最近公共祖先 | [LowestCommonAncestorOfABinaryTree](leetcode3/LowestCommonAncestorOfABinaryTree.java) | [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | 后序遍历 DFS  |
+| 236. 二叉树的最近公共祖先 | [LowestCommonAncestorOfABinaryTree](leetcode3/LowestCommonAncestorOfABinaryTree.java) | [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | DFS  |
 | 105. 从前序与中序遍历序列构造二叉树 | [ConstructBinaryTreeFromPreorderAndInorderTraversal](leetcode3/ConstructBinaryTreeFromPreorderAndInorderTraversal.java) | [construct-binary-tree-from-preorder-and-inorder-traversal](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | 递归 |
 | 77. 组合 | [Combinations](leetcode3/Combinations.java) | [combinations](https://leetcode-cn.com/problems/combinations/) | 递归 |
 | 46. 全排列 | [Permutations](leetcode3/Permutations.java) | [permutations](https://leetcode-cn.com/problems/permutations/) | 回溯 |
