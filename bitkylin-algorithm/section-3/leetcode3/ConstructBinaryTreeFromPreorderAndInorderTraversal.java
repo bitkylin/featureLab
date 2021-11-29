@@ -1,23 +1,37 @@
-//根据一棵树的前序遍历与中序遍历构造二叉树。
-//
-// 注意:
-//你可以假设树中没有重复的元素。
-//
-// 例如，给出
-//
-// 前序遍历 preorder = [3,9,20,15,7]
-//中序遍历 inorder = [9,3,15,20,7]
-//
-// 返回如下的二叉树：
-//
-//     3
-//   / \
-//  9  20
-//    /  \
-//   15   7
-// Related Topics 树 深度优先搜索 数组
-// 👍 688 👎 0
-
+/**
+ * <p>给定一棵树的前序遍历 <code>preorder</code> 与中序遍历  <code>inorder</code>。请构造二叉树并返回其根节点。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1:</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/tree.jpg" />
+ * <pre>
+ * <strong>Input:</strong> preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+ * <strong>Output:</strong> [3,9,20,null,null,15,7]
+ * </pre>
+ *
+ * <p><strong>示例 2:</strong></p>
+ *
+ * <pre>
+ * <strong>Input:</strong> preorder = [-1], inorder = [-1]
+ * <strong>Output:</strong> [-1]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示:</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= preorder.length <= 3000</code></li>
+ * <li><code>inorder.length == preorder.length</code></li>
+ * <li><code>-3000 <= preorder[i], inorder[i] <= 3000</code></li>
+ * <li><code>preorder</code> 和 <code>inorder</code> 均无重复元素</li>
+ * <li><code>inorder</code> 均出现在 <code>preorder</code></li>
+ * <li><code>preorder</code> 保证为二叉树的前序遍历序列</li>
+ * <li><code>inorder</code> 保证为二叉树的中序遍历序列</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>树</li><li>数组</li><li>哈希表</li><li>分治</li><li>二叉树</li></div></div><br><div><li>👍 1311</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
@@ -35,37 +49,45 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 递归，
+     * 递归「DFS」
      * 技巧：二叉树的左子树在前序遍历、中序遍历中，占用连续的序号，且元素个数相同；右子树同样
+     * 参考题解：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/dong-hua-yan-shi-105-cong-qian-xu-yu-zhong-xu-bian/
      */
     class Solution {
         public TreeNode buildTree(int[] preorder, int[] inorder) {
-            Map<Integer, Integer> map = new HashMap<>();
+            Map<Integer, Integer> memo = new HashMap<>(inorder.length);
             for (int i = 0; i < inorder.length; i++) {
-                map.put(inorder[i], i);
+                memo.put(inorder[i], i);
             }
-            return resolve(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1, map);
+            return solve(memo, preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
         }
 
-        private TreeNode resolve(int[] preorder, int pi, int pj, int[] inorder, int ii, int ij, Map<Integer, Integer> map) {
-            if (pi > pj) {
+        private TreeNode solve(Map<Integer, Integer> memo, int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight) {
+            if (preLeft > preRight || inLeft > inRight) {
                 return null;
             }
-            TreeNode root = new TreeNode(preorder[pi]);
-            int middle = map.get(preorder[pi]);
-            int length = middle - ii;
-
-            root.left = resolve(preorder, pi + 1, pi + length, inorder, ii, middle - 1, map);
-            root.right = resolve(preorder, pi + length + 1, pj, inorder, middle + 1, ij, map);
-            return root;
+            TreeNode node = new TreeNode(preorder[preLeft]);
+            int i = memo.get(preorder[preLeft]);
+            node.left = solve(memo, preorder, inorder, preLeft + 1, preLeft + i - inLeft, inLeft, i - 1);
+            node.right = solve(memo, preorder, inorder, preRight - inRight + i + 1, preRight, i + 1, inRight);
+            return node;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
