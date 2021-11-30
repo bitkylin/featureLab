@@ -1,30 +1,52 @@
-//给定一个 没有重复 数字的序列，返回其所有可能的全排列。
-//
-// 示例:
-//
-// 输入: [1,2,3]
-//输出:
-//[
-//  [1,2,3],
-//  [1,3,2],
-//  [2,1,3],
-//  [2,3,1],
-//  [3,1,2],
-//  [3,2,1]
-//]
-// Related Topics 回溯算法
-// 👍 918 👎 0
-
+/**
+ * <p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <strong>所有可能的全排列</strong> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [1,2,3]
+ * <strong>输出：</strong>[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [0,1]
+ * <strong>输出：</strong>[[0,1],[1,0]]
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [1]
+ * <strong>输出：</strong>[[1]]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= nums.length <= 6</code></li>
+ * <li><code>-10 <= nums[i] <= 10</code></li>
+ * <li><code>nums</code> 中的所有整数 <strong>互不相同</strong></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>数组</li><li>回溯</li></div></div><br><div><li>👍 1662</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Permutations {
 
     public static void main(String[] args) {
-        new Permutations().new Solution().permute(new int[]{1, 2, 3});
+        Solution solution = new Permutations().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -39,31 +61,25 @@ public class Permutations {
     class Solution {
         public List<List<Integer>> permute(int[] nums) {
             List<List<Integer>> res = new ArrayList<>();
-            resolve(0, nums, res);
+            solve(res, nums, 0);
             return res;
         }
 
-        private void resolve(int start, int[] nums, List<List<Integer>> res) {
-            if (start == nums.length) {
-                List<Integer> list = new ArrayList<>();
-                for (int i = 0; i < nums.length; i++) {
-                    list.add(nums[i]);
-                }
-                res.add(list);
-                return;
+        private void solve(List<List<Integer>> res, int[] nums, int i) {
+            if (i == nums.length) {
+                res.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
             }
-
-            for (int i = start; i < nums.length; i++) {
-                swap(nums, i, start);
-                resolve(start + 1, nums, res);
-                swap(nums, i, start);
+            for (int j = i; j < nums.length; j++) {
+                swap(nums, j, i);
+                solve(res, nums, i + 1);
+                swap(nums, j, i);
             }
         }
 
-        private void swap(int[] nums, int i, int j) {
-            int k = nums[i];
+        private void swap(int[] nums, int j, int i) {
+            int temp = nums[i];
             nums[i] = nums[j];
-            nums[j] = k;
+            nums[j] = temp;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
