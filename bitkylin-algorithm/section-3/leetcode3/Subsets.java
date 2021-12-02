@@ -1,24 +1,35 @@
-//给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
-//
-// 说明：解集不能包含重复的子集。
-//
-// 示例:
-//
-// 输入: nums = [1,2,3]
-//输出:
-//[
-//  [3],
-//  [1],
-//  [2],
-//  [1,2,3],
-//  [1,3],
-//  [2,3],
-//  [1,2],
-//  []
-//]
-// Related Topics 位运算 数组 回溯算法
-// 👍 811 👎 0
-
+/**
+ * <p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+ *
+ * <p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [1,2,3]
+ * <strong>输出：</strong>[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [0]
+ * <strong>输出：</strong>[[],[0]]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= nums.length <= 10</code></li>
+ * <li><code>-10 <= nums[i] <= 10</code></li>
+ * <li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>位运算</li><li>数组</li><li>回溯</li></div></div><br><div><li>👍 1403</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
@@ -32,25 +43,48 @@ public class Subsets {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 递归
+     */
     class Solution {
         public List<List<Integer>> subsets(int[] nums) {
             List<List<Integer>> res = new ArrayList<>();
-            resolve(res, nums, new ArrayList<>(nums.length), 0);
+            solve(res, nums, new ArrayList<>(), 0);
             return res;
         }
 
-        private void resolve(List<List<Integer>> res, int[] nums, List<Integer> list, int i) {
+        private void solve(List<List<Integer>> res, int[] nums, List<Integer> list, int i) {
             if (i == nums.length) {
                 res.add(list);
                 return;
             }
-            resolve(res, nums, list, i + 1);
-            List<Integer> afterList = new ArrayList<>(nums.length);
-            afterList.addAll(list);
-            afterList.add(nums[i]);
-            resolve(res, nums, afterList, i + 1);
+
+            solve(res, nums, list, i + 1);
+            list = new ArrayList<>(list);
+            list.add(nums[i]);
+            solve(res, nums, list, i + 1);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * 技巧性做法
+     */
+    class Solution2 {
+        public List<List<Integer>> subsets(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+            res.add(new ArrayList<>());
+            for (int i = 0; i < nums.length; i++) {
+                List<List<Integer>> sub = new ArrayList<>();
+                for (List<Integer> list : res) {
+                    list = new ArrayList<>(list);
+                    list.add(nums[i]);
+                    sub.add(list);
+                }
+                res.addAll(sub);
+            }
+            return res;
+        }
+    }
 }
