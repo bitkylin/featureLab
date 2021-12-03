@@ -1,61 +1,75 @@
-//给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。 
-//
-// 你可以假设数组是非空的，并且给定的数组总是存在多数元素。 
-//
-// 
-//
-// 示例 1: 
-//
-// 输入: [3,2,3]
-//输出: 3 
-//
-// 示例 2: 
-//
-// 输入: [2,2,1,1,1,2,2]
-//输出: 2
-// 
-// Related Topics 位运算 数组 分治算法 
-// 👍 750 👎 0
-
+/**
+ * <p>给定一个大小为 <em>n </em>的数组，找到其中的多数元素。多数元素是指在数组中出现次数 <strong>大于</strong> <code>⌊ n/2 ⌋</code> 的元素。</p>
+ *
+ * <p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>[3,2,3]
+ * <strong>输出：</strong>3</pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>[2,2,1,1,1,2,2]
+ * <strong>输出：</strong>2
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>进阶：</strong></p>
+ *
+ * <ul>
+ * <li>尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>数组</li><li>哈希表</li><li>分治</li><li>计数</li><li>排序</li></div></div><br><div><li>👍 1219</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class MajorityElement {
 
     public static void main(String[] args) {
-        new MajorityElement().new Solution().majorityElement(new int[]{3, 2, 3});
+        Solution solution = new MajorityElement().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * topK
+     * topK，此处大顶堆和小顶堆结果一致，可以任意用
+     * 时间复杂度: O(NlogN)
+     * 空间复杂度：O(n)
      */
     class Solution {
         public int majorityElement(int[] nums) {
-            int length = nums.length + 1 >> 1;
-            PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+            int count = ((nums.length + 1) >> 1) + 1;
+            PriorityQueue<Integer> queue = new PriorityQueue<>(count);
+//            PriorityQueue<Integer> queue = new PriorityQueue<>(max, (o1, o2) -> o2 - o1);
             for (int num : nums) {
-                queue.add(num);
-                if (queue.size() > length) {
+                queue.offer(num);
+                if (queue.size() == count) {
                     queue.poll();
                 }
             }
             return queue.poll();
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * 排序取中
+     * 时间复杂度: O(NlogN)
+     * 空间复杂度：O(1)
      */
-    class Solution2 {
+    class Solution1 {
         public int majorityElement(int[] nums) {
             Arrays.sort(nums);
             return nums[nums.length >> 1];
@@ -64,19 +78,23 @@ public class MajorityElement {
 
     /**
      * Map中找最大值
+     * 时间复杂度: O(NlogN)
+     * 空间复杂度：O(n)
      */
-    class Solution1 {
+    class Solution2 {
         public int majorityElement(int[] nums) {
-            Map<Integer, Long> map = Arrays.stream(nums)
-                    .boxed()
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-            int length = nums.length >> 1;
-            for (Map.Entry<Integer, Long> entry : map.entrySet()) {
-                if (entry.getValue() > length) {
-                    return entry.getKey();
+            int countSub = (nums.length + 1) >> 1;
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int num : nums) {
+                Integer count = map.get(num);
+                if (count == null) {
+                    map.put(num, 1);
+                } else {
+                    if (++count == countSub) return num;
+                    map.put(num, count);
                 }
             }
-            return -1;
+            return nums[0];
         }
     }
 }

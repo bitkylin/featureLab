@@ -1,20 +1,43 @@
-//给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。 
-//
-// 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。 
-//
-// 
-//
-// 示例: 
-//
-// 输入："23"
-//输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
-// 
-//
-// 说明: 
-//尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。 
-// Related Topics 字符串 回溯算法 
-// 👍 935 👎 0
-
+/**
+ * <p>给定一个仅包含数字&nbsp;<code>2-9</code>&nbsp;的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p>
+ *
+ * <p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+ *
+ * <p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/11/09/200px-telephone-keypad2svg.png" style="width: 200px;" /></p>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>digits = "23"
+ * <strong>输出：</strong>["ad","ae","af","bd","be","bf","cd","ce","cf"]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>digits = ""
+ * <strong>输出：</strong>[]
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>digits = "2"
+ * <strong>输出：</strong>["a","b","c"]
+ * </pre>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>0 &lt;= digits.length &lt;= 4</code></li>
+ * <li><code>digits[i]</code> 是范围 <code>['2', '9']</code> 的一个数字。</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>哈希表</li><li>字符串</li><li>回溯</li></div></div><br><div><li>👍 1630</li><li>👎 0</li></div>
+ */
 
 package leetcode3;
 
@@ -32,9 +55,37 @@ public class LetterCombinationsOfAPhoneNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 回溯算法，全程不使用List，不适用Queue，效率最高
+     * 递归「回溯」，不需要进行当前层的清理，因为递归的结果不会直接作为结果集，后续递归会覆盖前面的
      */
     class Solution {
+        public List<String> letterCombinations(String digits) {
+            String[] raw = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+            List<String> list = new ArrayList<>();
+            char[] arr = digits.toCharArray();
+            if (arr.length == 0) {
+                return list;
+            }
+            solve(raw, list, new char[digits.length()], arr, 0);
+            return list;
+        }
+
+        private void solve(String[] raw, List<String> list, char[] res, char[] arr, int i) {
+            if (i >= arr.length) {
+                list.add(String.valueOf(res));
+                return;
+            }
+            for (char c : raw[arr[i] - 0x30].toCharArray()) {
+                res[i] = c;
+                solve(raw, list, res, arr, i + 1);
+            }
+        }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * 回溯算法，全程不使用List，不适用Queue，效率最高
+     */
+    class Solution1 {
         private String[] map = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
         public List<String> letterCombinations(String digits) {
@@ -58,8 +109,6 @@ public class LetterCombinationsOfAPhoneNumber {
             }
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 回溯算法，全程使用List，只在生成最后结果时转为String，效率较高
