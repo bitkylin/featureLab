@@ -22,14 +22,14 @@ public class GitBatchPull {
         System.out.println("-------------------");
         System.out.println("共有仓库个数：" + fileList.size());
         System.out.println("-------------------");
-        for (File file : fileList) {
-
-            System.out.println("\n\n>>> " + file.getAbsolutePath());
+        for (int i = 0; i < fileList.size(); i++) {
+            File file = fileList.get(i);
+            System.out.println("\n\n>>>" + i + ": " + file.getAbsolutePath());
             Process process = Runtime.getRuntime().exec("git pull", null, file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             reader.lines().forEach(System.out::println);
             reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            reader.lines().forEach(System.out::println);
+            reader.lines().forEach(str -> System.out.println("「ERROR」" + str));
         }
 
     }
