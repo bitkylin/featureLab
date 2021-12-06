@@ -1,142 +1,164 @@
-//一条基因序列由一个带有8个字符的字符串表示，其中每个字符都属于 "A", "C", "G", "T"中的任意一个。
-//
-// 假设我们要调查一个基因序列的变化。一次基因变化意味着这个基因序列中的一个字符发生了变化。
-//
-// 例如，基因序列由"AACCGGTT" 变化至 "AACCGGTA" 即发生了一次基因变化。
-//
-// 与此同时，每一次基因变化的结果，都需要是一个合法的基因串，即该结果属于一个基因库。
-//
-// 现在给定3个参数 — start, end, bank，分别代表起始基因序列，目标基因序列及基因库，请找出能够使起始基因序列变化为目标基因序列所需的最少变
-//化次数。如果无法实现目标变化，请返回 -1。
-//
-// 注意:
-//
-//
-// 起始基因序列默认是合法的，但是它并不一定会出现在基因库中。
-// 所有的目标基因序列必须是合法的。
-// 假定起始基因序列与目标基因序列是不一样的。
-//
-//
-// 示例 1:
-//
-//
-//start: "AACCGGTT"
-//end:   "AACCGGTA"
-//bank: ["AACCGGTA"]
-//
-//返回值: 1
-//
-//
-// 示例 2:
-//
-//
-//start: "AACCGGTT"
-//end:   "AAACGGTA"
-//bank: ["AACCGGTA", "AACCGCTA", "AAACGGTA"]
-//
-//返回值: 2
-//
-//
-// 示例 3:
-//
-//
-//start: "AAAAACCC"
-//end:   "AACCCCCC"
-//bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
-//
-//返回值: 3
-//
-// 👍 51 👎 0
-
+/**
+ * <p>一条基因序列由一个带有8个字符的字符串表示，其中每个字符都属于 <code>"A"</code>, <code>"C"</code>, <code>"G"</code>, <code>"T"</code>中的任意一个。</p>
+ *
+ * <p>假设我们要调查一个基因序列的变化。<strong>一次</strong>基因变化意味着这个基因序列中的<strong>一个</strong>字符发生了变化。</p>
+ *
+ * <p>例如，基因序列由<code>"AACCGGTT"</code> 变化至 <code>"AACCGGTA" </code>即发生了一次基因变化。</p>
+ *
+ * <p>与此同时，每一次基因变化的结果，都需要是一个合法的基因串，即该结果属于一个基因库。</p>
+ *
+ * <p>现在给定3个参数 — start, end, bank，分别代表起始基因序列，目标基因序列及基因库，请找出能够使起始基因序列变化为目标基因序列所需的最少变化次数。如果无法实现目标变化，请返回 -1。</p>
+ *
+ * <p><strong>注意：</strong></p>
+ *
+ * <ol>
+ * <li>起始基因序列默认是合法的，但是它并不一定会出现在基因库中。</li>
+ * <li>如果一个起始基因序列需要多次变化，那么它每一次变化之后的基因序列都必须是合法的。</li>
+ * <li>假定起始基因序列与目标基因序列是不一样的。</li>
+ * </ol>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * start: "AACCGGTT"
+ * end:   "AACCGGTA"
+ * bank: ["AACCGGTA"]
+ *
+ * 返回值: 1
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * start: "AACCGGTT"
+ * end:   "AAACGGTA"
+ * bank: ["AACCGGTA", "AACCGCTA", "AAACGGTA"]
+ *
+ * 返回值: 2
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * start: "AAAAACCC"
+ * end:   "AACCCCCC"
+ * bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
+ *
+ * 返回值: 3
+ * </pre>
+ * <div><div>Related Topics</div><div><li>广度优先搜索</li><li>哈希表</li><li>字符串</li></div></div><br><div><li>👍 94</li><li>👎 0</li></div>
+ */
 
 package leetcode4;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 本问题的优秀解法参考 {@link leetcode7.MinimumGeneticMutation}
+ *
+ * @author bitkylin
+ */
 public class MinimumGeneticMutation {
 
     public static void main(String[] args) {
-        Solution solution = new MinimumGeneticMutation().new Solution();
+        new MinimumGeneticMutation().new Solution().minMutation("AACCGGTT", "AAACGGTA",
+                new String[]{"AACCGGTA", "AACCGCTA", "AAACGGTA"});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * BFS，循环，效率极高
+     * DFS，回溯
      */
     class Solution {
         public int minMutation(String start, String end, String[] bank) {
-            Set<String> set = new HashSet<>();
-            Deque<String> queue = new ArrayDeque<>();
-            queue.offer(start);
+            AtomicInteger res = new AtomicInteger(Integer.MAX_VALUE);
+            solve(start, end, bank, res, new HashSet<>(), 0);
+            return res.get() == Integer.MAX_VALUE ? -1 : res.get();
+        }
 
-            int level = 0;
-            while (!queue.isEmpty()) {
-                int size = queue.size();
-                for (int i = 0; i < size; i++) {
-                    String str = queue.poll();
-                    if (end.equals(str)) {
-                        return level;
-                    }
-                    for (String bankStr : bank) {
-                        if (set.contains(bankStr)) {
-                            continue;
-                        }
-                        int diff = 0;
-                        for (int j = 0; j < str.length(); j++) {
-                            if (str.charAt(j) != bankStr.charAt(j)) {
-                                diff++;
-                            }
-                        }
-                        if (diff == 1) {
-                            queue.offer(bankStr);
-                            set.add(bankStr);
-                        }
-                    }
+        private void solve(String start, String end, String[] bank, AtomicInteger res, Set<String> set, int level) {
+            if (res.get() < level) {
+                return;
+            }
+            if (start.equals(end)) {
+                res.set(level);
+                return;
+            }
+            for (String b : bank) {
+                if (!set.contains(b) && match(start, b)) {
+                    set.add(b);
+                    solve(b, end, bank, res, set, level + 1);
+                    set.remove(b);
                 }
-                level++;
+            }
+        }
+
+        private boolean match(String start, String end) {
+            if (start.length() != end.length()) {
+                return false;
+            }
+            int count = 0;
+            for (int i = 0; i < start.length(); i++) {
+                if (start.charAt(i) != end.charAt(i)) {
+                    if (++count > 1) return false;
+                }
+            }
+            return count == 1;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * BFS，循环
+     */
+    class Solution1 {
+        public int minMutation(String start, String end, String[] bank) {
+            int step = 0;
+            List<String> src = new ArrayList<>();
+            List<String> bankList = new ArrayList<>(Arrays.asList(bank));
+
+            src.add(start);
+            while (!src.isEmpty()) {
+                if (src.contains(end)) {
+                    return step;
+                }
+                step++;
+                src = solve(src, bankList);
             }
             return -1;
         }
-    }
-//leetcode submit region end(Prohibit modification and deletion)
 
-    /**
-     * DFS，回溯，效率极高
-     */
-    class Solution2 {
-        private int min = Integer.MAX_VALUE;
-
-        public int minMutation(String start, String end, String[] bank) {
-            Set<String> set = new HashSet<>();
-            resolve(start, 0, end, set, bank);
-            return min == Integer.MAX_VALUE ? -1 : min;
-        }
-
-        private void resolve(String start, int level, String end, Set<String> set, String[] bank) {
-            if (end.equals(start)) {
-                min = Math.min(min, level);
-                return;
-            }
-            for (String bankStr : bank) {
-                if (set.contains(bankStr)) {
-                    continue;
-                }
-                int diff = 0;
-                for (int i = 0; i < bankStr.length(); i++) {
-                    if (bankStr.charAt(i) != start.charAt(i)) {
-                        diff++;
+        private List<String> solve(List<String> src, List<String> bankList) {
+            List<String> res = new ArrayList<>();
+            for (String s : src) {
+                Iterator<String> bankIterator = bankList.iterator();
+                while (bankIterator.hasNext()) {
+                    String b = bankIterator.next();
+                    if (match(b, s)) {
+                        res.add(b);
+                        bankIterator.remove();
                     }
                 }
-                if (diff == 1) {
-                    set.add(bankStr);
-                    resolve(bankStr, level + 1, end, set, bank);
-                    set.remove(bankStr);
+            }
+            return res;
+        }
+
+        private boolean match(String start, String end) {
+            if (start.length() != end.length()) {
+                return false;
+            }
+            int count = 0;
+            for (int i = 0; i < start.length(); i++) {
+                if (start.charAt(i) != end.charAt(i)) {
+                    if (++count > 1) return false;
                 }
             }
+            return count == 1;
         }
     }
 }

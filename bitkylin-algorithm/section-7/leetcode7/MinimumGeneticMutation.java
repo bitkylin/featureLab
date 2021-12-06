@@ -54,7 +54,7 @@ package leetcode7;
 import java.util.*;
 
 /**
- * {@link leetcode4.MinimumGeneticMutation}
+ * 本问题的常规解法参考 {@link leetcode4.MinimumGeneticMutation}
  */
 public class MinimumGeneticMutation {
 

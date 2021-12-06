@@ -1,28 +1,30 @@
-//给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
-//
-//
-//
-// 示例：
-//二叉树：[3,9,20,null,null,15,7],
-//
-//     3
-//   / \
-//  9  20
-//    /  \
-//   15   7
-//
-//
-// 返回其层次遍历结果：
-//
-// [
-//  [3],
-//  [9,20],
-//  [15,7]
-//]
-//
-// Related Topics 树 广度优先搜索
-// 👍 655 👎 0
-
+/**
+ * <p>给你一个二叉树，请你返回其按 <strong>层序遍历</strong> 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例：</strong><br />
+ * 二叉树：<code>[3,9,20,null,null,15,7]</code>,</p>
+ *
+ * <pre>
+ * 3
+ * / \
+ * 9  20
+ * /  \
+ * 15   7
+ * </pre>
+ *
+ * <p>返回其层序遍历结果：</p>
+ *
+ * <pre>
+ * [
+ * [3],
+ * [9,20],
+ * [15,7]
+ * ]
+ * </pre>
+ * <div><div>Related Topics</div><div><li>树</li><li>广度优先搜索</li><li>二叉树</li></div></div><br><div><li>👍 1113</li><li>👎 0</li></div>
+ */
 
 package leetcode4;
 
@@ -37,74 +39,77 @@ public class BinaryTreeLevelOrderTraversal {
         Solution solution = new BinaryTreeLevelOrderTraversal().new Solution();
     }
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * DFS，递归，效率极高
+     * DFS，递归
      */
     class Solution {
         public List<List<Integer>> levelOrder(TreeNode root) {
-            if (root == null) {
-                return new ArrayList<>();
-            }
             List<List<Integer>> res = new ArrayList<>();
-            resolve(root, 0, res);
+            solve(res, root, 1);
             return res;
         }
 
-        private void resolve(TreeNode node, int depth, List<List<Integer>> res) {
+        private void solve(List<List<Integer>> res, TreeNode node, int level) {
             if (node == null) {
                 return;
             }
-            if (res.size() < depth + 1) {
+            if (res.size() < level) {
                 res.add(new ArrayList<>());
             }
-            res.get(depth).add(node.val);
-            resolve(node.left, depth + 1, res);
-            resolve(node.right, depth + 1, res);
+            res.get(level - 1).add(node.val);
+            solve(res, node.left, level + 1);
+            solve(res, node.right, level + 1);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
+    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * BFS，循环，分别读取每一层，效率极高
+     * BFS，循环
      */
     class Solution2 {
         public List<List<Integer>> levelOrder(TreeNode root) {
-            if (root == null) {
-                return new ArrayList<>();
-            }
             List<List<Integer>> res = new ArrayList<>();
             Deque<TreeNode> deque = new ArrayDeque<>();
-            deque.offer(root);
-
+            offer(deque, root);
             while (!deque.isEmpty()) {
+                int size = deque.size();
                 List<Integer> list = new ArrayList<>();
                 res.add(list);
-                int size = deque.size();
                 for (int i = 0; i < size; i++) {
                     TreeNode node = deque.poll();
                     list.add(node.val);
-                    if (node.left != null) {
-                        deque.addLast(node.left);
-                    }
-                    if (node.right != null) {
-                        deque.addLast(node.right);
-                    }
+                    offer(deque, node.left);
+                    offer(deque, node.right);
                 }
             }
             return res;
+        }
+
+        private void offer(Deque<TreeNode> deque, TreeNode node) {
+            if (node != null) {
+                deque.offer(node);
+            }
         }
     }
 }
