@@ -1,21 +1,31 @@
-//数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
-//
-//
-//
-// 示例：
-//
-// 输入：n = 3
-//输出：[
-//       "((()))",
-//       "(()())",
-//       "(())()",
-//       "()(())",
-//       "()()()"
-//     ]
-//
-// Related Topics 字符串 回溯算法
-// 👍 1390 👎 0
-
+/**
+ * <p>数字 <code>n</code>&nbsp;代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 <strong>有效的 </strong>括号组合。</p>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>n = 3
+ * <strong>输出：</strong>["((()))","(()())","(())()","()(())","()()()"]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>n = 1
+ * <strong>输出：</strong>["()"]
+ * </pre>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 &lt;= n &lt;= 8</code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>字符串</li><li>动态规划</li><li>回溯</li></div></div><br><div><li>👍 2195</li><li>👎 0</li></div>
+ */
 
 package leetcode7;
 
@@ -24,9 +34,6 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-/**
- * {@link leetcode3.GenerateParentheses}之前的解法「STACK，QUEUE」不再赘述
- */
 public class GenerateParentheses {
 
     public static void main(String[] args) {
@@ -36,9 +43,75 @@ public class GenerateParentheses {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * DFS，剪枝写法有两种
+     * 最佳实践（1）
+     * DFS，在使用数组时，无需剪枝
      */
     class Solution {
+        public List<String> generateParenthesis(int n) {
+            List<String> res = new ArrayList<>();
+            solve(res, n, new char[2 * n], 0, 0);
+            return res;
+        }
+
+        private void solve(List<String> res, int n, char[] arr, int left, int right) {
+            if (right >= n) {
+                res.add(String.valueOf(arr));
+                return;
+            }
+            if (left < n) {
+                arr[left + right] = '(';
+                solve(res, n, arr, left + 1, right);
+            }
+            if (left > right) {
+                arr[left + right] = ')';
+                solve(res, n, arr, left, right + 1);
+            }
+        }
+    }
+
+
+    /**
+     * 最佳实践（2）
+     * DFS，剪枝，使用 Deque
+     */
+    class Solution0 {
+        public List<String> generateParenthesis(int n) {
+            List<String> res = new ArrayList<>();
+            solve(res, n, new ArrayDeque<>(2 * n), 0, 0);
+            return res;
+        }
+
+        private void solve(List<String> res, int n, Deque<Character> deque, int left, int right) {
+            if (right >= n) {
+                calc(res, deque);
+                return;
+            }
+            if (left < n) {
+                deque.addLast('(');
+                solve(res, n, deque, left + 1, right);
+                deque.removeLast();
+            }
+            if (left > right) {
+                deque.addLast(')');
+                solve(res, n, deque, left, right + 1);
+                deque.removeLast();
+            }
+        }
+
+        private void calc(List<String> res, Deque<Character> deque) {
+            StringBuilder builder = new StringBuilder();
+            for (Character c : deque) {
+                builder.append(c);
+            }
+            res.add(builder.toString());
+        }
+    }
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * DFS，剪枝写法有两种
+     */
+    class Solution1 {
         public List<String> generateParenthesis(int n) {
             List<String> res = new ArrayList<>();
             solve("", 0, 0, n, res);
@@ -72,7 +145,6 @@ public class GenerateParentheses {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DFS，非递归

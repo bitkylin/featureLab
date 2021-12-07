@@ -1,21 +1,67 @@
-//您需要在二叉树的每一行中找到最大的值。
-//
-// 示例：
-//
-//
-//输入:
-//
-//          1
-//         / \
-//        3   2
-//       / \   \
-//      5   3   9
-//
-//输出: [1, 3, 9]
-//
-// Related Topics 树 深度优先搜索 广度优先搜索
-// 👍 93 👎 0
-
+/**
+ * <p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入: </strong>root = [1,3,2,5,3,null,9]
+ * <strong>输出: </strong>[1,3,9]
+ * <strong>解释:</strong>
+ * 1
+ * / \
+ * 3   2
+ * / \   \
+ * 5   3   9
+ * </pre>
+ *
+ * <p><strong>示例2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入: </strong>root = [1,2,3]
+ * <strong>输出: </strong>[1,3]
+ * <strong>解释:</strong>
+ * 1
+ * / \
+ * 2   3
+ * </pre>
+ *
+ * <p><strong>示例3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入: </strong>root = [1]
+ * <strong>输出: </strong>[1]
+ * </pre>
+ *
+ * <p><strong>示例4：</strong></p>
+ *
+ * <pre>
+ * <strong>输入: </strong>root = [1,null,2]
+ * <strong>输出: </strong>[1,2]
+ * <strong>解释:</strong>
+ * 1
+ * \
+ * 2
+ * </pre>
+ *
+ * <p><strong>示例5：</strong></p>
+ *
+ * <pre>
+ * <strong>输入: </strong>root = []
+ * <strong>输出: </strong>[]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li>二叉树的节点个数的范围是 <code>[0,10<sup>4</sup>]</code></li>
+ * <li><meta charset="UTF-8" /><code>-2<sup>31</sup> <= Node.val <= 2<sup>31</sup> - 1</code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>树</li><li>深度优先搜索</li><li>广度优先搜索</li><li>二叉树</li></div></div><br><div><li>👍 160</li><li>👎 0</li></div>
+ */
 
 package leetcode4;
 
@@ -50,64 +96,59 @@ public class FindLargestValueInEachTreeRow {
         }
     }
 
-
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * BFS，效率较高
+     * DFS
      */
     class Solution {
         public List<Integer> largestValues(TreeNode root) {
             List<Integer> res = new ArrayList<>();
-            if (root == null) {
-                return res;
+            solve(res, root, 0);
+            return res;
+        }
+
+        private void solve(List<Integer> res, TreeNode node, int level) {
+            if (node == null) {
+                return;
             }
+            if (res.size() <= level) {
+                res.add(node.val);
+            } else {
+                res.set(level, Math.max(res.get(level), node.val));
+            }
+            solve(res, node.left, level + 1);
+            solve(res, node.right, level + 1);
+        }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * BFS
+     */
+    class Solution1 {
+        public List<Integer> largestValues(TreeNode root) {
+            List<Integer> res = new ArrayList<>();
             Deque<TreeNode> deque = new ArrayDeque<>();
-            deque.offer(root);
+            offer(deque, root);
             while (!deque.isEmpty()) {
-                int size = deque.size();
                 int max = Integer.MIN_VALUE;
+                int size = deque.size();
                 for (int i = 0; i < size; i++) {
                     TreeNode node = deque.poll();
                     max = Math.max(max, node.val);
-                    if (node.left != null) {
-                        deque.offer(node.left);
-                    }
-                    if (node.right != null) {
-                        deque.offer(node.right);
-                    }
+                    offer(deque, node.left);
+                    offer(deque, node.right);
                 }
                 res.add(max);
             }
             return res;
         }
-    }
 
-    //leetcode submit region end(Prohibit modification and deletion)
-
-    /**
-     * DFS，效率极高
-     */
-    class Solution2 {
-        public List<Integer> largestValues(TreeNode root) {
-            List<Integer> res = new ArrayList<>();
-            if (root == null) {
-                return res;
+        private void offer(Deque<TreeNode> deque, TreeNode node) {
+            if (node != null) {
+                deque.offer(node);
             }
-            resolve(res, 0, root);
-            return res;
-        }
-
-        private void resolve(List<Integer> res, int level, TreeNode node) {
-            if (node == null) {
-                return;
-            }
-            if (res.size() < level + 1) {
-                res.add(Integer.MIN_VALUE);
-            }
-            res.set(level, Math.max(res.get(level), node.val));
-            resolve(res, level + 1, node.left);
-            resolve(res, level + 1, node.right);
         }
     }
 }
