@@ -1,47 +1,46 @@
-//给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
-//
-//
-//
-// 每次转换只能改变一个字母。
-// 转换过程中的中间单词必须是字典中的单词。
-//
-//
-// 说明:
-//
-//
-// 如果不存在这样的转换序列，返回 0。
-// 所有单词具有相同的长度。
-// 所有单词只由小写字母组成。
-// 字典中不存在重复的单词。
-// 你可以假设 beginWord 和 endWord 是非空的，且二者不相同。
-//
-//
-// 示例 1:
-//
-// 输入:
-//beginWord = "hit",
-//endWord = "cog",
-//wordList = ["hot","dot","dog","lot","log","cog"]
-//
-//输出: 5
-//
-//解释: 一个最短转换序列是 "hit" -> "hot" -> "dot" -> "dog" -> "cog",
-//     返回它的长度 5。
-//
-//
-// 示例 2:
-//
-// 输入:
-//beginWord = "hit"
-//endWord = "cog"
-//wordList = ["hot","dot","dog","lot","log"]
-//
-//输出: 0
-//
-//解释: endWord "cog" 不在字典中，所以无法进行转换。
-// Related Topics 广度优先搜索
-// 👍 492 👎 0
-
+/**
+ * <p>字典 <code>wordList</code> 中从单词 <code>beginWord</code><em> </em>和 <code>endWord</code> 的 <strong>转换序列 </strong>是一个按下述规格形成的序列：</p>
+ *
+ * <ul>
+ * <li>序列中第一个单词是 <code>beginWord</code> 。</li>
+ * <li>序列中最后一个单词是 <code>endWord</code> 。</li>
+ * <li>每次转换只能改变一个字母。</li>
+ * <li>转换过程中的中间单词必须是字典 <code>wordList</code> 中的单词。</li>
+ * </ul>
+ *
+ * <p>给你两个单词<em> </em><code>beginWord</code><em> </em>和 <code>endWord</code> 和一个字典 <code>wordList</code> ，找到从 <code>beginWord</code> 到 <code>endWord</code> 的 <strong>最短转换序列</strong> 中的 <strong>单词数目</strong> 。如果不存在这样的转换序列，返回 0。</p>
+ *
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+ * <strong>输出：</strong>5
+ * <strong>解释：</strong>一个最短转换序列是 "hit" -> "hot" -> "dot" -> "dog" -> "cog", 返回它的长度 5。
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]
+ * <strong>输出：</strong>0
+ * <strong>解释：</strong>endWord "cog" 不在字典中，所以无法进行转换。</pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= beginWord.length <= 10</code></li>
+ * <li><code>endWord.length == beginWord.length</code></li>
+ * <li><code>1 <= wordList.length <= 5000</code></li>
+ * <li><code>wordList[i].length == beginWord.length</code></li>
+ * <li><code>beginWord</code>、<code>endWord</code> 和 <code>wordList[i]</code> 由小写英文字母组成</li>
+ * <li><code>beginWord != endWord</code></li>
+ * <li><code>wordList</code> 中的所有字符串 <strong>互不相同</strong></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>广度优先搜索</li><li>哈希表</li><li>字符串</li></div></div><br><div><li>👍 910</li><li>👎 0</li></div>
+ */
 
 package leetcode7;
 
@@ -53,10 +52,7 @@ import java.util.*;
 public class WordLadder {
 
     public static void main(String[] args) {
-        new WordLadder().new Solution()
-                .ladderLength("hit",
-                        "cog",
-                        new ArrayList<>(Arrays.asList(new String[]{"hot", "dot", "dog", "lot", "log", "cog"})));
+        new WordLadder().new Solution().ladderLength("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -101,51 +97,58 @@ public class WordLadder {
         }
     }
 
-    //leetcode submit region end(Prohibit modification and deletion)
+//leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * BFS，数组实现
+     * 单向 BFS，数组实现
+     * 注：双向 BFS 太复杂，暂不研究
      */
     class Solution2 {
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-            List<String> target = new ArrayList<>();
-            target.add(beginWord);
+            List<String> begin = new ArrayList<>();
+            begin.add(beginWord);
             int level = 1;
-            while (!target.isEmpty()) {
-                if (target.contains(endWord)) {
+            while (!begin.isEmpty()) {
+                if (begin.contains(endWord)) {
                     return level;
                 }
-                target = calc(wordList, target);
                 level++;
+                begin = solve(begin, wordList);
             }
             return 0;
         }
 
-        private List<String> calc(List<String> wordList, List<String> target) {
+        private List<String> solve(List<String> begin, List<String> wordList) {
             List<String> res = new ArrayList<>();
-            Iterator<String> iterator = wordList.iterator();
-            while (iterator.hasNext()) {
-                String s = iterator.next();
-                for (int i = 0; i < target.size(); i++) {
-                    String t = target.get(i);
-                    if (solve(s, t)) {
-                        res.add(s);
+            for (String b : begin) {
+                Iterator<String> iterator = wordList.iterator();
+                while (iterator.hasNext()) {
+                    String word = iterator.next();
+                    if (calc(b, word)) {
+                        res.add(word);
                         iterator.remove();
-                        break;
                     }
                 }
             }
             return res;
         }
 
-        private boolean solve(String o1, String o2) {
-            int val = 0;
-            for (int i = 0; i < o1.length(); i++) {
-                if (o1.charAt(i) != o2.charAt(i)) {
-                    val++;
+        private boolean calc(String aStr, String bStr) {
+            char[] a = aStr.toCharArray();
+            char[] b = bStr.toCharArray();
+            if (a.length != b.length) {
+                return false;
+            }
+            int cnt = 0;
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] != b[i]) {
+                    cnt++;
+                    if (cnt > 1) {
+                        return false;
+                    }
                 }
             }
-            return val == 1;
+            return cnt == 1;
         }
     }
 }

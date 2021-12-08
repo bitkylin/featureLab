@@ -162,7 +162,7 @@ if (arr[mid] <= target) {
 | 515. 在每个树行中找最大值 | [FindLargestValueInEachTreeRow](leetcode4/FindLargestValueInEachTreeRow.java) | [find-largest-value-in-each-tree-row/](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/) | DFS、BFS |
 | 433. 最小基因变化 | [MinimumGeneticMutation](leetcode4/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) |   |
 | 200. 岛屿数量 | [NumberOfIslands](leetcode4/NumberOfIslands.java) | [number-of-islands](https://leetcode-cn.com/problems/number-of-islands/) | DFS、BFS |
-| 127. 单词接龙 | [WordLadder](leetcode4/WordLadder.java) | [word-ladder](https://leetcode-cn.com/problems/word-ladder) | BFS，不可用DFS，双向BFS待补充 |
+| 127. 单词接龙 | [WordLadder](../section-7/leetcode7/WordLadder.java) | [word-ladder](https://leetcode-cn.com/problems/word-ladder) | BFS，不可用DFS，双向BFS待补充 |
 
 ### 贪心算法
 | 题目 | 项目链接 | leetcode | 心得 |
