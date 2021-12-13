@@ -6,6 +6,7 @@
 - 广度优先：breadth ﬁrst search
 
 ### 搜索、遍历要求
+
 - 每个节点都要访问一次
 - 每个节点仅仅要访问一次
 - 对于节点的访问顺序不限
@@ -14,6 +15,7 @@
 ### DFS 代码模板
 
 递归法
+
 ```java
 public class DfsTest {
 
@@ -33,6 +35,7 @@ public class DfsTest {
 ```
 
 循环法
+
 ```java
 public class DfsTest {
 
@@ -58,6 +61,7 @@ public class DfsTest {
 ### BFS 代码模板
 
 循环法
+
 ```java
 public class BfsTest {
 
@@ -81,6 +85,7 @@ public class BfsTest {
 ```
 
 ### 遍历顺序
+
 ![遍历顺序](photo/遍历顺序.jpg)
 
 ## 贪心算法 Greedy
@@ -90,10 +95,12 @@ public class BfsTest {
 一旦一个问题可以通过贪心法来解决，那么贪心法一般是解决这个问题的最好办法。由于贪心法的高效性以及其所求得的答案比较接近最优结果，贪心法也可以用作辅助算法或者直接解决一些要求结果不特别精确的问题。
 
 ### 贪心算法与动态规划的不同
+
 - 贪心：对每个子问题的解决方案都做出选择，不能回退。
 - 动态规划：会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。
 
 ### 比较
+
 - 贪心：当下局部最优判断
 - 回溯：能够回退
 - 动态规划：最优判断 + 回退
@@ -107,6 +114,7 @@ public class BfsTest {
 3. 能够通过索引访问（index accessible)
 
 ### 二分查找模板
+
 ```java
 public class Test {
 
@@ -132,7 +140,9 @@ public class Test {
 ```
 
 ### 二分查找技巧
+
 取左中值，left要跨中值
+
 ```
 int mid = left + (right - left) / 2;
 if (arr[mid] < target) {
@@ -143,6 +153,7 @@ if (arr[mid] < target) {
 ```
 
 取右中值，right要跨中值
+
 ```
 int mid = left + (right - left + 1) / 2;
 if (arr[mid] <= target) {
@@ -155,16 +166,19 @@ if (arr[mid] <= target) {
 ## LeetCode
 
 ### DFS & BFS
-| 题目 | 项目链接 | leetcode | 心得 |
-|---|---|---|---|
-| 102. 二叉树的层序遍历 | [BinaryTreeLevelOrderTraversal](leetcode4/BinaryTreeLevelOrderTraversal.java) | [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/) | DFS、BFS |
-| 22. 括号生成 | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 可用递归、DFS、BFS |
-| 515. 在每个树行中找最大值 | [FindLargestValueInEachTreeRow](leetcode4/FindLargestValueInEachTreeRow.java) | [find-largest-value-in-each-tree-row/](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/) | DFS、BFS |
-| 433. 最小基因变化 | [MinimumGeneticMutation](leetcode4/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) |   |
-| 200. 岛屿数量 | [NumberOfIslands](leetcode4/NumberOfIslands.java) | [number-of-islands](https://leetcode-cn.com/problems/number-of-islands/) | DFS、BFS |
+
+| 题目 | 项目链接 | leetcode | 心得                  |
+|---|---|---|---------------------|
+| 102. 二叉树的层序遍历 | [BinaryTreeLevelOrderTraversal](leetcode4/BinaryTreeLevelOrderTraversal.java) | [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/) | DFS、BFS             |
+| 22. 括号生成 | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 可用递归、DFS、BFS        |
+| 515. 在每个树行中找最大值 | [FindLargestValueInEachTreeRow](leetcode4/FindLargestValueInEachTreeRow.java) | [find-largest-value-in-each-tree-row/](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/) | DFS、BFS             |
+| 433. 最小基因变化 | [MinimumGeneticMutation](leetcode4/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) |                     |
+| 200. 岛屿数量 | [NumberOfIslands](leetcode4/NumberOfIslands.java) | [number-of-islands](https://leetcode-cn.com/problems/number-of-islands/) | DFS、BFS             |
 | 127. 单词接龙 | [WordLadder](../section-7/leetcode7/WordLadder.java) | [word-ladder](https://leetcode-cn.com/problems/word-ladder) | BFS，不可用DFS，双向BFS待补充 |
+| 529. 扫雷游戏 | [Minesweeper](leetcode4/Minesweeper.java) | [minesweeper](https://leetcode-cn.com/problems/minesweeper/) | DFS                 |
 
 ### 贪心算法
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 322. 零钱兑换 | [CoinChange](leetcode4/CoinChange.java) | [coin-change](https://leetcode-cn.com/problems/coin-change/) | DFS |
@@ -176,6 +190,7 @@ if (arr[mid] <= target) {
 | 45. 跳跃游戏 II | [JumpGameIi](leetcode4/JumpGameIi.java) | [jump-game-ii](https://leetcode-cn.com/problems/jump-game-ii/) | 贪心 |
 
 ### 二分查找
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 69. x 的平方根 | [Sqrtx](leetcode4/Sqrtx.java) | [sqrtx](https://leetcode-cn.com/problems/sqrtx/) | 二分查找 |

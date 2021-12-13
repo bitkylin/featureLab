@@ -11,6 +11,8 @@
     <file url="file://$PROJECT_DIR$/bitkylin-mq/bitkylin-mq-client-producer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bitkylin-mq/bitkylin-mq-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bitkylin-mq/bitkylin-mq-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bitkylin-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bitkylin-mq/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bitkylin-spring-boot/bitkylin-print-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bitkylin-spring-boot/bitkylin-spring-boot-demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/bitky-demo-account-a/src/main/java" charset="UTF-8" />
@@ -19,10 +21,14 @@
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/bitky-demo-account-b/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/bitky-demo-account-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/bitky-demo-account-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-account/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-order/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dubbo-with-hmily/bitky-demo-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-with-hmily/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dubbo-with-hmily/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

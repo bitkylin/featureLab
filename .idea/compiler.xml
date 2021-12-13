@@ -11,6 +11,25 @@
         <module name="casper-lab.main" />
         <module name="casper-lab.test" />
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bitkylin-mq-client-consumer" />
+        <module name="spring-bean-lifecycle" />
+        <module name="bitkylin-mq-client-producer" />
+        <module name="bitkylin-mq-api" />
+        <module name="bitky-demo-account-common" />
+        <module name="bitky-demo-common" />
+        <module name="bitkylin-mq-server" />
+        <module name="bitkylin-print-spring-boot-starter" />
+        <module name="bitky-demo-order" />
+        <module name="bitkylin-spring-boot (1) (cc.bitky.demo.springboot)" />
+        <module name="bitky-demo-api" />
+        <module name="bitkylin-kafka" />
+        <module name="bitky-demo-account-b" />
+        <module name="bitky-demo-account-a" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />
   </component>
@@ -29,6 +48,7 @@
       <module name="bitkylin-mq-server" options="-parameters" />
       <module name="bitkylin-print-spring-boot-starter" options="-parameters" />
       <module name="bitkylin-spring" options="" />
+      <module name="bitkylin-spring-boot (1) (cc.bitky.demo.springboot)" options="-parameters" />
       <module name="bitkylin-spring-boot-demo" options="-parameters" />
     </option>
   </component>
