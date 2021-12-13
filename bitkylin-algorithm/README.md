@@ -12,6 +12,7 @@
 | 字典树、并查集、剪枝、回溯、双向 BFS、AVL 树、红黑树            | [section-7](section-7) |
 | 位运算、布隆过滤器、LRU 缓存、排序算法                          | [section-8](section-8) |
 | 高级动态规划、字符串                                            | [section-9](section-9) |
+| Top                                            | [Top](top) |
 
 ## IDEA 插件配置
 
