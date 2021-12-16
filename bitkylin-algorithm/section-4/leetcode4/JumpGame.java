@@ -1,55 +1,90 @@
-//给定一个非负整数数组，你最初位于数组的第一个位置。
-//
-// 数组中的每个元素代表你在该位置可以跳跃的最大长度。
-//
-// 判断你是否能够到达最后一个位置。
-//
-// 示例 1:
-//
-// 输入: [2,3,1,1,4]
-//输出: true
-//解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。
-//
-//
-// 示例 2:
-//
-// 输入: [3,2,1,0,4]
-//输出: false
-//解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。
-//
-// Related Topics 贪心算法 数组
-// 👍 845 👎 0
-
+/**
+ * <p>给定一个非负整数数组 <code>nums</code> ，你最初位于数组的 <strong>第一个下标</strong> 。</p>
+ *
+ * <p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+ *
+ * <p>判断你是否能够到达最后一个下标。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [2,3,1,1,4]
+ * <strong>输出：</strong>true
+ * <strong>解释：</strong>可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>nums = [3,2,1,0,4]
+ * <strong>输出：</strong>false
+ * <strong>解释：</strong>无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= nums.length <= 3 * 10<sup>4</sup></code></li>
+ * <li><code>0 <= nums[i] <= 10<sup>5</sup></code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>贪心</li><li>数组</li><li>动态规划</li></div></div><br><div><li>👍 1536</li><li>👎 0</li></div>
+ */
 
 package leetcode4;
 
 public class JumpGame {
 
     public static void main(String[] args) {
-        new JumpGame().new Solution().canJump(new int[]{3, 2, 1, 0, 4});
+        Solution solution = new JumpGame().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 正序
+     * DP完整版：DP[n] = Max( DP[n - 1], arr[n] + n )
      */
     class Solution {
         public boolean canJump(int[] nums) {
-            int max = 0;
-            for (int i = 0; i < nums.length; i++) {
-                if (i > max) {
+            if (nums.length < 0) {
+                return true;
+            }
+            int[] dp = new int[nums.length];
+            dp[0] = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                if (dp[i - 1] < i) {
                     return false;
                 }
-                max = Math.max(max, i + nums[i]);
-                if (max >= nums.length - 1) {
-                    return true;
-                }
+                dp[i] = Math.max(dp[i - 1], i + nums[i]);
             }
-            return false;
+            return true;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * DP优化空间复杂度
+     */
+    class Solution1 {
+        public boolean canJump(int[] nums) {
+            if (nums.length < 0) {
+                return true;
+            }
+            int prev = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                if (prev < i) {
+                    return false;
+                }
+                prev = Math.max(prev, i + nums[i]);
+            }
+            return true;
+        }
+    }
+
+    // ------ 后面的解法都不研究了 ------
 
     /**
      * 倒序
