@@ -1,25 +1,36 @@
-//实现 int sqrt(int x) 函数。
-//
-// 计算并返回 x 的平方根，其中 x 是非负整数。
-//
-// 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
-//
-// 示例 1:
-//
-// 输入: 4
-//输出: 2
-//
-//
-// 示例 2:
-//
-// 输入: 8
-//输出: 2
-//说明: 8 的平方根是 2.82842...,
-//     由于返回类型是整数，小数部分将被舍去。
-//
-// Related Topics 数学 二分查找
-// 👍 522 👎 0
-
+/**
+ * <p>给你一个非负整数 <code>x</code> ，计算并返回&nbsp;<code>x</code>&nbsp;的 <strong>算术平方根</strong> 。</p>
+ *
+ * <p>由于返回类型是整数，结果只保留 <strong>整数部分 </strong>，小数部分将被 <strong>舍去 。</strong></p>
+ *
+ * <p><strong>注意：</strong>不允许使用任何内置指数函数和算符，例如 <code>pow(x, 0.5)</code> 或者 <code>x ** 0.5</code> 。</p>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>x = 4
+ * <strong>输出：</strong>2
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>x = 8
+ * <strong>输出：</strong>2
+ * <strong>解释：</strong>8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
+ * </pre>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>0 &lt;= x &lt;= 2<sup>31</sup> - 1</code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>数学</li><li>二分查找</li></div></div><br><div><li>👍 842</li><li>👎 0</li></div>
+ */
 
 package leetcode4;
 
@@ -29,45 +40,25 @@ public class Sqrtx {
         Solution solution = new Sqrtx().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * 注意mid，需要取右mid
+     * mid取偏右的值，当大于x时，right直接限制到mid的左值。
+     * 计算mid时始终覆盖x，且最终mid始终是left值。
      */
+    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int mySqrt(int x) {
-            long left = 0;
-            long right = (x + 1L) / 2;
+            long left = 0, right = x;
             while (left < right) {
                 long mid = (right - left + 1) / 2 + left;
-                long m = mid * mid;
-                if (m <= x) {
-                    left = mid;
-                } else {
+                if (mid * mid > x) {
                     right = mid - 1;
+                } else {
+                    left = mid;
                 }
             }
             return (int) left;
         }
     }
+//leetcode submit region end(Prohibit modification and deletion)
 
-    //leetcode submit region end(Prohibit modification and deletion)
-    class Solution2 {
-        public int mySqrt(int x) {
-            long left = 0;
-            long right = (x + 1L) / 2;
-            while (left < right) {
-                long mid = (right - left + 1) / 2 + left;
-                long m = mid * mid;
-                if (m == x) {
-                    return (int) mid;
-                } else if (m < x) {
-                    left = mid;
-                } else {
-                    right = mid - 1;
-                }
-            }
-            return (int) left;
-        }
-    }
 }

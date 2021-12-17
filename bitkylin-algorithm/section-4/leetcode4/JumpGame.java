@@ -70,9 +70,6 @@ public class JumpGame {
      */
     class Solution1 {
         public boolean canJump(int[] nums) {
-            if (nums.length < 0) {
-                return true;
-            }
             int prev = nums[0];
             for (int i = 1; i < nums.length; i++) {
                 if (prev < i) {

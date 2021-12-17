@@ -45,26 +45,21 @@ public class JumpGameIi {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 画个图更好理解
+     */
     class Solution {
         public int jump(int[] nums) {
-            int res = 0;
-            int max = 0;
-            int min = 0;
-            if (nums.length <= 1) {
-                return 0;
-            }
-            while (true) {
-                res++;
-                int temp = 0;
-                while (min <= max) {
-                    temp = Math.max(temp, min + nums[min]);
-                    if (temp >= nums.length - 1) {
-                        return res;
-                    }
-                    min++;
+            int res = 0, min = 0, max = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (i > min) {
+                    min = max;
+                    res++;
                 }
-                max = temp;
+                max = Math.max(max, nums[i] + i);
             }
+            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
