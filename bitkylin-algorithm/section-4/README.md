@@ -196,6 +196,7 @@ if (arr[mid] <= target) {
 | 69. x 的平方根 | [Sqrtx](leetcode4/Sqrtx.java) | [sqrtx](https://leetcode-cn.com/problems/sqrtx/) | 二分查找 |
 | 367. 有效的完全平方数 | [ValidPerfectSquare](leetcode4/ValidPerfectSquare.java) | [valid-perfect-square](https://leetcode-cn.com/problems/valid-perfect-square/) | 二分查找 |
 | 153. 寻找旋转排序数组中的最小值 | [FindMinimumInRotatedSortedArray](leetcode4/FindMinimumInRotatedSortedArray.java) | [find-minimum-in-rotated-sorted-array](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | 二分查找 |
+| 33. 搜索旋转排序数组| [SearchInRotatedSortedArray](leetcode4/SearchInRotatedSortedArray.java) | [search-in-rotated-sorted-array](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/) | 二分查找 |
 | 35. 搜索插入位置 | [SearchInsertPosition](leetcode4/SearchInsertPosition.java) | [search-insert-position](https://leetcode-cn.com/problems/search-insert-position/) | 二分查找 |
 | 74. 搜索二维矩阵 | [SearchA2dMatrix](leetcode4/SearchA2dMatrix.java) | [search-a-2d-matrix](https://leetcode-cn.com/problems/search-a-2d-matrix/) | 二分查找 |
 | 使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方 |  |  | 参考「153. 寻找旋转排序数组中的最小值」求得最小值，其与前值即为无序处 |
