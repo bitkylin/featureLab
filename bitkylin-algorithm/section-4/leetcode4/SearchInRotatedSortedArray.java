@@ -47,6 +47,9 @@
 
 package leetcode4;
 
+/**
+ * 还有这种解法，看起来是这道题专供的解法，不管它：https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/jian-ji-rong-yi-li-jie-java-er-fen-fa-by-breezean/
+ */
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {

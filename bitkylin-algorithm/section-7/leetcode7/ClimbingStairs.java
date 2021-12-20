@@ -1,33 +1,30 @@
-//假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
-//
-// 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
-//
-// 注意：给定 n 是一个正整数。
-//
-// 示例 1：
-//
-// 输入： 2
-//输出： 2
-//解释： 有两种方法可以爬到楼顶。
-//1.  1 阶 + 1 阶
-//2.  2 阶
-//
-// 示例 2：
-//
-// 输入： 3
-//输出： 3
-//解释： 有三种方法可以爬到楼顶。
-//1.  1 阶 + 1 阶 + 1 阶
-//2.  1 阶 + 2 阶
-//3.  2 阶 + 1 阶
-//
-// Related Topics 动态规划
-// 👍 1308 👎 0
-
-
 /**
- * {@link leetcode1.ClimbingStairs}
+ * <p>假设你正在爬楼梯。需要 <em>n</em>&nbsp;阶你才能到达楼顶。</p>
+ *
+ * <p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+ *
+ * <p><strong>注意：</strong>给定 <em>n</em> 是一个正整数。</p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre><strong>输入：</strong> 2
+ * <strong>输出：</strong> 2
+ * <strong>解释：</strong> 有两种方法可以爬到楼顶。
+ * 1.  1 阶 + 1 阶
+ * 2.  2 阶</pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre><strong>输入：</strong> 3
+ * <strong>输出：</strong> 3
+ * <strong>解释：</strong> 有三种方法可以爬到楼顶。
+ * 1.  1 阶 + 1 阶 + 1 阶
+ * 2.  1 阶 + 2 阶
+ * 3.  2 阶 + 1 阶
+ * </pre>
+ * <div><div>Related Topics</div><div><li>记忆化搜索</li><li>数学</li><li>动态规划</li></div></div><br><div><li>👍 2073</li><li>👎 0</li></div>
  */
+
 package leetcode7;
 
 public class ClimbingStairs {
@@ -36,29 +33,30 @@ public class ClimbingStairs {
         Solution solution = new ClimbingStairs().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * DP
+     * 「斐波那契数列」正向求解，DP优化解法
      */
+    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int climbStairs(int n) {
             if (n <= 2) {
                 return n;
             }
-            int[] dp = new int[n + 1];
-            dp[1] = 1;
-            dp[2] = 2;
-            for (int i = 3; i <= n; i++) {
-                dp[i] = dp[i - 2] + dp[i - 1];
+            int val = 0;
+            for (int i = 1, j = 2, k = 3; k <= n; k++) {
+                val = i + j;
+                i = j;
+                j = val;
             }
-            return dp[n];
+            return val;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * 递归 + 存储中间计算结果
+     * 「斐波那契数列」递归 + 存储中间计算结果
      */
     class Solution2 {
         public int climbStairs(int n) {
@@ -78,4 +76,21 @@ public class ClimbingStairs {
         }
     }
 
+    /**
+     * 「斐波那契数列」DP
+     */
+    class Solution3 {
+        public int climbStairs(int n) {
+            if (n <= 2) {
+                return n;
+            }
+            int[] dp = new int[n + 1];
+            dp[1] = 1;
+            dp[2] = 2;
+            for (int i = 3; i <= n; i++) {
+                dp[i] = dp[i - 2] + dp[i - 1];
+            }
+            return dp[n];
+        }
+    }
 }
