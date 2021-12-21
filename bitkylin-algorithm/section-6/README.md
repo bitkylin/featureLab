@@ -35,7 +35,7 @@
 | 62. 不同路径 | [UniquePaths](leetcode6/UniquePaths.java) | [unique-paths](https://leetcode-cn.com/problems/unique-paths/) | 前两道题做法一致，简单DP |
 | 63. 不同路径 II | [UniquePathsIi](leetcode6/UniquePathsIi.java) | [unique-paths-ii](https://leetcode-cn.com/problems/unique-paths-ii/) | 仅加上对障碍的判断即可，需要注意初始化时也会有障碍 |
 | 1143. 最长公共子序列 | [LongestCommonSubsequence](leetcode6/LongestCommonSubsequence.java) | [longest-common-subsequence](https://leetcode-cn.com/problems/longest-common-subsequence/) | 重点是得出状态转移方程 |
-| 53. 最大子序和 | [MaximumSubarray](leetcode6/MaximumSubarray.java) | [maximum-subarray](https://leetcode-cn.com/problems/maximum-subarray/) | 动态规划，仅需要取最大值，不需要保存全部状态值 |
+| 53. 最大子数组和 | [MaximumSubarray](leetcode6/MaximumSubarray.java) | [maximum-subarray](https://leetcode-cn.com/problems/maximum-subarray/) | 动态规划，仅需要取最大值，不需要保存全部状态值 |
 | 120. 三角形最小路径和 | [Triangle](leetcode6/Triangle.java) | [triangle](https://leetcode-cn.com/problems/triangle/) | DFS、动态规划 |
 | 152. 乘积最大子数组 | [MaximumProductSubarray](leetcode6/MaximumProductSubarray.java) | [maximum-product-subarray](https://leetcode-cn.com/problems/maximum-product-subarray/) | 状态转移方程比较难理解 |
 | 198. 打家劫舍 | [HouseRobber](leetcode6/HouseRobber.java) | [house-robber](https://leetcode-cn.com/problems/house-robber/) | DP |
