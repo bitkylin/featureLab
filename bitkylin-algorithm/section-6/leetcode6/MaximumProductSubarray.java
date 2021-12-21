@@ -1,80 +1,96 @@
-//给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
-//
-//
-//
-// 示例 1:
-//
-// 输入: [2,3,-2,4]
-//输出: 6
-//解释: 子数组 [2,3] 有最大乘积 6。
-//
-//
-// 示例 2:
-//
-// 输入: [-2,0,-1]
-//输出: 0
-//解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
-// Related Topics 数组 动态规划
-// 👍 787 👎 0
-
+/**
+ * <p>给你一个整数数组 <code>nums</code>&nbsp;，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。</p>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>示例 1:</strong></p>
+ *
+ * <pre><strong>输入:</strong> [2,3,-2,4]
+ * <strong>输出:</strong> <code>6</code>
+ * <strong>解释:</strong>&nbsp;子数组 [2,3] 有最大乘积 6。
+ * </pre>
+ *
+ * <p><strong>示例 2:</strong></p>
+ *
+ * <pre><strong>输入:</strong> [-2,0,-1]
+ * <strong>输出:</strong> 0
+ * <strong>解释:</strong>&nbsp;结果不能为 2, 因为 [-2,-1] 不是子数组。</pre>
+ * <div><div>Related Topics</div><div><li>数组</li><li>动态规划</li></div></div><br><div><li>👍 1410</li><li>👎 0</li></div>
+ */
 
 package leetcode6;
 
 public class MaximumProductSubarray {
 
     public static void main(String[] args) {
-        new MaximumProductSubarray().new Solution();
+        Solution solution = new MaximumProductSubarray().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * 关注这篇题解: https://leetcode-cn.com/problems/maximum-product-subarray/solution/dong-tai-gui-hua-li-jie-wu-hou-xiao-xing-by-liweiw/
-     * 重点：
-     * 1. 由于状态的设计 nums[i] 必须被选取
-     * 2. 关注「第 2 步：推导状态转移方程」，写的很好
-     * 3. 状态转移方程，理解起来比较难，需要加强理解
+     * DP
+     * <p>
+     * if arr(n) >= 0
+     * DPMax(n) = Max( DPMax(n-1) * arr(n), arr(n) )
+     * DPMin(n) = Max( DPMin(n-1) * arr(n), arr(n) )
+     * <p>
+     * if arr(n) < 0
+     * DPMax(n) = Max( DPMin(n-1) * arr(n), arr(n) )
+     * DPMin(n) = Max( DPMax(n-1) * arr(n), arr(n) )
+     * <p>
+     * DP(i) 为包含第 i 个数时的最大值 / 最小值
+     * DPMin[i]始终维护最小值
+     * DPMax[i]始终维护最大值
+     * 注1：乘以负数时，最大/最小值必然翻转
+     * 注2：变量max始终跟踪最大值
+     * 注3：DP[i]始终包含nums[i]的信息，必须为包含nums[i]时的最大值/最小值
+     * <p>
+     * 精简版，压缩空间复杂度
      */
+    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProduct(int[] nums) {
-            int[][] dp = new int[2][nums.length];
+            int dpMin = nums[0];
+            int dpMax = nums[0];
             int max = nums[0];
-            dp[0][0] = max;
-            dp[1][0] = max;
             for (int i = 1; i < nums.length; i++) {
-                if (nums[i] >= 0) {
-                    dp[0][i] = Math.min(dp[0][i - 1] * nums[i], nums[i]);
-                    dp[1][i] = Math.max(dp[1][i - 1] * nums[i], nums[i]);
+                int curMax;
+                int curMin;
+                if (nums[i] > 0) {
+                    curMax = Math.max(dpMax * nums[i], nums[i]);
+                    curMin = Math.min(dpMin * nums[i], nums[i]);
                 } else {
-                    dp[0][i] = Math.min(dp[1][i - 1] * nums[i], nums[i]);
-                    dp[1][i] = Math.max(dp[0][i - 1] * nums[i], nums[i]);
+                    curMax = Math.max(dpMin * nums[i], nums[i]);
+                    curMin = Math.min(dpMax * nums[i], nums[i]);
                 }
-                max = Math.max(max, dp[1][i]);
+                dpMax = curMax;
+                dpMin = curMin;
+                max = Math.max(max, dpMax);
             }
             return max;
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * DP数组压缩，空间复杂度压缩为O(1)
+     * 完整版
      */
     class Solution2 {
         public int maxProduct(int[] nums) {
+            int[] dpMin = new int[nums.length];
+            int[] dpMax = new int[nums.length];
+            dpMin[0] = nums[0];
+            dpMax[0] = nums[0];
             int max = nums[0];
-            int min = nums[0];
-            int res = max;
             for (int i = 1; i < nums.length; i++) {
-                if (nums[i] >= 0) {
-                    max = Math.max(max * nums[i], nums[i]);
-                    min = Math.min(min * nums[i], nums[i]);
+                if (nums[i] > 0) {
+                    dpMax[i] = Math.max(dpMax[i - 1] * nums[i], nums[i]);
+                    dpMin[i] = Math.min(dpMin[i - 1] * nums[i], nums[i]);
                 } else {
-                    int subMin = Math.min(max * nums[i], nums[i]);
-                    int subMax = Math.max(min * nums[i], nums[i]);
-                    max = subMax;
-                    min = subMin;
+                    dpMax[i] = Math.max(dpMin[i - 1] * nums[i], nums[i]);
+                    dpMin[i] = Math.min(dpMax[i - 1] * nums[i], nums[i]);
                 }
-                max = Math.max(max, res);
+                max = Math.max(max, dpMax[i]);
             }
             return max;
         }
