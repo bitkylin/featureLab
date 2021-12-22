@@ -1,33 +1,54 @@
-//给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
-//
-// 设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。
-//
-// 注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-//
-// 示例 1:
-//
-// 输入: [3,3,5,0,0,3,1,4]
-//输出: 6
-//解释: 在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。
-//     随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。
-//
-// 示例 2:
-//
-// 输入: [1,2,3,4,5]
-//输出: 4
-//解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。  
-//     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。  
-//     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
-//
-//
-// 示例 3:
-//
-// 输入: [7,6,4,3,1]
-//输出: 0
-//解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。
-// Related Topics 数组 动态规划
-// 👍 523 👎 0
-
+/**
+ * <p>给定一个数组，它的第<em> </em><code>i</code> 个元素是一支给定的股票在第 <code>i</code><em> </em>天的价格。</p>
+ *
+ * <p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 <strong>两笔 </strong>交易。</p>
+ *
+ * <p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1:</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>prices = [3,3,5,0,0,3,1,4]
+ * <strong>输出：</strong>6
+ * <strong>解释：</strong>在第 4 天（股票价格 = 0）的时候买入，在第 6 天（股票价格 = 3）的时候卖出，这笔交易所能获得利润 = 3-0 = 3 。
+ * 随后，在第 7 天（股票价格 = 1）的时候买入，在第 8 天 （股票价格 = 4）的时候卖出，这笔交易所能获得利润 = 4-1 = 3 。</pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>prices = [1,2,3,4,5]
+ * <strong>输出：</strong>4
+ * <strong>解释：</strong>在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+ * 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
+ * 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>prices = [7,6,4,3,1]
+ * <strong>输出：</strong>0
+ * <strong>解释：</strong>在这个情况下, 没有交易完成, 所以最大利润为 0。</pre>
+ *
+ * <p><strong>示例 4：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>prices = [1]
+ * <strong>输出：</strong>0
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= prices.length <= 10<sup>5</sup></code></li>
+ * <li><code>0 <= prices[i] <= 10<sup>5</sup></code></li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>数组</li><li>动态规划</li></div></div><br><div><li>👍 955</li><li>👎 0</li></div>
+ */
 
 package leetcode6;
 
@@ -40,7 +61,60 @@ public class BestTimeToBuyAndSellStockIii {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * DP
+     * 详细题解参考 {@link BestTimeToBuyAndSellStockIv}
+     */
+    class Solution {
+        public int maxProfit(int[] prices) {
+            if (prices.length <= 1) {
+                return 0;
+            }
+            int[][][] dp = new int[prices.length][2][2];
+            dp[0][0][1] = -prices[0];
+            dp[0][1][1] = -prices[0];
+            for (int i = 1; i < prices.length; i++) {
+                dp[i][0][1] = Math.max(dp[i - 1][0][1], -prices[i]);
+                dp[i][0][0] = Math.max(dp[i - 1][0][0], dp[i - 1][0][1] + prices[i]);
+                dp[i][1][1] = Math.max(dp[i - 1][1][1], dp[i - 1][0][0] - prices[i]);
+                dp[i][1][0] = Math.max(dp[i - 1][1][0], dp[i - 1][1][1] + prices[i]);
+            }
+            return dp[prices.length - 1][1][0];
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * DP，优化空间复杂度
+     */
+    class Solution1 {
+        public int maxProfit(int[] prices) {
+            if (prices.length <= 1) {
+                return 0;
+            }
+            int dp001 = -prices[0];
+            int dp000 = 0;
+            int dp011 = -prices[0];
+            int dp010 = 0;
+            for (int i = 1; i < prices.length; i++) {
+                int dp101 = Math.max(dp001, -prices[i]);
+                int dp100 = Math.max(dp000, dp001 + prices[i]);
+                int dp111 = Math.max(dp011, dp000 - prices[i]);
+                int dp110 = Math.max(dp010, dp011 + prices[i]);
+
+                dp001 = dp101;
+                dp000 = dp100;
+                dp011 = dp111;
+                dp010 = dp110;
+            }
+            return dp010;
+        }
+    }
+
+    // 后面的解法不再研究
+
+    /**
+     * DP，优化空间复杂度「进一步优化」
+     * <p>
      * 1. 由于刚开始迭代时，dp3&dp4 与 dp1&dp2 有重复，dp3&dp4已包含所有情况，
      * 2. dp3 仅买入，收益一定小于dp4
      * 结论：所以只需比较dp4即可
@@ -50,29 +124,6 @@ public class BestTimeToBuyAndSellStockIii {
             if (prices == null || prices.length <= 1) {
                 return 0;
             }
-            int[][] dp = new int[5][prices.length];
-            dp[1][0] = -prices[0];
-            dp[3][0] = -prices[0];
-            for (int i = 1; i < prices.length; i++) {
-                dp[1][i] = Math.max(dp[1][i - 1], dp[0][i - 1] - prices[i]);
-                dp[2][i] = Math.max(dp[2][i - 1], dp[1][i - 1] + prices[i]);
-                dp[3][i] = Math.max(dp[3][i - 1], dp[2][i - 1] - prices[i]);
-                dp[4][i] = Math.max(dp[4][i - 1], dp[3][i - 1] + prices[i]);
-            }
-            return Math.max(dp[4][prices.length - 1], 0);
-        }
-    }
-//leetcode submit region end(Prohibit modification and deletion)
-
-    /**
-     * DP，优化空间复杂度
-     */
-    class Solution {
-        public int maxProfit(int[] prices) {
-            if (prices == null || prices.length <= 1) {
-                return 0;
-            }
-            int dp0 = 0;
             int dp1 = -prices[0];
             int dp2 = 0;
             int dp3 = -prices[0];
@@ -86,7 +137,6 @@ public class BestTimeToBuyAndSellStockIii {
             return Math.max(dp4, 0);
         }
     }
-
 
     /**
      * DFS + 剪枝，通过大部分测试用例，超时，不过看起来是正确解
