@@ -47,7 +47,9 @@ public class BestTimeToBuyAndSellStockIv {
     /**
      * DP - 完整版
      * <p>
-     * 优秀题解：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/javayi-ge-si-lu-da-bao-suo-you-gu-piao-t-pd1p/
+     * 优秀题解：
+     * - https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/solution/javayi-ge-si-lu-da-bao-suo-you-gu-piao-t-pd1p/
+     * - https://leetcode-cn.com/circle/article/qiAgHn/
      * dp[i][1][k] = Max(dp[i-1][1][k], dp[i-1][0][k-1] - prices[i])
      * dp[i][0][k] = Max(dp[i-1][0][k], dp[i-1][1][k] + prices[i])
      * <p>

@@ -53,6 +53,7 @@ public class LongestCommonSubsequence {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 两个字符串的问题，都可以转化为二维DP数组的形式「做题经验」
      * dp状态矩阵始终跟踪arr[x-1][y-1]
      */
     class Solution {
