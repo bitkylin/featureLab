@@ -1,71 +1,66 @@
-//给定一个二维网格和一个单词，找出该单词是否存在于网格中。
-//
-// 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
-//
-//
-//
-// 示例:
-//
-// board =
-//[
-//  ['A','B','C','E'],
-//  ['S','F','C','S'],
-//  ['A','D','E','E']
-//]
-//
-//给定 word = "ABCCED", 返回 true
-//给定 word = "SEE", 返回 true
-//给定 word = "ABCB", 返回 false
-//
-//
-//
-// 提示：
-//
-//
-// board 和 word 中只包含大写和小写英文字母。
-// 1 <= board.length <= 200
-// 1 <= board[i].length <= 200
-// 1 <= word.length <= 10^3
-//
-// Related Topics 数组 回溯算法
-// 👍 660 👎 0
-
+/**
+ * <p>给定一个 <code>m x n</code> 二维字符网格 <code>board</code> 和一个字符串单词 <code>word</code> 。如果 <code>word</code> 存在于网格中，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+ *
+ * <p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/11/04/word2.jpg" style="width: 322px; height: 242px;" />
+ * <pre>
+ * <strong>输入：</strong>board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+ * <strong>输出：</strong>true
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg" style="width: 322px; height: 242px;" />
+ * <pre>
+ * <strong>输入：</strong>board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+ * <strong>输出：</strong>true
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/10/15/word3.jpg" style="width: 322px; height: 242px;" />
+ * <pre>
+ * <strong>输入：</strong>board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+ * <strong>输出：</strong>false
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>m == board.length</code></li>
+ * <li><code>n = board[i].length</code></li>
+ * <li><code>1 <= m, n <= 6</code></li>
+ * <li><code>1 <= word.length <= 15</code></li>
+ * <li><code>board</code> 和 <code>word</code> 仅由大小写英文字母组成</li>
+ * </ul>
+ *
+ * <p> </p>
+ *
+ * <p><strong>进阶：</strong>你可以使用搜索剪枝的技术来优化解决方案，使其在 <code>board</code> 更大的情况下可以更快解决问题？</p>
+ * <div><div>Related Topics</div><div><li>数组</li><li>回溯</li><li>矩阵</li></div></div><br><div><li>👍 1132</li><li>👎 0</li></div>
+ */
 
 package leetcode7;
 
 public class WordSearch {
 
     public static void main(String[] args) {
-        new WordSearch().new Solution()
-                .exist(new char[][]{
-                                {'A', 'B', 'C', 'E'},
-                                {'S', 'F', 'C', 'S'},
-                                {'A', 'D', 'E', 'E'}
-                        }
-                        , "ABCCED");
+        Solution solution = new WordSearch().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
-
-    /**
-     * DFS + 回溯
-     * 注意方向数组不要写错
-     */
     class Solution {
-        int[][] addr = new int[][]{
-                {1, 0},
-                {-1, 0},
-                {0, 1},
-                {0, -1}
-        };
+
+        int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         public boolean exist(char[][] board, String word) {
-            int xMax = board.length - 1;
-            int yMax = board[0].length - 1;
-
-            for (int x = 0; x <= xMax; x++) {
-                for (int y = 0; y <= yMax; y++) {
-                    if (dfs(x, y, xMax, yMax, 0, word, board)) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    if (solve(board, word, i, j, 0)) {
                         return true;
                     }
                 }
@@ -73,26 +68,21 @@ public class WordSearch {
             return false;
         }
 
-        private boolean dfs(int x, int y, int xMax, int yMax, int i, String word, char[][] board) {
-            if (i == word.length()) {
+        private boolean solve(char[][] board, String word, int i, int j, int level) {
+            if (level >= word.length()) {
                 return true;
             }
-            if (x < 0 || y < 0 || x > xMax || y > yMax || board[x][y] == 0) {
+            if (i < 0 || i >= board.length || j < 0 || j >= board[0].length
+                    || board[i][j] != word.charAt(level)) {
                 return false;
             }
-            if (board[x][y] != word.charAt(i)) {
-                return false;
-            }
-            char backup = board[x][y];
-            board[x][y] = 0;
-
-            for (int[] arr : addr) {
-                if (dfs(x + arr[0], y + arr[1], xMax, yMax, i + 1, word, board)) {
-                    board[x][y] = backup;
+            board[i][j] = 0;
+            for (int[] point : pointList) {
+                if (solve(board, word, i + point[0], j + point[1], level + 1)) {
                     return true;
                 }
             }
-            board[x][y] = backup;
+            board[i][j] = word.charAt(level);
             return false;
         }
     }

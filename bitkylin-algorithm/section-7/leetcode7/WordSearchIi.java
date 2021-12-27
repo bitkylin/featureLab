@@ -1,34 +1,40 @@
-//给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
-//
-// 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。
-//
-//
-// 示例:
-//
-// 输入:
-//words = ["oath","pea","eat","rain"] and board =
-//[
-//  ['o','a','a','n'],
-//  ['e','t','a','e'],
-//  ['i','h','k','r'],
-//  ['i','f','l','v']
-//]
-//
-//输出: ["eat","oath"]
-//
-// 说明:
-//你可以假设所有输入都由小写字母 a-z 组成。
-//
-// 提示:
-//
-//
-// 你需要优化回溯算法以通过更大数据量的测试。你能否早点停止回溯？
-// 如果当前单词不存在于所有单词的前缀中，则可以立即停止回溯。什么样的数据结构可以有效地执行这样的操作？散列表是否可行？为什么？ 前缀树如何？如果你想学习如何
-//实现一个基本的前缀树，请先查看这个问题： 实现Trie（前缀树）。
-//
-// Related Topics 字典树 回溯算法
-// 👍 267 👎 0
-
+/**
+ * <p>给定一个 <code>m x n</code> 二维字符网格 <code>board</code><strong> </strong>和一个单词（字符串）列表 <code>words</code>，找出所有同时在二维网格和字典中出现的单词。</p>
+ *
+ * <p>单词必须按照字母顺序，通过 <strong>相邻的单元格</strong> 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/11/07/search1.jpg" style="width: 322px; height: 322px;" />
+ * <pre>
+ * <strong>输入：</strong>board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]
+ * <strong>输出：</strong>["eat","oath"]
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ * <img alt="" src="https://assets.leetcode.com/uploads/2020/11/07/search2.jpg" style="width: 162px; height: 162px;" />
+ * <pre>
+ * <strong>输入：</strong>board = [["a","b"],["c","d"]], words = ["abcb"]
+ * <strong>输出：</strong>[]
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>m == board.length</code></li>
+ * <li><code>n == board[i].length</code></li>
+ * <li><code>1 <= m, n <= 12</code></li>
+ * <li><code>board[i][j]</code> 是一个小写英文字母</li>
+ * <li><code>1 <= words.length <= 3 * 10<sup>4</sup></code></li>
+ * <li><code>1 <= words[i].length <= 10</code></li>
+ * <li><code>words[i]</code> 由小写英文字母组成</li>
+ * <li><code>words</code> 中的所有字符串互不相同</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>字典树</li><li>数组</li><li>字符串</li><li>回溯</li><li>矩阵</li></div></div><br><div><li>👍 598</li><li>👎 0</li></div>
+ */
 
 package leetcode7;
 
@@ -37,22 +43,67 @@ import java.util.*;
 public class WordSearchIi {
 
     public static void main(String[] args) {
-        new WordSearchIi().new Solution().findWords(new char[][]{
+        new WordSearchIi().new Solution().findWords(
+                new char[][]{
                         {'o', 'a', 'a', 'n'},
                         {'e', 't', 'a', 'e'},
                         {'i', 'h', 'k', 'r'},
-                        {'i', 'f', 'l', 'v'}
-                }, new String[]{"oath", "pea", "eat", "rain"}
-        );
+                        {'i', 'f', 'l', 'v'}},
+                new String[]{"oath", "pea", "eat", "rain"});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 字典树
+     * DFS + 回溯
      * 时间复杂度高
+     * 注：回溯时注意不要漏了恢复当前层，一定要恢复全
      */
     class Solution {
+
+        int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+        public List<String> findWords(char[][] board, String[] words) {
+            List<String> res = new ArrayList<>();
+            for (String word : words) {
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board[0].length; j++) {
+                        if (solve(board, word, i, j, 0)) {
+                            res.add(word);
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+
+        private boolean solve(char[][] board, String word, int i, int j, int level) {
+            if (level >= word.length()) {
+                return true;
+            }
+            if (i < 0 || i >= board.length || j < 0 || j >= board[0].length
+                    || board[i][j] != word.charAt(level)) {
+                return false;
+            }
+            board[i][j] = 0;
+            for (int[] point : pointList) {
+                if (solve(board, word, i + point[0], j + point[1], level + 1)) {
+                    board[i][j] = word.charAt(level);
+                    return true;
+                }
+            }
+            board[i][j] = word.charAt(level);
+            return false;
+        }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * 字典树
+     * 时间复杂度高
+     * 暂不研究了
+     */
+    class Solution1 {
 
         int[][] addr = new int[][]{
                 {0, 1},
@@ -120,64 +171,5 @@ public class WordSearchIi {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
-    /**
-     * DFS + 回溯
-     * 时间复杂度高
-     */
-    class Solution2 {
-
-        int[][] addr = new int[][]{
-                {0, 1},
-                {0, -1},
-                {-1, 0},
-                {1, 0},
-        };
-
-        public List<String> findWords(char[][] board, String[] words) {
-            List<String> res = new ArrayList<>();
-            for (int i = 0; i < words.length; i++) {
-                if (calc(board, words[i])) {
-                    res.add(words[i]);
-                }
-            }
-            return res;
-        }
-
-        private boolean calc(char[][] board, String word) {
-            for (int x = 0; x < board.length; x++) {
-                for (int y = 0; y < board[0].length; y++) {
-                    if (dfs(x, y, 0, board, word)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private boolean dfs(int x, int y, int i, char[][] board, String word) {
-            if (i == word.length()) {
-                return true;
-            }
-            if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || board[x][y] == 0) {
-                return false;
-            }
-            if (board[x][y] != word.charAt(i)) {
-                return false;
-            }
-            char backup = board[x][y];
-            board[x][y] = 0;
-            for (int[] arr : addr) {
-                if (dfs(x + arr[0], y + arr[1], i + 1, board, word)) {
-                    board[x][y] = backup;
-                    return true;
-                }
-            }
-            board[x][y] = backup;
-            return false;
-        }
-    }
-
 }
 
