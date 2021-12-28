@@ -58,7 +58,7 @@ public class WordLadder {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * BFS，队列实现
+     * BFS，队列实现BeginList，每次poll一个BeginWord判断WordList
      */
     class Solution {
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -98,6 +98,58 @@ public class WordLadder {
     }
 
 //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * BFS，Set实现BeginSet，迭代wordList，每个word去BeginSet中比较
+     * 注：题目要求是最短转换序列的单词数目，不是转换次数
+     */
+    class Solution1 {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            if (!wordList.contains(endWord)) {
+                return 0;
+            }
+            int res = 1;
+            Set<String> beginSet = new HashSet<>();
+            beginSet.add(beginWord);
+            while (!beginSet.isEmpty()) {
+                if (beginSet.contains(endWord)) {
+                    return res;
+                }
+                beginSet = solve(beginSet, wordList);
+                res++;
+            }
+            return 0;
+        }
+
+        private Set<String> solve(Set<String> beginSet, List<String> wordList) {
+            Set<String> set = new HashSet<>();
+            Iterator<String> iterator = wordList.iterator();
+            while (iterator.hasNext()) {
+                String word = iterator.next();
+                for (String beginWord : beginSet) {
+                    if (calc(word, beginWord)) {
+                        set.add(word);
+                        iterator.remove();
+                        break;
+                    }
+                }
+            }
+            return set;
+        }
+
+        private boolean calc(String word1, String word2) {
+            if (word1.length() != word2.length()) {
+                return false;
+            }
+            int res = 0;
+            for (int i = 0; i < word1.length(); i++) {
+                if (word1.charAt(i) != word2.charAt(i) && ++res > 1) {
+                    return false;
+                }
+            }
+            return res == 1;
+        }
+    }
 
     /**
      * 单向 BFS，数组实现
