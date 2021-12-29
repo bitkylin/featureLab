@@ -24,6 +24,7 @@ DP[x][y] = (DP[x - 1][y] + DP[x][y - 1]) * (1 ^ Grid[x][y])
 | 63. 不同路径 II | [UniquePathsIi](leetcode9/UniquePathsIi.java) | [unique-paths-ii](https://leetcode-cn.com/problems/unique-paths-ii/) | 仅加上对障碍的判断即可，需要注意初始化时也会有障碍 |
 | 91. 解码方法 | [DecodeWays](leetcode9/DecodeWays.java) | [decode-ways/](https://leetcode-cn.com/problems/decode-ways/) |   |
 | 300. 最长上升子序列 | [LongestIncreasingSubsequence](leetcode9/LongestIncreasingSubsequence.java) | [longest-increasing-subsequence/](https://leetcode-cn.com/problems/longest-increasing-subsequence/) | dp，二分查找法待补充 |
+| 279. 完全平方数 | [PerfectSquares](leetcode9/PerfectSquares.java) | [perfect-squares](https://leetcode-cn.com/problems/perfect-squares/) |   |
 | 72. 编辑距离 | [EditDistance](leetcode9/EditDistance.java) | [edit-distance](https://leetcode-cn.com/problems/edit-distance/) |   |
 | 32. 最长有效括号 | [LongestValidParentheses](leetcode9/LongestValidParentheses.java) | [longest-valid-parentheses](https://leetcode-cn.com/problems/longest-valid-parentheses/) |   |
 | 5. 最长回文子串 | [LongestPalindromicSubstring](leetcode9/LongestPalindromicSubstring.java) | [longest-palindromic-substring](https://leetcode-cn.com/problems/longest-palindromic-substring/) | DP，暴力 |
