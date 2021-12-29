@@ -3,13 +3,14 @@
 ## 心得
 
 ### 高级动态规划
+
 1. 常练常新，根据要求重新练习 section 6 动态规划相关题目时，总能直接写出更加精简的写法，能体会到自己的算法功底有明显提升。
 2. 高级动态规划的难点是，状态空间需要升维。section 6 中已练习的题目大部分为二维，少数三维，本章题目多为「困难」难度，先练好基础系统， 学有余力时再挑战困难题目。
 3. 之前练习时，习惯确定状态数组边界为最大索引值，现发现使用数组长度值「最大索引值+1」更容易解题。
 
 ## 字符串
-1. 基础题目偏简单，其余题目较复杂，通常需要结合动态规划。
 
+1. 基础题目偏简单，其余题目较复杂，通常需要结合动态规划。
 
 ## LeetCode
 
@@ -18,6 +19,7 @@
 DP[x][y] = (DP[x - 1][y] + DP[x][y - 1]) * (1 ^ Grid[x][y])
 
 ### 高级动态规划
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 62. 不同路径 | [UniquePaths](leetcode9/UniquePaths.java) | [unique-paths](https://leetcode-cn.com/problems/unique-paths/) | dp、递归 |
@@ -32,6 +34,7 @@ DP[x][y] = (DP[x - 1][y] + DP[x][y - 1]) * (1 ^ Grid[x][y])
 |  |  |  |   |
 
 ### 字符串
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 709. 转换成小写字母 | [ToLowerCase](leetcode9/ToLowerCase.java) | [to-lower-case](https://leetcode-cn.com/problems/to-lower-case/) | 题目很简单 |
