@@ -87,12 +87,12 @@
 
 ### 动态规划习题
 
-| 题目 | 项目链接 | leetcode | 心得 |
-|---|---|---|---|
-| 64. 最小路径和 | [MinimumPathSum](leetcode6/MinimumPathSum.java) | [minimum-path-sum](https://leetcode-cn.com/problems/minimum-path-sum/) | DP |
-| 91. 解码方法 | [DecodeWays](leetcode6/DecodeWays.java) | [decode-ways](https://leetcode-cn.com/problems/decode-ways/) | DP |
-| 221. 最大正方形 | [MaximalSquare](leetcode6/MaximalSquare.java) | [maximal-square](https://leetcode-cn.com/problems/maximal-square/) | DP |
-| 621. 任务调度器 | [TaskScheduler](leetcode6/TaskScheduler.java) | [task-scheduler](https://leetcode-cn.com/problems/task-scheduler/) | 桶思想 |
+| 题目 | 项目链接                                                          | leetcode | 心得 |
+|---|---------------------------------------------------------------|---|---|
+| 64. 最小路径和 | [MinimumPathSum](leetcode6/MinimumPathSum.java)               | [minimum-path-sum](https://leetcode-cn.com/problems/minimum-path-sum/) | DP |
+| 91. 解码方法 | [DecodeWays](../section-9/leetcode9/DecodeWays.java)          | [decode-ways](https://leetcode-cn.com/problems/decode-ways/) | DP |
+| 221. 最大正方形 | [MaximalSquare](leetcode6/MaximalSquare.java)                 | [maximal-square](https://leetcode-cn.com/problems/maximal-square/) | DP |
+| 621. 任务调度器 | [TaskScheduler](leetcode6/TaskScheduler.java)                 | [task-scheduler](https://leetcode-cn.com/problems/task-scheduler/) | 桶思想 |
 | 647. 回文子串 | [PalindromicSubstrings](leetcode6/PalindromicSubstrings.java) | [palindromic-substrings](https://leetcode-cn.com/problems/palindromic-substrings/) | dp、暴力 |
 |--困难难度--||||
-| 矩形区域不超过 K 的最大数值和 | [todo]() | [max-sum-of-rectangle-no-larger-than-k](https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/) | |
+| 矩形区域不超过 K 的最大数值和 | [todo]()                                                      | [max-sum-of-rectangle-no-larger-than-k](https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/) | |
