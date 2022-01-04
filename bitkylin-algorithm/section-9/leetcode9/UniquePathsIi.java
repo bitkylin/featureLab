@@ -103,6 +103,34 @@ public class UniquePathsIi {
     }
 
     /**
+     * DFS
+     */
+    class Solution3 {
+        public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+            int xMax = obstacleGrid.length - 1;
+            int yMax = obstacleGrid[0].length - 1;
+            int[][] memo = new int[xMax + 1][yMax + 1];
+            return solve(obstacleGrid, memo, xMax, yMax);
+        }
+
+        private int solve(int[][] obstacleGrid, int[][] memo, int x, int y) {
+            if (x < 0 || y < 0 || obstacleGrid[x][y] == 1) {
+                return 0;
+            }
+            if (x == 0 && y == 0) {
+                return 1;
+            }
+            if (memo[x][y] > 0) {
+                return memo[x][y];
+            }
+            memo[x][y] = solve(memo, obstacleGrid, x - 1, y) + solve(memo, obstacleGrid, x, y - 1);
+            return memo[x][y];
+        }
+    }
+
+    // --- 后面的解法不再研究 ---
+
+    /**
      * DP灵巧版，
      * 状态转移方程：
      * <p>
@@ -126,29 +154,6 @@ public class UniquePathsIi {
                 }
             }
             return dp[xMax + 1][yMax + 1];
-        }
-    }
-
-    /**
-     * DFS，数据较大时执行超时
-     */
-    class Solution3 {
-        public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-            int xMax = obstacleGrid.length - 1;
-            int yMax = obstacleGrid[0].length - 1;
-            int[][] memo = new int[xMax + 1][yMax + 1];
-            return solve(obstacleGrid, memo, xMax, yMax);
-        }
-
-        private int solve(int[][] obstacleGrid, int[][] memo, int x, int y) {
-            if (x < 0 || y < 0 || obstacleGrid[x][y] == 1) {
-                return 0;
-            }
-            if (x == 0 && y == 0) {
-                return 1;
-            }
-            memo[x][y] = solve(obstacleGrid, memo, x - 1, y) + solve(obstacleGrid, memo, x, y - 1);
-            return memo[x][y];
         }
     }
 
