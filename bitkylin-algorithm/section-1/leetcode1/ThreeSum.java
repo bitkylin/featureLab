@@ -52,6 +52,24 @@ public class ThreeSum {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 此解法是三数之和的基础
+     */
+    class TwoSum {
+        public int[] twoSum(int[] nums, int target) {
+            Arrays.sort(nums);
+            for (int i = 0, j = nums.length - 1; i < j; ) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                } else {
+                    if (nums[i] + nums[j] < target) i++;
+                    else j--;
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
      * 根据上面的简单解法改进，去除所有重复结果，从而去除 Set
      * 双指针法，外层循环 + 内层夹逼：O(n^2)
      */
