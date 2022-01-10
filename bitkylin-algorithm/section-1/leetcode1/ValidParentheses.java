@@ -70,6 +70,7 @@ public class ValidParentheses {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
     class Solution {
         Map<Character, Character> map = new HashMap<Character, Character>() {{
             put('{', '}');put('[', ']');put('(', ')');
@@ -89,7 +90,27 @@ public class ValidParentheses {
             return deque.isEmpty();
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    class Solution1_1 {
+        private Map<Character, Character> map = new HashMap<Character, Character>() {{
+            put(')', '(');put(']', '[');put('}', '{');
+        }};
+
+        public boolean isValid(String s) {
+            ArrayDeque<Character> stack = new ArrayDeque<>(s.length());
+            for (char c : s.toCharArray()) {
+                if (!map.containsKey(c)) {
+                    stack.push(c);
+                    continue;
+                }
+                if (stack.isEmpty() || !stack.pop().equals(map.get(c))) {
+                    return false;
+                }
+            }
+            return stack.isEmpty();
+        }
+    }
 
     /**
      * 优化
