@@ -62,6 +62,10 @@ public class MergeSortedArray {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 要细心，要一个一个变量检查，不要写错了
+     */
     class Solution {
         public void merge(int[] nums1, int m, int[] nums2, int n) {
             int i = m + n - 1;

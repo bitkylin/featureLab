@@ -58,10 +58,11 @@ public class RotateArray {
         Solution solution = new RotateArray().new Solution();
     }
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+
     /**
      * 数组多次翻转
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void rotate(int[] nums, int k) {
             k = k % nums.length;
@@ -82,6 +83,7 @@ public class RotateArray {
             nums[j] = k;
         }
     }
+
     //leetcode submit region end(Prohibit modification and deletion)
 
     /**
@@ -96,6 +98,4 @@ public class RotateArray {
             System.arraycopy(res, 0, nums, 0, nums.length);
         }
     }
-
-
 }
