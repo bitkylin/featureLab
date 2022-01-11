@@ -61,38 +61,48 @@ public class WordSearchIi {
      */
     class Solution {
 
-        int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        private int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0},};
 
         public List<String> findWords(char[][] board, String[] words) {
             List<String> res = new ArrayList<>();
             for (String word : words) {
-                for (int i = 0; i < board.length; i++) {
-                    for (int j = 0; j < board[0].length; j++) {
-                        if (solve(board, word, i, j, 0)) {
-                            res.add(word);
-                        }
-                    }
+                String wordRes = calc(board, res, word);
+                if (wordRes != null) {
+                    res.add(wordRes);
                 }
             }
             return res;
         }
 
-        private boolean solve(char[][] board, String word, int i, int j, int level) {
+        private String calc(char[][] board, List<String> res, String word) {
+            for (int x = 0; x <= board.length; x++) {
+                for (int y = 0; y <= board[0].length; y++) {
+                    if (solve(board, word, x, y, 0)) {
+                        return word;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private boolean solve(char[][] board, String word, int x, int y, int level) {
+            int xMax = board.length - 1;
+            int yMax = board[0].length - 1;
             if (level >= word.length()) {
                 return true;
             }
-            if (i < 0 || i >= board.length || j < 0 || j >= board[0].length
-                    || board[i][j] != word.charAt(level)) {
+            if (x < 0 || y < 0 || x > xMax || y > yMax
+                    || word.charAt(level) != board[x][y]) {
                 return false;
             }
-            board[i][j] = 0;
-            for (int[] point : pointList) {
-                if (solve(board, word, i + point[0], j + point[1], level + 1)) {
-                    board[i][j] = word.charAt(level);
+            board[x][y] = 0;
+            for (int[] p : pointList) {
+                if (solve(board, word, x + p[0], y + p[1], level + 1)) {
+                    board[x][y] = word.charAt(level);
                     return true;
                 }
             }
-            board[i][j] = word.charAt(level);
+            board[x][y] = word.charAt(level);
             return false;
         }
     }

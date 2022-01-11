@@ -53,6 +53,10 @@ public class WordSearch {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * DFS + 剪枝
+     */
     class Solution {
 
         int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
