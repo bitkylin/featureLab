@@ -69,8 +69,34 @@ public class SimplifyPath {
         Solution solution = new SimplifyPath().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    /**
+     * 易理解的解法
+     * 注：不要漏了场景
+     */
     class Solution {
+        public String simplifyPath(String path) {
+            StringBuilder builder = new StringBuilder();
+            ArrayDeque<String> stack = new ArrayDeque<>();
+            String[] arr = path.split("/");
+            for (String s : arr) {
+                if ("..".equals(s)) {
+                    if (!stack.isEmpty()) {
+                        stack.pop();
+                    }
+                } else if (".".equals(s) || "".equals(s)) {
+                    continue;
+                } else {
+                    stack.push(s);
+                }
+            }
+            while (!stack.isEmpty()) {
+                builder.append("/").append(stack.removeLast());
+            }
+            return builder.length() == 0 ? "/" : builder.toString();
+        }
+    }
+
+    class Solution2 {
         public String simplifyPath(String path) {
             Deque<String> deque = new ArrayDeque<>();
             StringBuilder builder = new StringBuilder();
@@ -87,6 +113,5 @@ public class SimplifyPath {
             return builder.length() == 0 ? "/" : builder.toString();
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
 }

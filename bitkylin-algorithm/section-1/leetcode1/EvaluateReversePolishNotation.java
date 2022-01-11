@@ -85,12 +85,19 @@ public class EvaluateReversePolishNotation {
         new Solution().evalRPN(new String[]{"2", "1", "+", "3", "*"});
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 数组模拟栈
      */
     public static class Solution {
+
+        public static int calc(int v1, int v2, String token) {
+            if ("+".equals(token)) return v1 + v2;
+            if ("-".equals(token)) return v1 - v2;
+            if ("*".equals(token)) return v1 * v2;
+            if ("/".equals(token)) return v1 / v2;
+            return 0;
+        }
+
         public int evalRPN(String[] tokens) {
             int[] stack = new int[tokens.length];
             int j = 0;
@@ -104,17 +111,7 @@ public class EvaluateReversePolishNotation {
             }
             return stack[j - 1];
         }
-
-        public static int calc(int v1, int v2, String token) {
-            if ("+".equals(token)) return v1 + v2;
-            if ("-".equals(token)) return v1 - v2;
-            if ("*".equals(token)) return v1 * v2;
-            if ("/".equals(token)) return v1 / v2;
-            return 0;
-        }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
 
     /**
@@ -122,17 +119,17 @@ public class EvaluateReversePolishNotation {
      */
     class Solution2 {
         public int evalRPN(String[] tokens) {
-            Deque<String> deque = new ArrayDeque<>();
+            Deque<Integer> deque = new ArrayDeque<>();
             for (String token : tokens) {
                 if ("+-*/".contains(token)) {
-                    int v2 = Integer.parseInt(deque.removeLast());
-                    int v1 = Integer.parseInt(deque.removeLast());
-                    deque.addLast(Solution.calc(v1, v2, token) + "");
+                    int v2 = deque.removeLast();
+                    int v1 = deque.removeLast();
+                    deque.addLast(Solution.calc(v1, v2, token));
                 } else {
-                    deque.addLast(token);
+                    deque.addLast(Integer.parseInt(token));
                 }
             }
-            return Integer.parseInt(deque.peekLast());
+            return deque.peekLast();
         }
     }
 }

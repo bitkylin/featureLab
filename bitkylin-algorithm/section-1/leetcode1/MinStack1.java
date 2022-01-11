@@ -42,7 +42,7 @@
 
 package leetcode1;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 
 public class MinStack1 {
 
@@ -50,13 +50,13 @@ public class MinStack1 {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
     class MinStack {
 
-        private LinkedList<Integer> stack = new LinkedList<>();
-        private LinkedList<Integer> min = new LinkedList<>();
+        private ArrayDeque<Integer> stack = new ArrayDeque<>();
+        private ArrayDeque<Integer> min = new ArrayDeque<>();
 
         public MinStack() {
-
         }
 
         public void push(int val) {

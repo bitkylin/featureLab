@@ -44,13 +44,62 @@ public class TrappingRainWater {
     }
 
     /**
-     * 方法一：
+     * 单调栈「递减」，两题解法一致
+     * 单调栈「递增」可参考这个题 {@link LargestRectangleInHistogram}
+     */
+    class Solution {
+        public int trap(int[] height) {
+            int res = 0;
+            Deque<Integer> stack = new ArrayDeque<>(height.length);
+            for (int i = 0; i < height.length; i++) {
+                while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
+                    int prev = stack.pop();
+                    if (stack.isEmpty()) {
+                        continue;
+                    }
+                    int h = Math.min(height[stack.peek()], height[i]) - height[prev];
+                    res += h * (i - stack.peek() - 1);
+                }
+                stack.push(i);
+            }
+            return res;
+        }
+    }
+
+    /**
+     * 方法二：
+     * 按列求 + 动态规划，O(n)，空间复杂度：O(n)
+     * 左侧最大值方程：dp[n] = max(dp[n - 1], height[n - 1])
+     * 右侧最大值方程：dp[n] = max(dp[n + 1], height[n + 1])
+     * 注：注意循环的边界条件
+     */
+    class Solution2 {
+        public int trap(int[] height) {
+            int res = 0;
+            int n = height.length;
+            int[] left = new int[n];
+            int[] right = new int[n];
+            for (int i = 1; i < n - 1; i++) {
+                left[i] = Math.max(left[i - 1], height[i - 1]);
+            }
+            for (int i = n - 2; i > 0; i--) {
+                right[i] = Math.max(right[i + 1], height[i + 1]);
+            }
+            for (int i = 1; i < n - 1; i++) {
+                res += Math.max(Math.min(left[i], right[i]) - height[i], 0);
+            }
+            return res;
+        }
+    }
+
+    /**
+     * 方法三：
      * 按行求，几乎通过所有用例，最后的用例超时，O(n * maxHeight)
      * 1. 算出最大高度
      * 2. 从下到上遍历
      * 3. 累计各层的值
      */
-    class Solution {
+    class Solution3 {
         /**
          * 选出左右边界，然后统计其中的空格
          */
@@ -102,38 +151,12 @@ public class TrappingRainWater {
     }
 
     /**
-     * 方法二：
-     * 按列求 + 动态规划，O(n)，空间复杂度：O(n)
-     * 左侧最大值方程：dp[n] = max(dp[n - 1], height[n - 1])
-     * 右侧最大值方程：dp[n] = max(dp[n + 1], height[n + 1])
-     * 注：注意循环的边界条件
-     */
-    class Solution2 {
-        public int trap(int[] height) {
-            int res = 0;
-            int n = height.length;
-            int[] left = new int[n];
-            int[] right = new int[n];
-            for (int i = 1; i < n - 1; i++) {
-                left[i] = Math.max(left[i - 1], height[i - 1]);
-            }
-            for (int i = n - 2; i > 0; i--) {
-                right[i] = Math.max(right[i + 1], height[i + 1]);
-            }
-            for (int i = 1; i < n - 1; i++) {
-                res += Math.max(Math.min(left[i], right[i]) - height[i], 0);
-            }
-            return res;
-        }
-    }
-
-    /**
-     * 方法三：「不推荐」
+     * 方法四：「不推荐」
      * 双指针法，O(n)，空间复杂度：O(1)
      * 可看作动态规划版本的优化，不必记录中间结果
      * 两侧各一个高度，高度最低值可累计到res中
      */
-    class Solution3 {
+    class Solution4 {
         public int trap(int[] height) {
             int left = height[0];
             int right = height[height.length - 1];
@@ -148,29 +171,6 @@ public class TrappingRainWater {
                     res += Math.max(0, right - height[j]);
                     right = Math.max(right, height[j--]);
                 }
-            }
-            return res;
-        }
-    }
-
-    /**
-     * 单调栈「递减」，两题解法一致
-     * 单调栈「递增」可参考这个题 {@link LargestRectangleInHistogram}
-     */
-    class Solution4 {
-        public int trap(int[] height) {
-            int res = 0;
-            Deque<Integer> stack = new ArrayDeque<>(height.length);
-            for (int i = 0; i < height.length; i++) {
-                while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
-                    int prev = stack.pop();
-                    if (stack.isEmpty()) {
-                        continue;
-                    }
-                    int h = Math.min(height[stack.peek()], height[i]) - height[prev];
-                    res += h * (i - stack.peek() - 1);
-                }
-                stack.push(i);
             }
             return res;
         }

@@ -44,7 +44,8 @@ public class LargestRectangleInHistogram {
 
     public static void main(String[] args) {
 
-        Solution solution = new LargestRectangleInHistogram().new Solution();
+        new LargestRectangleInHistogram().new Solution().largestRectangleArea(new int[]{2, 1, 2})
+        ;
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -53,6 +54,7 @@ public class LargestRectangleInHistogram {
      * 单调栈「递增」
      * 单调栈「递减」可参考这个题 {@link TrappingRainWater}
      * 时间复杂度O(n)
+     * 注：确实稍有难度
      */
     class Solution {
         public int largestRectangleArea(int[] heights) {
