@@ -43,6 +43,7 @@ public class SurroundedRegions {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
     class Solution {
         public void solve(char[][] board) {
             int yMax = board.length - 1;
@@ -76,6 +77,7 @@ public class SurroundedRegions {
             }
         }
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
