@@ -1,7 +1,8 @@
 package cc.bitky.test.idea.integration.config;
 
 import cc.bitky.test.idea.integration.dto.BitkylinConfigState;
-import cc.bitky.test.idea.integration.ui.IntegrationTestConfig;
+import cc.bitky.test.idea.integration.ui.IntegrationTestConfigUi;
+import com.alibaba.fastjson.JSON;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts;
@@ -14,7 +15,8 @@ import javax.swing.*;
  */
 public class BitkylinConfigurable implements Configurable {
 
-    private static IntegrationTestConfig integrationTestConfig;
+    private BitkylinConfigState stateUi;
+    private IntegrationTestConfigUi integrationTestConfigUi;
 
     private BitkylinConfigurable() {
     }
@@ -26,28 +28,23 @@ public class BitkylinConfigurable implements Configurable {
 
     @Override
     public @Nullable JComponent createComponent() {
-        integrationTestConfig = IntegrationTestConfig.instance();
-        integrationTestConfig.init();
-        return integrationTestConfig.getMainPanel();
+        BitkylinConfigState state = BitkylinPersistentStateComponent.getInstance();
+        stateUi = JSON.parseObject(JSON.toJSONString(state), BitkylinConfigState.class);
+        integrationTestConfigUi = IntegrationTestConfigUi.instance();
+        integrationTestConfigUi.init();
+        return integrationTestConfigUi.getMainPanel();
     }
 
     @Override
     public boolean isModified() {
         BitkylinConfigState state = BitkylinPersistentStateComponent.getInstance();
-        if (state == null) {
-            return true;
-        }
-        if (Boolean.FALSE.equals(state.getModified())) {
-            return false;
-        }
-        return true;
+        integrationTestConfigUi.updateState(stateUi);
+        return !state.equals(stateUi);
     }
 
     @Override
     public void apply() throws ConfigurationException {
-        String pathText = integrationTestConfig.fetchPathText();
         BitkylinConfigState state = BitkylinPersistentStateComponent.getInstance();
-        state.setModified(false);
-        state.setPath(pathText);
+        integrationTestConfigUi.updateState(state);
     }
 }

@@ -13,9 +13,11 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-                <applicationConfigurable  displayName="集成测试"
-                                          id="cc.bitky.idea.plugin.integration_test.config.total"
-                                         instance="cc.bitky.test.idea.integration.config.BitkylinConfigurable"/>
+        <applicationService
+                serviceImplementation="cc.bitky.test.idea.integration.config.BitkylinPersistentStateComponent"/>
+        <applicationConfigurable displayName="集成测试"
+                                 id="cc.bitky.idea.plugin.integration_test.config.total"
+                                 instance="cc.bitky.test.idea.integration.config.BitkylinConfigurable"/>
     </extensions>
 
     <actions>
@@ -24,13 +26,28 @@
                 class="cc.bitky.test.idea.integration.action.ActionPullSysConfig"
                 text="拉取系统配置" description="拉取系统配置" popup="true">
         </action>
+
         <action id="cc.bitky.idea.plugin.integration_test.action.pull_sim_business_config"
                 class="cc.bitky.test.idea.integration.action.ActionPullSimBusinessConfig"
                 text="拉取简单业务配置" description="拉取简单业务配置" popup="true">
         </action>
+
+        <action id="cc.bitky.idea.plugin.integration_test.action.clear_sys_config"
+                class="cc.bitky.test.idea.integration.action.ActionClearSysConfig"
+                text="清理系统配置" description="清理系统配置" popup="true">
+        </action>
+
+        <action id="cc.bitky.idea.plugin.integration_test.action.clear_sim_business_config"
+                class="cc.bitky.test.idea.integration.action.ActionClearSimBusinessConfig"
+                text="清理简单业务配置" description="清理简单业务配置" popup="true">
+        </action>
+
         <group popup="true" id="cc.bitky.idea.plugin.integration_test.group" text="集成测试">
             <reference ref="cc.bitky.idea.plugin.integration_test.action.pull_sys_config"/>
             <reference ref="cc.bitky.idea.plugin.integration_test.action.pull_sim_business_config"/>
+            <separator/>
+            <reference ref="cc.bitky.idea.plugin.integration_test.action.clear_sys_config"/>
+            <reference ref="cc.bitky.idea.plugin.integration_test.action.clear_sim_business_config"/>
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
     </actions>
