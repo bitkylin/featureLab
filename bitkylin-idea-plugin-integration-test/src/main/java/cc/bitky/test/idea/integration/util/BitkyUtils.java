@@ -20,24 +20,6 @@ public class BitkyUtils {
     private BitkyUtils() {
     }
 
-    public static Optional<Path> solvePath(Project project) {
-        ConfigProjectState state = PersistentStateProjectComponent.getInstance(project);
-        String path = state.getPath();
-        if (StringUtils.isBlank(path)) {
-            return Optional.empty();
-        }
-        return Optional.of(Paths.get(path));
-    }
-
-    public static Optional<String> solveAppName(Project project) {
-        ConfigProjectState state = PersistentStateProjectComponent.getInstance(project);
-        String appName = state.getProjectName();
-        if (StringUtils.isBlank(appName)) {
-            return Optional.empty();
-        }
-        return Optional.of(appName);
-    }
-
     public static Optional<ConfigProjectState> solveConfigProjectState(Project project) {
         ConfigProjectState state = PersistentStateProjectComponent.getInstance(project);
         if (StringUtils.isBlank(state.getProjectName())) {
@@ -67,17 +49,5 @@ public class BitkyUtils {
             return Optional.empty();
         }
         return Optional.of(state.getSysConfigTemplateUrl());
-    }
-
-    public static boolean checkStateCompleted(Optional<String> appName, Optional<Path> path) {
-        if (!appName.isPresent()) {
-            Messages.showMessageDialog("请先在IDEA的配置页面配置应用名", "无法执行", Messages.getInformationIcon());
-            return false;
-        }
-        if (!path.isPresent()) {
-            Messages.showMessageDialog("请先在IDEA的配置页面配置路径", "无法执行", Messages.getInformationIcon());
-            return false;
-        }
-        return false;
     }
 }

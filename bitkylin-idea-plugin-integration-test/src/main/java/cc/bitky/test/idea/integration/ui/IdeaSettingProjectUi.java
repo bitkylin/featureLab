@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class IdeaSettingProjectUi {
 
-    private static final IdeaSettingProjectUi settingProjectUi = new IdeaSettingProjectUi();
+    private static final IdeaSettingProjectUi SETTING_PROJECT_UI = new IdeaSettingProjectUi();
 
     private TextFieldWithBrowseButton fileFolderBtn;
 
@@ -23,7 +23,7 @@ public class IdeaSettingProjectUi {
     private JTextField appName;
 
     public static IdeaSettingProjectUi instance() {
-        return settingProjectUi;
+        return SETTING_PROJECT_UI;
     }
 
     public JPanel getMainPanel() {

@@ -25,6 +25,22 @@ public class ActionPullSimBusinessConfig extends AnAction {
             "    \"ip\": \"localhost\"\n" +
             "}";
 
+    private static List<SimbusinessKvInfo> getSimbusinessKvInfos(String url, String body) {
+        try {
+            String resp = TradeTestHttpClient.postJson(url, body);
+            return JSON.parseArray(resp, SimbusinessKvInfo.class);
+        } catch (Exception e) {
+            Messages.showMessageDialog(
+                    "接口请求或结果解析发生异常\n\n"
+                            + e.getMessage()
+                            + "\n\n"
+                            + url
+                            + "\n"
+                            + body, "接口有异常啦", Messages.getInformationIcon());
+            throw e;
+        }
+    }
+
     @Override
     public void actionPerformed(AnActionEvent e) {
         Optional<ConfigProjectState> configProjectStateOptional = BitkyUtils.solveConfigProjectState(e.getProject());
@@ -35,8 +51,7 @@ public class ActionPullSimBusinessConfig extends AnAction {
         ConfigProjectState projectState = configProjectStateOptional.get();
         String url = String.format(simBusinessTemplateUrlOptional.get(), projectState.getProjectName());
         String body = String.format(bodyTemplate, projectState.getProjectName());
-        String resp = TradeTestHttpClient.postJson(url, body);
-        List<SimbusinessKvInfo> simbusinessKvInfoList = JSON.parseArray(resp, SimbusinessKvInfo.class);
+        List<SimbusinessKvInfo> simbusinessKvInfoList = getSimbusinessKvInfos(url, body);
         try {
             Path realPath = TradeTestPath.simBusinessByJava(Paths.get(projectState.getPath()));
             SimbusinessWriter.write(realPath, simbusinessKvInfoList);

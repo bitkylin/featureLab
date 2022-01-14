@@ -11,7 +11,7 @@ import javax.swing.*;
  */
 public class IdeaSettingGlobalUi {
 
-    private static final IdeaSettingGlobalUi settingGlobalUi = new IdeaSettingGlobalUi();
+    private static final IdeaSettingGlobalUi SETTING_GLOBAL_UI = new IdeaSettingGlobalUi();
 
     private JTextField sysConfigTemplateUrl;
 
@@ -24,7 +24,7 @@ public class IdeaSettingGlobalUi {
     private JButton buttonResetSimBusinessTemplateUrl;
 
     public static IdeaSettingGlobalUi instance() {
-        return settingGlobalUi;
+        return SETTING_GLOBAL_UI;
     }
 
     public JPanel getMainPanel() {
@@ -41,8 +41,8 @@ public class IdeaSettingGlobalUi {
         buttonResetSysConfigTemplateUrl.addActionListener(e -> {
             sysConfigTemplateUrl.setText(TradeTestConstants.URL_SYS_CONFIG);
         });
-        buttonResetSimBusinessTemplateUrl.addItemListener(e -> {
-            sysConfigTemplateUrl.setText(TradeTestConstants.URL_SIM_BUSINESS);
+        buttonResetSimBusinessTemplateUrl.addActionListener(e -> {
+            simBusinessTemplateUrl.setText(TradeTestConstants.URL_SIM_BUSINESS);
         });
     }
 

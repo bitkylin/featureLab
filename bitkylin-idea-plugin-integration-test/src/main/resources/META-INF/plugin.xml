@@ -1,10 +1,10 @@
 <idea-plugin>
-    <id>cc.bitky.bitkylin-idea-plugin</id>
-    <name>bitkylin-idea-demo</name>
+    <id>cc.bitky.idea.integration-test</id>
+    <name>bitkylin-integration-test</name>
     <vendor email="bitkylin@163.com" url="https://github.com/bitkylin">bitkylin</vendor>
 
     <description><![CDATA[
-    bitkylin-idea-plugin-demo, see : https://github.com/bitkylin
+    bitkylin-integration-test，集成测试组件，基于远端配置中心生成本地配置中心
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
