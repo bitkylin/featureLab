@@ -6,7 +6,9 @@ import lombok.Data;
  * @author limingliang
  */
 @Data
-public class BitkylinConfigState {
+public class ConfigProjectState {
 
     private String path;
+
+    private String projectName;
 }

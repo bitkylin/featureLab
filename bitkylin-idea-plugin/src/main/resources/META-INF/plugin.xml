@@ -13,11 +13,16 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <projectService
+                serviceImplementation="cc.bitky.test.idea.integration.config.PersistentStateProjectComponent"/>
+        <projectConfigurable displayName="集成测试project"
+                             id="cc.bitky.idea.plugin.integration_test.ide_setting.project"
+                             instance="cc.bitky.test.idea.integration.config.IdeaSettingProjectConfigurable"/>
         <applicationService
-                serviceImplementation="cc.bitky.test.idea.integration.config.BitkylinPersistentStateComponent"/>
-        <applicationConfigurable displayName="集成测试"
-                                 id="cc.bitky.idea.plugin.integration_test.config.total"
-                                 instance="cc.bitky.test.idea.integration.config.BitkylinConfigurable"/>
+                serviceImplementation="cc.bitky.test.idea.integration.config.PersistentStateGlobalComponent"/>
+        <applicationConfigurable displayName="集成测试全局"
+                                 id="cc.bitky.idea.plugin.integration_test.ide_setting.global"
+                                 instance="cc.bitky.test.idea.integration.config.IdeaSettingGlobalConfigurable"/>
     </extensions>
 
     <actions>
