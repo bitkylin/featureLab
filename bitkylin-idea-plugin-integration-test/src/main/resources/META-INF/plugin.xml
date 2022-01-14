@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>cc.bitky.idea.integration-test</id>
+    <id>cc.bitky.idea.plugin.integration_test</id>
     <name>bitkylin-integration-test</name>
     <vendor email="bitkylin@163.com" url="https://github.com/bitkylin">bitkylin</vendor>
 
@@ -15,14 +15,14 @@
         <!-- Add your extensions here -->
         <projectService
                 serviceImplementation="cc.bitky.test.idea.integration.config.PersistentStateProjectComponent"/>
-        <projectConfigurable displayName="集成测试project"
+        <projectConfigurable displayName="集成测试Project"
                              id="cc.bitky.idea.plugin.integration_test.ide_setting.project"
                              instance="cc.bitky.test.idea.integration.config.IdeaSettingProjectConfigurable"/>
         <applicationService
-                serviceImplementation="cc.bitky.test.idea.integration.config.PersistentStateGlobalComponent"/>
-        <applicationConfigurable displayName="集成测试全局"
-                                 id="cc.bitky.idea.plugin.integration_test.ide_setting.global"
-                                 instance="cc.bitky.test.idea.integration.config.IdeaSettingGlobalConfigurable"/>
+                serviceImplementation="cc.bitky.test.idea.integration.config.PersistentStateApplicationComponent"/>
+        <applicationConfigurable displayName="集成测试Application"
+                                 id="cc.bitky.idea.plugin.integration_test.ide_setting.application"
+                                 instance="cc.bitky.test.idea.integration.config.IdeaSettingApplicationConfigurable"/>
     </extensions>
 
     <actions>

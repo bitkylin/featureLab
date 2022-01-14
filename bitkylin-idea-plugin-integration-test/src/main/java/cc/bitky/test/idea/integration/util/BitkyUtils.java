@@ -1,15 +1,13 @@
 package cc.bitky.test.idea.integration.util;
 
-import cc.bitky.test.idea.integration.config.PersistentStateGlobalComponent;
+import cc.bitky.test.idea.integration.config.PersistentStateApplicationComponent;
 import cc.bitky.test.idea.integration.config.PersistentStateProjectComponent;
-import cc.bitky.test.idea.integration.dto.ConfigGlobalState;
+import cc.bitky.test.idea.integration.dto.ConfigApplicationState;
 import cc.bitky.test.idea.integration.dto.ConfigProjectState;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.apache.commons.lang3.StringUtils;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
@@ -34,7 +32,7 @@ public class BitkyUtils {
     }
 
     public static Optional<String> solveSimBusinessTemplateUrl() {
-        ConfigGlobalState state = PersistentStateGlobalComponent.getInstance();
+        ConfigApplicationState state = PersistentStateApplicationComponent.getInstance();
         if (StringUtils.isBlank(state.getSimBusinessTemplateUrl())) {
             Messages.showMessageDialog("请先在IDEA的配置页面配置-简单业务配置URL模板", "无法执行", Messages.getInformationIcon());
             return Optional.empty();
@@ -43,7 +41,7 @@ public class BitkyUtils {
     }
 
     public static Optional<String> solveSysConfigTemplateUrl() {
-        ConfigGlobalState state = PersistentStateGlobalComponent.getInstance();
+        ConfigApplicationState state = PersistentStateApplicationComponent.getInstance();
         if (StringUtils.isBlank(state.getSysConfigTemplateUrl())) {
             Messages.showMessageDialog("请先在IDEA的配置页面配置-系统配置URL模板", "无法执行", Messages.getInformationIcon());
             return Optional.empty();

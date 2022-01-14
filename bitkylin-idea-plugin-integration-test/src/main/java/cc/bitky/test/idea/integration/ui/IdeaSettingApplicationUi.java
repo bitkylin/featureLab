@@ -1,7 +1,7 @@
 package cc.bitky.test.idea.integration.ui;
 
-import cc.bitky.test.idea.integration.config.PersistentStateGlobalComponent;
-import cc.bitky.test.idea.integration.dto.ConfigGlobalState;
+import cc.bitky.test.idea.integration.config.PersistentStateApplicationComponent;
+import cc.bitky.test.idea.integration.dto.ConfigApplicationState;
 import cc.bitky.test.idea.integration.service.constant.TradeTestConstants;
 
 import javax.swing.*;
@@ -9,9 +9,9 @@ import javax.swing.*;
 /**
  * @author limingliang
  */
-public class IdeaSettingGlobalUi {
+public class IdeaSettingApplicationUi {
 
-    private static final IdeaSettingGlobalUi SETTING_GLOBAL_UI = new IdeaSettingGlobalUi();
+    private static final IdeaSettingApplicationUi SETTING_APPLICATION_UI = new IdeaSettingApplicationUi();
 
     private JTextField sysConfigTemplateUrl;
 
@@ -23,8 +23,8 @@ public class IdeaSettingGlobalUi {
 
     private JButton buttonResetSimBusinessTemplateUrl;
 
-    public static IdeaSettingGlobalUi instance() {
-        return SETTING_GLOBAL_UI;
+    public static IdeaSettingApplicationUi instance() {
+        return SETTING_APPLICATION_UI;
     }
 
     public JPanel getMainPanel() {
@@ -32,7 +32,7 @@ public class IdeaSettingGlobalUi {
     }
 
     public void init() {
-        ConfigGlobalState state = PersistentStateGlobalComponent.getInstance();
+        ConfigApplicationState state = PersistentStateApplicationComponent.getInstance();
         sysConfigTemplateUrl.setText(state.getSysConfigTemplateUrl() == null ?
                 TradeTestConstants.URL_SYS_CONFIG : state.getSysConfigTemplateUrl());
         simBusinessTemplateUrl.setText(state.getSimBusinessTemplateUrl() == null ?
@@ -54,7 +54,7 @@ public class IdeaSettingGlobalUi {
         return simBusinessTemplateUrl.getText();
     }
 
-    public void updateState(ConfigGlobalState state) {
+    public void updateState(ConfigApplicationState state) {
         state.setSysConfigTemplateUrl(fetchSysConfigTemplateUrl());
         state.setSimBusinessTemplateUrl(fetchSimBusinessTemplateUrl());
     }

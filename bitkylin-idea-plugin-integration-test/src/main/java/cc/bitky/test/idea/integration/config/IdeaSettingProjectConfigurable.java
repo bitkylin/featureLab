@@ -26,7 +26,7 @@ public class IdeaSettingProjectConfigurable implements Configurable {
 
     @Override
     public @NlsContexts.ConfigurableName String getDisplayName() {
-        return "集成测试project";
+        return "集成测试Project";
     }
 
     @Override

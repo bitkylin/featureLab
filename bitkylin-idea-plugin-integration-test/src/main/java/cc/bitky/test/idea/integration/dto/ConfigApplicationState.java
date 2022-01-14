@@ -6,7 +6,7 @@ import lombok.Data;
  * @author limingliang
  */
 @Data
-public class ConfigGlobalState {
+public class ConfigApplicationState {
 
     private String sysConfigTemplateUrl;
 

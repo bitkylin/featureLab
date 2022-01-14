@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author limingliang
  */
-@State(name = "bitkylin_integration_test_project", storages = {@Storage("bitkylin_integration_test_storage_project.xml")})
+@State(name = "bitkylin-integration-test-project", storages = {@Storage("bitkylin-integration-test-project.xml")})
 public class PersistentStateProjectComponent implements PersistentStateComponent<ConfigProjectState> {
 
     private ConfigProjectState state;
