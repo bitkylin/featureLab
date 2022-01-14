@@ -102,6 +102,7 @@ public class WordLadder {
     /**
      * BFS，Set实现BeginSet，迭代wordList，每个word去BeginSet中比较
      * 注：题目要求是最短转换序列的单词数目，不是转换次数
+     * 最优解法
      */
     class Solution1 {
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {

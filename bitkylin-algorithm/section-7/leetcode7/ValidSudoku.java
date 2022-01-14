@@ -81,7 +81,6 @@ public class ValidSudoku {
         });
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isValidSudoku(char[][] board) {
             int len = 9;
@@ -107,7 +106,6 @@ public class ValidSudoku {
             return true;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 冗长的解法,空间复杂度 O(n)

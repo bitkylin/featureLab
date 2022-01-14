@@ -45,6 +45,7 @@ public class GenerateParentheses {
     /**
      * 最佳实践（1）
      * DFS，在使用数组时，无需剪枝
+     * 该解法最优
      */
     class Solution {
         public List<String> generateParenthesis(int n) {
