@@ -39,8 +39,6 @@ public class BinaryTreeLevelOrderTraversal {
         Solution solution = new BinaryTreeLevelOrderTraversal().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     public class TreeNode {
         int val;
         TreeNode left;
@@ -61,33 +59,9 @@ public class BinaryTreeLevelOrderTraversal {
     }
 
     /**
-     * DFS，递归
-     */
-    class Solution {
-        public List<List<Integer>> levelOrder(TreeNode root) {
-            List<List<Integer>> res = new ArrayList<>();
-            solve(res, root, 1);
-            return res;
-        }
-
-        private void solve(List<List<Integer>> res, TreeNode node, int level) {
-            if (node == null) {
-                return;
-            }
-            if (res.size() < level) {
-                res.add(new ArrayList<>());
-            }
-            res.get(level - 1).add(node.val);
-            solve(res, node.left, level + 1);
-            solve(res, node.right, level + 1);
-        }
-    }
-    //leetcode submit region end(Prohibit modification and deletion)
-
-    /**
      * BFS，循环
      */
-    class Solution2 {
+    class Solution {
         public List<List<Integer>> levelOrder(TreeNode root) {
             List<List<Integer>> res = new ArrayList<>();
             Deque<TreeNode> deque = new ArrayDeque<>();
@@ -110,6 +84,29 @@ public class BinaryTreeLevelOrderTraversal {
             if (node != null) {
                 deque.offer(node);
             }
+        }
+    }
+
+    /**
+     * DFS，递归
+     */
+    class Solution2 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            solve(res, root, 1);
+            return res;
+        }
+
+        private void solve(List<List<Integer>> res, TreeNode node, int level) {
+            if (node == null) {
+                return;
+            }
+            if (res.size() < level) {
+                res.add(new ArrayList<>());
+            }
+            res.get(level - 1).add(node.val);
+            solve(res, node.left, level + 1);
+            solve(res, node.right, level + 1);
         }
     }
 }

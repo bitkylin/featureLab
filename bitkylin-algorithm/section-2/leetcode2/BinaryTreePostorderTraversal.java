@@ -48,8 +48,6 @@ public class BinaryTreePostorderTraversal {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 手动模拟递归栈
      */
@@ -77,7 +75,6 @@ public class BinaryTreePostorderTraversal {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 递归

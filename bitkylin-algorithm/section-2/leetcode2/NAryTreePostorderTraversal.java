@@ -70,7 +70,6 @@ public class NAryTreePostorderTraversal {
             children = _children;
         }
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
      * 栈 - 仅存放 node
@@ -95,12 +94,38 @@ public class NAryTreePostorderTraversal {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 栈 - 存放 node + value
      */
-    class Solution2 {
+    class Solution2_1 {
+        public List<Integer> postorder(Node root) {
+            List<Integer> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+            ArrayDeque<Object> stack = new ArrayDeque<>();
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                Object obj = stack.pop();
+                if (obj instanceof Integer) {
+                    res.add((Integer) obj);
+                } else {
+                    Node node = (Node) obj;
+                    stack.push(node.val);
+                    if (node.children != null) {
+                        Collections.reverse(node.children);
+                        for (Node child : node.children) {
+                            stack.push(child);
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+    }
+
+    class Solution2_2 {
         public List<Integer> postorder(Node root) {
             List<Integer> res = new ArrayList<>();
             ArrayDeque<Object> stack = new ArrayDeque<>();

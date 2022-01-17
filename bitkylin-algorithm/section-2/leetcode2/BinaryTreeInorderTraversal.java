@@ -85,8 +85,6 @@ public class BinaryTreeInorderTraversal {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 手动模拟递归栈
      */
@@ -114,7 +112,6 @@ public class BinaryTreeInorderTraversal {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 递归

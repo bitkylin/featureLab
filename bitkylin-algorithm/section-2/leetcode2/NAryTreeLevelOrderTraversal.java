@@ -61,8 +61,6 @@ public class NAryTreeLevelOrderTraversal {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class Solution {
         public List<List<Integer>> levelOrder(Node root) {
             List<List<Integer>> res = new ArrayList<>();
@@ -87,7 +85,6 @@ public class NAryTreeLevelOrderTraversal {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 自实现的循环法，每次大循环需要创建新的Deque，性能较差
