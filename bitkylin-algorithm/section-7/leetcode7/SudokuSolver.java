@@ -53,7 +53,9 @@ public class SudokuSolver {
         Solution solution = new SudokuSolver().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    /**
+     * 数独数字范围是0-8或1-9，不要搞错了
+     */
     class Solution {
         public void solveSudoku(char[][] board) {
             solve(board);
@@ -109,7 +111,6 @@ public class SudokuSolver {
             return true;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 预先取出所有需填空的格子，然后直接遍历

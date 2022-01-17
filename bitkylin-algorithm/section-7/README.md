@@ -20,12 +20,14 @@ todo
 1. 朴素搜索
 2. 优化方式：不重复（ﬁbonacci）、剪枝（生成括号问题）
 3. 搜索方向：
+
 - DFS: depth ﬁrst search 深度优先搜索
 - BFS: breadth ﬁrst search 广度优先搜索
 
 ## LeetCode
 
 ### 字典树 Trie，还是使用了剪枝、回溯解法
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 208. 实现 Trie (字典树「前缀树」) | [ImplementTriePrefixTree](leetcode7/ImplementTriePrefixTree.java) | [implement-trie-prefix-tree](https://leetcode-cn.com/problems/implement-trie-prefix-tree/) | 标准实现 |
@@ -35,6 +37,7 @@ todo
 | 547. 省份数量 | [NumberOfProvinces](leetcode7/NumberOfProvinces.java) | [number-of-provinces](https://leetcode-cn.com/problems/number-of-provinces/) | DFS |
 
 ### 剪枝、回溯
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 70. 爬楼梯 | [ClimbingStairs](leetcode7/ClimbingStairs.java) | [climbing-stairs](https://leetcode-cn.com/problems/climbing-stairs/) | DP |
@@ -44,3 +47,4 @@ todo
 | 37. 解数独 | [SudokuSolver](leetcode7/SudokuSolver.java) | [sudoku-solver](https://leetcode-cn.com/problems/sudoku-solver/) | 回溯，入参二维数组存储中间结果 |
 | 433. 最小基因变化 | [MinimumGeneticMutation](leetcode7/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) | BFS，新增双向BFS，不过难度确实较大 |
 | 127. 单词接龙 | [WordLadder](leetcode7/WordLadder.java) | [word-ladder](https://leetcode-cn.com/problems/word-ladder/) | BFS，双向BFS待补充 |
+| 1091. 二进制矩阵中的最短路径 | [ShortestPathInBinaryMatrix](leetcode7/ShortestPathInBinaryMatrix.java) | [shortest-path-in-binary-matrix](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/) | BFS |

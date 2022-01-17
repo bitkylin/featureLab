@@ -42,8 +42,6 @@ public class SurroundedRegions {
         Solution solution = new SurroundedRegions().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class Solution {
         public void solve(char[][] board) {
             int yMax = board.length - 1;
@@ -78,6 +76,42 @@ public class SurroundedRegions {
         }
     }
 
-//leetcode submit region end(Prohibit modification and deletion)
+    /**
+     * 换一种写法
+     */
+    class Solution2 {
+        int[][] pointList = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
+        public void solve(char[][] board) {
+            int xMax = board.length - 1;
+            int yMax = board[0].length - 1;
+            for (int x = 0; x <= xMax; x++) {
+                reset(board, xMax, yMax, x, 0);
+                reset(board, xMax, yMax, x, yMax);
+            }
+            for (int y = 0; y <= yMax; y++) {
+                reset(board, xMax, yMax, 0, y);
+                reset(board, xMax, yMax, xMax, y);
+            }
+            for (int x = 0; x <= xMax; x++) {
+                for (int y = 0; y <= yMax; y++) {
+                    if (board[x][y] == 'O') {
+                        board[x][y] = 'X';
+                    } else if (board[x][y] == 0) {
+                        board[x][y] = 'O';
+                    }
+                }
+            }
+        }
+
+        private void reset(char[][] board, int xMax, int yMax, int x, int y) {
+            if (x < 0 || y < 0 || x > xMax || y > yMax || board[x][y] != 'O') {
+                return;
+            }
+            board[x][y] = 0;
+            for (int[] point : pointList) {
+                reset(board, xMax, yMax, x + point[0], y + point[1]);
+            }
+        }
+    }
 }

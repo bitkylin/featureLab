@@ -21,6 +21,11 @@ import java.util.stream.Collectors;
  */
 public class GitBatchPull {
 
+    private static final List<String> skipRepositoryList = Lists.newArrayList(
+//            "project\\opensource",
+//            "project\\learn"
+    );
+
     public static void main(String[] args) throws IOException {
         List<RepoPullInfo> res = new ArrayList<>();
 
@@ -42,7 +47,11 @@ public class GitBatchPull {
             String branch = repo.alertBranch(StringUtils.trimToEmpty(StringUtils.removeStart(reader.readLine(), "*")));
             System.out.println("\n\n>>> branch: " + branch);
             if (!Lists.newArrayList("master", "main").contains(branch)) {
-                System.out.println("跳过");
+                System.out.println("未找到master分支，跳过");
+                continue;
+            }
+            if (skipRepo(repo)) {
+                System.out.println("主动配置，跳过");
                 continue;
             }
 
@@ -56,6 +65,15 @@ public class GitBatchPull {
             System.out.println(repo.alertErrorMsg(reader.lines().collect(Collectors.joining())));
         }
 
+    }
+
+    private static boolean skipRepo(RepoPullInfo repo) {
+        for (String skipRepository : skipRepositoryList) {
+            if (repo.getPath().contains(skipRepository)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void listFile(List<File> res, File file, int level, int top) {

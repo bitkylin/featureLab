@@ -49,8 +49,6 @@ public class NQueens {
         new NQueens().new Solution().solveNQueens(4);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class Solution {
         public List<List<String>> solveNQueens(int n) {
             boolean[] left = new boolean[2 * n];
@@ -63,24 +61,24 @@ public class NQueens {
             return res;
         }
 
-        private void solve(List<List<String>> res, int[] arr, boolean[] left, boolean[] right, boolean[] column, int y) {
+        private void solve(List<List<String>> res, int[] arr, boolean[] left, boolean[] right, boolean[] column, int x) {
             int n = arr.length;
-            if (y >= n) {
+            if (x >= n) {
                 write(res, arr);
                 return;
             }
-            for (int x = 0; x < n; x++) {
-                if (left[x + y] || right[x - y + n - 1] || column[x]) {
+            for (int y = 0; y < n; y++) {
+                if (left[y + x] || right[y - x + n - 1] || column[y]) {
                     continue;
                 }
-                left[x + y] = true;
-                right[x - y + n - 1] = true;
-                column[x] = true;
-                arr[y] = x;
-                solve(res, arr, left, right, column, y + 1);
-                left[x + y] = false;
-                right[x - y + n - 1] = false;
-                column[x] = false;
+                left[y + x] = true;
+                right[y - x + n - 1] = true;
+                column[y] = true;
+                arr[x] = y;
+                solve(res, arr, left, right, column, x + 1);
+                left[y + x] = false;
+                right[y - x + n - 1] = false;
+                column[y] = false;
             }
         }
 
@@ -96,8 +94,6 @@ public class NQueens {
             res.add(list);
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     class Solution2 {
         public List<List<String>> solveNQueens(int n) {
