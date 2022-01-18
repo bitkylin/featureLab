@@ -48,3 +48,4 @@ todo
 | 433. 最小基因变化 | [MinimumGeneticMutation](leetcode7/MinimumGeneticMutation.java) | [minimum-genetic-mutation](https://leetcode-cn.com/problems/minimum-genetic-mutation/) | BFS，新增双向BFS，不过难度确实较大 |
 | 127. 单词接龙 | [WordLadder](leetcode7/WordLadder.java) | [word-ladder](https://leetcode-cn.com/problems/word-ladder/) | BFS，双向BFS待补充 |
 | 1091. 二进制矩阵中的最短路径 | [ShortestPathInBinaryMatrix](leetcode7/ShortestPathInBinaryMatrix.java) | [shortest-path-in-binary-matrix](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/) | BFS |
+| 773. 滑动谜题 | [SlidingPuzzle](leetcode7/SlidingPuzzle.java) | [sliding-puzzle](https://leetcode-cn.com/problems/sliding-puzzle/) | BFS |
