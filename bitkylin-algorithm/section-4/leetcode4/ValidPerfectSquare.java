@@ -38,7 +38,27 @@ public class ValidPerfectSquare {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * mid值偏左偏右都是可以的
+     */
     class Solution {
+        public boolean isPerfectSquare(int num) {
+            long left = 0;
+            long right = num;
+            while (left < right) {
+                long mid = (right - left) / 2 + left;
+                if (mid * mid < num) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            return left * left == num;
+        }
+    }
+
+    class Solution1 {
         public boolean isPerfectSquare(int num) {
             long left = 0, right = num;
             while (left < right) {

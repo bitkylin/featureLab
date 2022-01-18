@@ -43,8 +43,6 @@ public class SearchA2dMatrix {
         Solution solution = new SearchA2dMatrix().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 把矩阵当做一位数组，直接二分查找
      */
@@ -63,8 +61,6 @@ public class SearchA2dMatrix {
             return matrix[left / len][left % len] == target;
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 对row二分查找，right可以左移，left不能主动右移，所以mid必须靠右

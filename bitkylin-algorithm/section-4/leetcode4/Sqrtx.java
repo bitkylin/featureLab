@@ -43,6 +43,8 @@ public class Sqrtx {
     /**
      * mid取偏右的值，当大于x时，right直接限制到mid的左值。
      * 计算mid时始终覆盖x，且最终mid始终是left值。
+     * <p>
+     * 注：注意溢出场景的处理，使用long类型
      */
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {

@@ -61,8 +61,8 @@ public class FindMinimumInRotatedSortedArray {
      * mid靠左，left <= mid时右移，mid小于峰值时可以跨过峰值，此时left可以天然保证最小；
      * 由于right != mid，所以right是可变动的
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
         public int findMin(int[] nums) {
             int left = 0;
             int right = nums.length - 1;
@@ -77,6 +77,4 @@ public class FindMinimumInRotatedSortedArray {
             return nums[left];
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

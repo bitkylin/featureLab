@@ -106,13 +106,50 @@ public class SearchInRotatedSortedArray {
             return nums[left] == target ? left : -1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 先求最小值，拆为两个有序数组再求值
      * 参考 153. 寻找旋转排序数组中的最小值: {@link FindMinimumInRotatedSortedArray}
      */
-    class Solution2 {
+    class Solution2_1 {
+        public int search(int[] nums, int target) {
+            int min = findMin(nums);
+            if (target >= nums[min] && target <= nums[nums.length - 1]) {
+                return find(nums, min, nums.length - 1, target);
+            }
+            return find(nums, 0, min - 1, target);
+        }
+
+        private int find(int[] nums, int left, int right, int target) {
+            while (left < right) {
+                int mid = (right - left) / 2 + left;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            return nums[left] == target ? left : -1;
+        }
+
+        private int findMin(int[] nums) {
+            int left = 0;
+            int right = nums.length - 1;
+            while (left < right) {
+                int mid = (right - left) / 2 + left;
+                if (nums[mid] > nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            return left;
+        }
+    }
+
+    class Solution2_2 {
         public int search(int[] nums, int target) {
             int left = 0;
             int right = nums.length - 1;
