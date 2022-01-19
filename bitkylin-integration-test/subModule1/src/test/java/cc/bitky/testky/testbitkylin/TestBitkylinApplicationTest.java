@@ -3,10 +3,15 @@ package cc.bitky.testky.testbitkylin;
 import cc.bitky.testky.testbitkylin.controller.TestController;
 import cc.bitky.testky.testbitkylin.service.sub.TestSub2Service;
 import cc.bitky.testky.testbitkylin.service.sub.TestSubService;
+import cc.bitky.testky.testbitkylin.util.TestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,11 +20,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @Slf4j
-//@RunWith(PowerMockRunner.class)
-@RunWith(SpringRunner.class)
-//@PowerMockRunnerDelegate(SpringRunner.class)
+@RunWith(PowerMockRunner.class)
+//@RunWith(SpringRunner.class)
+@PowerMockRunnerDelegate(SpringRunner.class)
 @SpringBootTest(classes = TestBitkylinApplication.class)
-//@PrepareForTest(TestUtils.class)
+@PrepareForTest(TestUtils.class)
 public class TestBitkylinApplicationTest {
 
     @Autowired
@@ -39,12 +44,14 @@ public class TestBitkylinApplicationTest {
 
     @Test
     public void contextLoads() {
-//        Mockito.when(testSubService.oneSub()).thenReturn("oneSub-mock");
-//        PowerMockito.mockStatic(TestUtils.class);
+        Mockito.when(testSubService.oneSub()).thenReturn("oneSub-mock");
+        PowerMockito.mockStatic(TestUtils.class);
         Mockito.doReturn("oneSub-spy").when(testSubService).oneSub();
-//        Mockito.when(TestUtils.fetchTwoStatic()).thenReturn("fetchTwoStatic-mock");
-//        Mockito.when(TestUtils.fetchTwoStatic2(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn("fetchTwoStatic2-mock");
+        Mockito.when(TestUtils.fetchTwoStatic()).thenReturn("fetchTwoStatic-mock");
+        Mockito.when(TestUtils.fetchTwoStatic2(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any())).thenReturn("fetchTwoStatic2-mock");
         TestSub2Service testSub2Service = context.getBean(TestSub2Service.class);
+        log.info(testSub2Service.twoSub());
+        log.info(testSub2Service.oneSub());
         log.info(testController.one());
         log.info(testController.two());
         log.info(testBitkylinApplication.abc());
