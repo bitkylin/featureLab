@@ -96,8 +96,6 @@ public class FindLargestValueInEachTreeRow {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS
      */
@@ -121,7 +119,6 @@ public class FindLargestValueInEachTreeRow {
             solve(res, node.right, level + 1);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * BFS

@@ -57,8 +57,23 @@ public class LongestSubstringWithoutRepeatingCharacters {
         Solution solution = new LongestSubstringWithoutRepeatingCharacters().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+
     class Solution {
+        public int lengthOfLongestSubstring(String s) {
+            int res = 0;
+            Set<Character> set = new HashSet<>();
+            for (int i = 0, j = 0; i < s.length(); i++) {
+                while (set.contains(s.charAt(i))) {
+                    set.remove(s.charAt(j++));
+                }
+                set.add(s.charAt(i));
+                res = Math.max(res, i - j + 1);
+            }
+            return res;
+        }
+    }
+
+    class Solution2 {
         public int lengthOfLongestSubstring(String s) {
             char[] arr = s.toCharArray();
             int res = 0;
@@ -73,6 +88,4 @@ public class LongestSubstringWithoutRepeatingCharacters {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

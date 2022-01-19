@@ -40,8 +40,6 @@ public class GenerateParentheses {
         Solution solution = new GenerateParentheses().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 最佳实践（1）
      * DFS，在使用数组时，无需剪枝
@@ -107,7 +105,6 @@ public class GenerateParentheses {
             res.add(builder.toString());
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DFS，剪枝写法有两种

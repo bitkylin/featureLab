@@ -182,8 +182,8 @@ if (arr[mid] <= target) {
 | 题目 | 项目链接                                                                                   | leetcode | 心得   |
 |---|----------------------------------------------------------------------------------------|---|------|
 | 322. 零钱兑换 | [CoinChange](leetcode4/CoinChange.java)                                                | [coin-change](https://leetcode-cn.com/problems/coin-change/) | DFS  |
-| 518. 零钱兑换 II | [CoinChange](leetcode4/CoinChange2.java)                                               | [coin-change](https://leetcode-cn.com/problems/coin-change/) | DP   |
-| 860. 柠檬水找零 | [LemonadeChange](leetcode4/LemonadeChange.java)                                        | [coin-change-2](https://leetcode-cn.com/problems/coin-change-2/) | DP   |
+| 518. 零钱兑换 II | [CoinChange2](leetcode4/CoinChange2.java)                                               | [coin-change-2](https://leetcode-cn.com/problems/coin-change-2/) | DP   |
+| 860. 柠檬水找零 | [LemonadeChange](leetcode4/LemonadeChange.java)                                        | [lemonade-change](https://leetcode-cn.com/problems/lemonade-change/) | DP   |
 | 455. 分发饼干 | [AssignCookies](leetcode4/AssignCookies.java)                                          | [assign-cookies](https://leetcode-cn.com/problems/assign-cookies/) | 贪心算法 |
 | 122. 买卖股票的最佳时机 II | [BestTimeToBuyAndSellStockIi](../section-6/leetcode6/BestTimeToBuyAndSellStockIi.java) | [best-time-to-buy-and-sell-stock-ii](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) | 贪心   |
 | 874. 模拟行走机器人 | [WalkingRobotSimulation](leetcode4/WalkingRobotSimulation.java)                        | [walking-robot-simulation](https://leetcode-cn.com/problems/walking-robot-simulation/) | 贪心   |

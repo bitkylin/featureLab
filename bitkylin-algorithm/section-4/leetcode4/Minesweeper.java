@@ -63,8 +63,6 @@ public class Minesweeper {
         Solution solution = new Minesweeper().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS
      */
@@ -89,7 +87,14 @@ public class Minesweeper {
             if (row < 0 || row > rowMax || column < 0 || column > columnMax || board[row][column] != 'E') {
                 return;
             }
-            int count = calc(board, rowMax, columnMax, row - 1, column - 1) + calc(board, rowMax, columnMax, row, column - 1) + calc(board, rowMax, columnMax, row + 1, column - 1) + calc(board, rowMax, columnMax, row - 1, column) + calc(board, rowMax, columnMax, row + 1, column) + calc(board, rowMax, columnMax, row - 1, column + 1) + calc(board, rowMax, columnMax, row, column + 1) + calc(board, rowMax, columnMax, row + 1, column + 1);
+            int count = calc(board, rowMax, columnMax, row - 1, column - 1)
+                    + calc(board, rowMax, columnMax, row, column - 1)
+                    + calc(board, rowMax, columnMax, row + 1, column - 1)
+                    + calc(board, rowMax, columnMax, row - 1, column)
+                    + calc(board, rowMax, columnMax, row + 1, column)
+                    + calc(board, rowMax, columnMax, row - 1, column + 1)
+                    + calc(board, rowMax, columnMax, row, column + 1)
+                    + calc(board, rowMax, columnMax, row + 1, column + 1);
 
             if (count != 0) {
                 board[row][column] = (char) (0x30 + count);
@@ -114,6 +119,62 @@ public class Minesweeper {
             return 1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * 另一种写法
+     */
+    class Solution2 {
+
+        private int[][] pointList = new int[][]{
+                {1, 0},
+                {1, 1},
+                {0, 1},
+                {-1, 1},
+                {-1, 0},
+                {-1, -1},
+                {0, -1},
+                {1, -1}
+        };
+
+        public char[][] updateBoard(char[][] board, int[] click) {
+            int x = click[0];
+            int y = click[1];
+            if (x < 0 || y < 0 || x >= board.length || y >= board[0].length) {
+                return board;
+            }
+            if (board[x][y] == 'M') {
+                board[x][y] = 'X';
+                return board;
+            }
+            solve(board, x, y);
+            return board;
+        }
+
+        private void solve(char[][] board, int x, int y) {
+            if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || board[x][y] != 'E') {
+                return;
+            }
+            int val = 0;
+            for (int[] point : pointList) {
+                val += calc(board, x, y, point);
+            }
+            if (val > 0) {
+                board[x][y] = (char) (val + 0x30);
+                return;
+            }
+            board[x][y] = 'B';
+            for (int[] point : pointList) {
+                solve(board, x + point[0], y + point[1]);
+            }
+        }
+
+        private int calc(char[][] board, int x, int y, int[] point) {
+            int x1 = x + point[0];
+            int y1 = y + point[1];
+            if (x1 < 0 || y1 < 0 || x1 >= board.length || y1 >= board[0].length) {
+                return 0;
+            }
+            return board[x1][y1] == 'M' ? 1 : 0;
+        }
+    }
 }
