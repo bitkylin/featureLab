@@ -3,19 +3,30 @@
 ## 心得
 
 ### i++
+
 - 在一个语句中，如果 i 被用到多次的话，i++ 会从左到右进行计算，并取其计算结果使用。
 - 在一个语句中，多种变量「i, j, k」分别执行 x++ 操作时，每种变量互不影响；单种变量自身互相影响，看前一条
 - 就算是在表达式中，也是先计算等号左边，再计算等号右边
 
 ### 位运算
+
 1. 正数的原码、反码、补码都一样
 2. 负数的反码 = 原码的符号位不变，其他位取反
 3. 负数的补码 = 反码+1
 4. 0的原码、反码、补码都是0
 5. 计算机以补码进行运算
 6. 加法运算中，符号位参与运算
+7. 参考文章：https://zhuanlan.zhihu.com/p/74022696
+
+| 数字        | 源码   | 补码                 |     |
+|-----------|------|--------------------|-----|
+| 0         | 0000 | 0000               |     |
+| 1         | 0001 | 0001               |     |
+| -1        | 1001 | 1111               |     |
+| 1 - 1 = 0 |  -   | 0001 + 1111 = 0000 |     |
 
 ## 位运算
+
 | 操作 | 符号 | 示例 | 备注 |
 |---|---|---|---|
 |左移|000011 << 3 = 011000|1 << 3 == 8; 3 << 3 == 24| |
@@ -35,32 +46,35 @@
 |其他| ~0 == -1 |||
 |---||||
 |要点||||
-|判断奇偶|x % 2  —> x & 1|||
+|判断奇偶|x % 2 —> x & 1|||
 |清零最低位的1|X = X & (X - 1)|||
 |得到最低位的1，其余位置0|X & -X|||
 |  其他  | x / 2 —> x >> 1|||
 |       |X & ~X == 0|||
 
-
 ## 布隆过滤器和LRU缓存
+
 todo
 
 ## 参考资料
+
 1. [Java运算符及运算符的优先级](https://www.jianshu.com/p/9d2204712097)
 
 ## LeetCode
 
 ### 位运算
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 191. 位1的个数 | [NumberOf1Bits](leetcode8/NumberOf1Bits.java) | [number-of-1-bits](https://leetcode-cn.com/problems/number-of-1-bits/) | 解法很多 |
 | 231. 2的幂 | [PowerOfTwo](leetcode8/PowerOfTwo.java) | [power-of-two](https://leetcode-cn.com/problems/power-of-two/) | 解法极简 |
 | 190. 颠倒二进制位 | [ReverseBits](leetcode8/ReverseBits.java) | [reverse-bits](https://leetcode-cn.com/problems/reverse-bits/) | 逐位颠倒 |
-|  | []() | []() |   |
+| 338. 比特位计数 |[CountingBits](leetcode8/CountingBits.java) | [counting-bits](https://leetcode-cn.com/problems/counting-bits/) |   |
 |  | []() | []() |   |
 |  |  |  |   |
 
 ### 布隆过滤器和LRU缓存
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 |  | []() | []() |   |
@@ -69,6 +83,7 @@ todo
 |  |  |  |   |
 
 ### 排序算法
+
 | 题目 | 项目链接 | leetcode | 心得 |
 |---|---|---|---|
 | 经典排序算法总结 | [SortMain](leetcode8/sort) | [经典排序算法及其 Java 实现](https://www.jianshu.com/p/8e708994e123) | 总结了所有的经典排序算法，此链接为入口方法 |
