@@ -86,5 +86,3 @@ public class Test {
 | 78. 子集 | [Subsets](leetcode3/Subsets.java) | [subsets](https://leetcode-cn.com/problems/subsets/) | 递归 |
 | 169. 多数元素 | [MajorityElement](leetcode3/MajorityElement.java) | [majority-element](https://leetcode-cn.com/problems/majority-element/) | 多种解法 |
 | 17. 电话号码的字母组合 | [LetterCombinationsOfAPhoneNumber](leetcode3/LetterCombinationsOfAPhoneNumber.java) | [letter-combinations-of-a-phone-number](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/) | 回溯算法 |
-| 51. N 皇后 | [NQueens](../section-7/leetcode7/NQueens.java) | [n-queens](https://leetcode-cn.com/problems/n-queens/) | 回溯 |
-| 52. N皇后 II | [NQueensIi](leetcode3/NQueensIi.java) | [n-queens-ii](https://leetcode-cn.com/problems/n-queens-ii/) | 回溯，相比上一题简化 |

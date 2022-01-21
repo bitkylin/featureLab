@@ -59,7 +59,28 @@ public class CountingBits {
         Solution solution = new CountingBits().new Solution();
     }
 
+    /**
+     * DP
+     * if (奇数)  DP( n ) = DP( n-1 ) + 1
+     * else      DP( n ) = DP( n/2 )
+     * 优质题解：https://leetcode-cn.com/problems/counting-bits/solution/hen-qing-xi-de-si-lu-by-duadua/
+     */
     class Solution {
+        public int[] countBits(int n) {
+            int[] dp = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                if (i % 2 == 1) {
+                    dp[i] = dp[i - 1] + 1;
+                } else {
+                    dp[i] = dp[i >> 1];
+                }
+            }
+            return dp;
+        }
+    }
+
+    class Solution2 {
+
         public int[] countBits(int n) {
             int[] res = new int[n + 1];
             for (int i = 0; i <= n; i++) {
