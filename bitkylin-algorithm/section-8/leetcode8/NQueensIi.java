@@ -63,11 +63,11 @@ public class NQueensIi {
             int res = 0;
             // 未填充的位置进行遍历
             while (bits != 0) {
-                // 选取末尾的1 ：x & -x
+                // 选取末位的1 : x & -x
                 int pick = bits & -bits;
                 // 下探到下一层
                 res += solve(n, column | pick, (left | pick) << 1, (right | pick) >>> 1, level + 1);
-                // 清零末尾的1 ：x & ( x-1 )
+                // 清零末位的1 : x & ( x-1 )
                 bits = bits & (bits - 1);
             }
             return res;
