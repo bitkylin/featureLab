@@ -46,65 +46,18 @@ package leetcode7;
 
 import java.util.*;
 
-/**
- * {@link leetcode4.WordLadder}
- */
 public class WordLadder {
 
     public static void main(String[] args) {
         new WordLadder().new Solution().ladderLength("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")));
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
-    /**
-     * BFS，队列实现BeginList，每次poll一个BeginWord判断WordList
-     */
-    class Solution {
-        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-            Deque<String> deque = new ArrayDeque<>();
-            deque.offer(beginWord);
-            int level = 1;
-            while (!deque.isEmpty()) {
-                if (deque.contains(endWord)) {
-                    return level;
-                }
-                int size = deque.size();
-                for (int i = 0; i < size; i++) {
-                    String s = deque.poll();
-                    Iterator<String> iterator = wordList.iterator();
-                    while (iterator.hasNext()) {
-                        String t = iterator.next();
-                        if (calc(s, t)) {
-                            iterator.remove();
-                            deque.offer(t);
-                        }
-                    }
-                }
-                level++;
-            }
-            return 0;
-        }
-
-        private boolean calc(String s, String t) {
-            int val = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) != t.charAt(i)) {
-                    val++;
-                }
-            }
-            return val == 1;
-        }
-    }
-
-//leetcode submit region end(Prohibit modification and deletion)
-
     /**
      * BFS，Set实现BeginSet，迭代wordList，每个word去BeginSet中比较
      * 注：题目要求是最短转换序列的单词数目，不是转换次数
      * 最优解法
      */
-    class Solution1 {
+    class Solution {
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {
             if (!wordList.contains(endWord)) {
                 return 0;
@@ -149,6 +102,46 @@ public class WordLadder {
                 }
             }
             return res == 1;
+        }
+    }
+
+    /**
+     * BFS，队列实现BeginList，每次poll一个BeginWord判断WordList
+     */
+    class Solution1 {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            Deque<String> deque = new ArrayDeque<>();
+            deque.offer(beginWord);
+            int level = 1;
+            while (!deque.isEmpty()) {
+                if (deque.contains(endWord)) {
+                    return level;
+                }
+                int size = deque.size();
+                for (int i = 0; i < size; i++) {
+                    String s = deque.poll();
+                    Iterator<String> iterator = wordList.iterator();
+                    while (iterator.hasNext()) {
+                        String t = iterator.next();
+                        if (calc(s, t)) {
+                            iterator.remove();
+                            deque.offer(t);
+                        }
+                    }
+                }
+                level++;
+            }
+            return 0;
+        }
+
+        private boolean calc(String s, String t) {
+            int val = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) != t.charAt(i)) {
+                    val++;
+                }
+            }
+            return val == 1;
         }
     }
 
@@ -202,6 +195,174 @@ public class WordLadder {
                 }
             }
             return cnt == 1;
+        }
+    }
+
+    /**
+     * BFS，队列实现
+     */
+    class Solution3 {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            Deque<String> deque = new ArrayDeque<>();
+            deque.offer(beginWord);
+            int level = 1;
+            while (!deque.isEmpty()) {
+                if (deque.contains(endWord)) {
+                    return level;
+                }
+                int size = deque.size();
+                for (int i = 0; i < size; i++) {
+                    String s = deque.poll();
+                    Iterator<String> iterator = wordList.iterator();
+                    while (iterator.hasNext()) {
+                        String t = iterator.next();
+                        if (calc(s, t)) {
+                            iterator.remove();
+                            deque.offer(t);
+                        }
+                    }
+                }
+                level++;
+            }
+            return 0;
+        }
+
+        private boolean calc(String s, String t) {
+            int val = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) != t.charAt(i)) {
+                    val++;
+                }
+            }
+            return val == 1;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * BFS，数组实现
+     */
+    class Solution4 {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            List<String> target = new ArrayList<>();
+            target.add(beginWord);
+            int level = 1;
+            while (!target.isEmpty()) {
+                if (target.contains(endWord)) {
+                    return level;
+                }
+                target = calc(wordList, target);
+                level++;
+            }
+            return 0;
+        }
+
+        private List<String> calc(List<String> wordList, List<String> target) {
+            List<String> res = new ArrayList<>();
+            Iterator<String> iterator = wordList.iterator();
+            while (iterator.hasNext()) {
+                String s = iterator.next();
+                for (int i = 0; i < target.size(); i++) {
+                    String t = target.get(i);
+                    if (solve(s, t)) {
+                        res.add(s);
+                        iterator.remove();
+                        break;
+                    }
+                }
+            }
+            return res;
+        }
+
+        private boolean solve(String o1, String o2) {
+            int val = 0;
+            for (int i = 0; i < o1.length(); i++) {
+                if (o1.charAt(i) != o2.charAt(i)) {
+                    val++;
+                }
+            }
+            return val == 1;
+        }
+    }
+
+    /**
+     * BFS，效率适中
+     * 双向BFS解法待补充
+     */
+    class Solution5 {
+
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            boolean[] visited = new boolean[wordList.size()];
+            Deque<String> deque = new ArrayDeque<>();
+            deque.offer(beginWord);
+            int level = 1;
+            while (!deque.isEmpty()) {
+                int size = deque.size();
+                for (int i = 0; i < size; i++) {
+                    String str = deque.poll();
+                    if (endWord.equals(str)) {
+                        return level;
+                    }
+                    for (int j = 0; j < wordList.size(); j++) {
+                        String word = wordList.get(j);
+                        if (visited[j]) {
+                            continue;
+                        }
+
+                        int diff = 0;
+                        for (int k = 0; k < word.length(); k++) {
+                            if (word.charAt(k) != str.charAt(k)) {
+                                diff++;
+                            }
+                        }
+                        if (diff == 1) {
+                            visited[j] = true;
+                            deque.offer(word);
+                        }
+                    }
+                }
+                level++;
+            }
+            return 0;
+        }
+    }
+
+    /**
+     * DFS + 回溯，超时，无法通过
+     */
+    class Solution6 {
+
+        int min = Integer.MAX_VALUE;
+
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            boolean[] visited = new boolean[wordList.size()];
+            resolve(beginWord, endWord, wordList, visited, 1);
+            return min == Integer.MAX_VALUE ? 0 : min;
+        }
+
+        private void resolve(String beginWord, String endWord, List<String> wordList, boolean[] visited, int level) {
+            if (endWord.equals(beginWord)) {
+                min = Math.min(min, level);
+                return;
+            }
+            for (int i = 0; i < wordList.size(); i++) {
+                if (visited[i]) {
+                    continue;
+                }
+                String word = wordList.get(i);
+                int diff = 0;
+                for (int j = 0; j < word.length(); j++) {
+                    if (word.charAt(j) != beginWord.charAt(j)) {
+                        diff++;
+                    }
+                }
+                if (diff == 1) {
+                    visited[i] = true;
+                    resolve(word, endWord, wordList, visited, level + 1);
+                    visited[i] = false;
+                }
+            }
         }
     }
 }

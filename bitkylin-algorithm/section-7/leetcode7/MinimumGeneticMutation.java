@@ -54,6 +54,7 @@
 package leetcode7;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MinimumGeneticMutation {
 
@@ -244,6 +245,98 @@ public class MinimumGeneticMutation {
                 }
             }
             return val;
+        }
+    }
+
+    /**
+     * DFS，回溯
+     */
+    class Solution5 {
+        public int minMutation(String start, String end, String[] bank) {
+            AtomicInteger res = new AtomicInteger(Integer.MAX_VALUE);
+            solve(start, end, bank, res, new HashSet<>(), 0);
+            return res.get() == Integer.MAX_VALUE ? -1 : res.get();
+        }
+
+        private void solve(String start, String end, String[] bank, AtomicInteger res, Set<String> set, int level) {
+            if (res.get() < level) {
+                return;
+            }
+            if (start.equals(end)) {
+                res.set(level);
+                return;
+            }
+            for (String b : bank) {
+                if (!set.contains(b) && match(start, b)) {
+                    set.add(b);
+                    solve(b, end, bank, res, set, level + 1);
+                    set.remove(b);
+                }
+            }
+        }
+
+        private boolean match(String start, String end) {
+            if (start.length() != end.length()) {
+                return false;
+            }
+            int count = 0;
+            for (int i = 0; i < start.length(); i++) {
+                if (start.charAt(i) != end.charAt(i)) {
+                    if (++count > 1) return false;
+                }
+            }
+            return count == 1;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * BFS，循环
+     */
+    class Solution6 {
+        public int minMutation(String start, String end, String[] bank) {
+            int step = 0;
+            List<String> src = new ArrayList<>();
+            List<String> bankList = new ArrayList<>(Arrays.asList(bank));
+
+            src.add(start);
+            while (!src.isEmpty()) {
+                if (src.contains(end)) {
+                    return step;
+                }
+                step++;
+                src = solve(src, bankList);
+            }
+            return -1;
+        }
+
+        private List<String> solve(List<String> src, List<String> bankList) {
+            List<String> res = new ArrayList<>();
+            for (String s : src) {
+                Iterator<String> bankIterator = bankList.iterator();
+                while (bankIterator.hasNext()) {
+                    String b = bankIterator.next();
+                    if (match(b, s)) {
+                        res.add(b);
+                        bankIterator.remove();
+                    }
+                }
+            }
+            return res;
+        }
+
+        private boolean match(String start, String end) {
+            if (start.length() != end.length()) {
+                return false;
+            }
+            int count = 0;
+            for (int i = 0; i < start.length(); i++) {
+                if (start.charAt(i) != end.charAt(i)) {
+                    if (++count > 1) return false;
+                }
+            }
+            return count == 1;
         }
     }
 }
