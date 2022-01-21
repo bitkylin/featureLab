@@ -45,8 +45,6 @@ public class PowxN {
         new PowxN().new Solution().myPow(2, 10);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 递归法
      */
@@ -63,7 +61,8 @@ public class PowxN {
             return res * res * myPow(x, n % 2);
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
+
+    // 后面的解法不看了
 
     /**
      * 循环法

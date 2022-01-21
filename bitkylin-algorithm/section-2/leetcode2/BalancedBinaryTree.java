@@ -70,7 +70,6 @@ public class BalancedBinaryTree {
             this.right = right;
         }
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
      * 自顶向下
@@ -108,7 +107,6 @@ public class BalancedBinaryTree {
             return value;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 自底向上

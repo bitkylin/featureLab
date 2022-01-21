@@ -53,7 +53,7 @@
  * <li><code>0 <= Node.val <= 1000</code></li>
  * <li><code>1 <= k <= sz</code></li>
  * </ul>
- * <div><div>Related Topics</div><div><li>递归</li><li>链表</li></div></div><br><div><li>👍 1354</li><li>👎 0</li></div>
+ * <div><div>Related Topics</div><div><li>递归</li><li>链表</li></div></div><br><div><li>👍 1443</li><li>👎 0</li></div>
  */
 
 package leetcode1;
@@ -63,7 +63,6 @@ public class ReverseNodesInKGroup {
     public static void main(String[] args) {
         Solution solution = new ReverseNodesInKGroup().new Solution();
     }
-
 
     public class ListNode {
         int val;
@@ -82,33 +81,29 @@ public class ReverseNodesInKGroup {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 参考题解，画图看一看就懂了，挺简单
      * https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/tu-jie-kge-yi-zu-fan-zhuan-lian-biao-by-user7208t/
      */
     class Solution {
         public ListNode reverseKGroup(ListNode head, int k) {
-            ListNode prev = new ListNode(-1);
+            ListNode prev = new ListNode();
             prev.next = head;
             head = prev;
-            ListNode end = prev;
-
             while (true) {
+                ListNode end = prev;
                 for (int i = 0; i < k && end != null; i++) end = end.next;
                 if (end == null) return head.next;
                 ListNode start = prev.next;
                 ListNode next = end.next;
                 end.next = null;
-                prev.next = resolve(start);
+                prev.next = reverse(start);
                 start.next = next;
                 prev = start;
-                end = start;
             }
         }
 
-        private ListNode resolve(ListNode node) {
+        private ListNode reverse(ListNode node) {
             ListNode prev = null;
             while (node != null) {
                 ListNode next = node.next;
@@ -119,6 +114,4 @@ public class ReverseNodesInKGroup {
             return prev;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

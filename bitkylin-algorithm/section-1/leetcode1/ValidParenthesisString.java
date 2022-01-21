@@ -1,126 +1,106 @@
-//给定一个只包含三种字符的字符串：（ ，） 和 *，写一个函数来检验这个字符串是否为有效字符串。有效字符串具有如下规则：
-//
-//
-// 任何左括号 ( 必须有相应的右括号 )。
-// 任何右括号 ) 必须有相应的左括号 ( 。
-// 左括号 ( 必须在对应的右括号之前 )。
-// * 可以被视为单个右括号 ) ，或单个左括号 ( ，或一个空字符串。
-// 一个空字符串也被视为有效字符串。
-//
-//
-// 示例 1:
-//
-//
-//输入: "()"
-//输出: True
-//
-//
-// 示例 2:
-//
-//
-//输入: "(*)"
-//输出: True
-//
-//
-// 示例 3:
-//
-//
-//输入: "(*))"
-//输出: True
-//
-//
-// 注意:
-//
-//
-// 字符串大小将在 [1，100] 范围内。
-//
-// Related Topics 字符串
-// 👍 167 👎 0
-
+/**
+ * <p>给定一个只包含三种字符的字符串：<code>（&nbsp;</code>，<code>）</code>&nbsp;和 <code>*</code>，写一个函数来检验这个字符串是否为有效字符串。有效字符串具有如下规则：</p>
+ *
+ * <ol>
+ * <li>任何左括号 <code>(</code>&nbsp;必须有相应的右括号 <code>)</code>。</li>
+ * <li>任何右括号 <code>)</code>&nbsp;必须有相应的左括号 <code>(</code>&nbsp;。</li>
+ * <li>左括号 <code>(</code> 必须在对应的右括号之前 <code>)</code>。</li>
+ * <li><code>*</code>&nbsp;可以被视为单个右括号 <code>)</code>&nbsp;，或单个左括号 <code>(</code>&nbsp;，或一个空字符串。</li>
+ * <li>一个空字符串也被视为有效字符串。</li>
+ * </ol>
+ *
+ * <p><strong>示例 1:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> &quot;()&quot;
+ * <strong>输出:</strong> True
+ * </pre>
+ *
+ * <p><strong>示例 2:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> &quot;(*)&quot;
+ * <strong>输出:</strong> True
+ * </pre>
+ *
+ * <p><strong>示例 3:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> &quot;(*))&quot;
+ * <strong>输出:</strong> True
+ * </pre>
+ *
+ * <p><strong>注意:</strong></p>
+ *
+ * <ol>
+ * <li>字符串大小将在 [1，100] 范围内。</li>
+ * </ol>
+ * <div><div>Related Topics</div><div><li>栈</li><li>贪心</li><li>字符串</li><li>动态规划</li></div></div><br><div><li>👍 439</li><li>👎 0</li></div>
+ */
 
 package leetcode1;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class ValidParenthesisString {
 
     public static void main(String[] args) {
-        new ValidParenthesisString().new Solution().checkValidString("(()(())()())*((()(())))*()(*)()()(*((()((*(*))))()*()(()((()(*((()))*(((())(())))*))(()*))(()*)");
+        Solution solution = new ValidParenthesisString().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * 双栈
+     * 双指针法，始终维护左括号数量的最大值和最小值
      */
     class Solution {
         public boolean checkValidString(String s) {
-            if (s == null || s.isEmpty()) {
-                return true;
-            }
-            Deque<Integer> left = new ArrayDeque<>();
-            Deque<Integer> blear = new ArrayDeque<>();
-
-            char[] arr = s.toCharArray();
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == '(') {
-                    left.push(i);
-                } else if (arr[i] == '*') {
-                    blear.push(i);
+            int left = 0;
+            int right = 0;
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (c == '(') {
+                    left++;
+                    right++;
+                } else if (c == ')') {
+                    left--;
+                    right--;
                 } else {
-                    if (!left.isEmpty()) {
-                        left.pop();
-                    } else if (!blear.isEmpty()) {
-                        blear.pop();
-                    } else {
-                        return false;
-                    }
+                    left--;
+                    right++;
                 }
-            }
-            while (!left.isEmpty() && !blear.isEmpty()) {
-                if (left.pop() > blear.pop()) {
+
+                left = Math.max(left, 0);
+                if (left > right) {
                     return false;
                 }
             }
-            return left.isEmpty();
+            return left == 0;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
-     * DFS
+     * DFS，该解法其实是正确的，不过最后几个刁钻的用例过不去
      */
     class Solution2 {
         public boolean checkValidString(String s) {
-            if (s == null || s.isEmpty()) {
-                return true;
-            }
-            char[] arr = s.toCharArray();
-            return recur(0, 0, arr);
+            return solve(s, 0, 0, 0);
         }
 
-        private boolean recur(int i, int left, char[] arr) {
-            if (i >= arr.length) {
-                return left == 0;
-            }
-            if (left < 0) {
+        private boolean solve(String s, int i, int left, int right) {
+            int n = s.length();
+            if (right > left) {
                 return false;
             }
-
-            char c = arr[i];
-            boolean res = false;
-            if (c == '(') {
-                res = res || recur(i + 1, left + 1, arr);
-            } else if (c == '*') {
-                res = res || recur(i + 1, left + 1, arr);
-                res = res || recur(i + 1, left - 1, arr);
-                res = res || recur(i + 1, left, arr);
-            } else {
-                res = res || recur(i + 1, left - 1, arr);
+            if (i == n) {
+                return left == right;
             }
-            return res;
+            char c = s.charAt(i);
+            if ('(' == c) {
+                return solve(s, i + 1, left + 1, right);
+            } else if (')' == c) {
+                return solve(s, i + 1, left, right + 1);
+            } else {
+                return solve(s, i + 1, left + 1, right)
+                        || solve(s, i + 1, left, right + 1)
+                        || solve(s, i + 1, left, right);
+            }
         }
     }
-
 }
