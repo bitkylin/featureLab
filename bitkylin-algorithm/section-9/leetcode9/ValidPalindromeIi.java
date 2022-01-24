@@ -1,28 +1,39 @@
-//给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
-//
-// 示例 1:
-//
-//
-//输入: "aba"
-//输出: True
-//
-//
-// 示例 2:
-//
-//
-//输入: "abca"
-//输出: True
-//解释: 你可以删除c字符。
-//
-//
-// 注意:
-//
-//
-// 字符串只包含从 a-z 的小写字母。字符串的最大长度是50000。
-//
-// Related Topics 字符串
-// 👍 282 👎 0
-
+/**
+ * <p>给定一个非空字符串 <code>s</code>，<strong>最多</strong>删除一个字符。判断是否能成为回文字符串。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> s = "aba"
+ * <strong>输出:</strong> true
+ * </pre>
+ *
+ * <p><strong>示例 2:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> s = "abca"
+ * <strong>输出:</strong> true
+ * <strong>解释:</strong> 你可以删除c字符。
+ * </pre>
+ *
+ * <p><strong>示例 3:</strong></p>
+ *
+ * <pre>
+ * <strong>输入:</strong> s = "abc"
+ * <strong>输出:</strong> false</pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示:</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= s.length <= 10<sup>5</sup></code></li>
+ * <li><code>s</code> 由小写英文字母组成</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>贪心</li><li>双指针</li><li>字符串</li></div></div><br><div><li>👍 443</li><li>👎 0</li></div>
+ */
 
 package leetcode9;
 
@@ -32,46 +43,64 @@ public class ValidPalindromeIi {
         Solution solution = new ValidPalindromeIi().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 跟随题意，判断两次回文串即可
      */
     class Solution {
 
+        public boolean validPalindrome(String s) {
+            int[] point = check(s, 0, s.length() - 1);
+            if (point == null) {
+                return true;
+            }
+            return check(s, point[0], point[1] - 1) == null
+                    || check(s, point[0] + 1, point[1]) == null;
+        }
+
+        private int[] check(String s, int left, int right) {
+            while (left < right) {
+                if (s.charAt(left) != s.charAt(right)) {
+                    return new int[]{left, right};
+                }
+                left++;
+                right--;
+            }
+            return null;
+        }
+    }
+
+    class Solution2 {
+
         private int left;
         private int right;
 
         public boolean validPalindrome(String s) {
-            if (isPalindrome(s)) {
+            if (check(s, 0, s.length() - 1)) {
                 return true;
             }
-            int left = this.left - 1;
-            int right = this.right + 1;
-            return isPalindrome(s.substring(left, right)) ||
-                    isPalindrome(s.substring(left + 1, right + 1));
+            int l = left;
+            int r = right;
+            return check(s, l, r - 1) || check(s, l + 1, r);
         }
 
-        public boolean isPalindrome(String s) {
-            if (s == null || s.length() <= 1) {
-                return true;
-            }
-            left = 0;
-            right = s.length() - 1;
+        private boolean check(String s, int l, int r) {
+            left = l;
+            right = r;
             while (left < right) {
-                if (s.charAt(left++) != s.charAt(right--)) {
+                if (s.charAt(left) != s.charAt(right)) {
                     return false;
                 }
+                left++;
+                right--;
             }
             return true;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 暴力法，超时
      */
-    class Solution2 {
+    class Solution3 {
         public boolean validPalindrome(String s) {
             if (isPalindrome(s)) {
                 return true;

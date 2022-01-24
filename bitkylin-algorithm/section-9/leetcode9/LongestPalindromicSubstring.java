@@ -62,6 +62,29 @@ public class LongestPalindromicSubstring {
      */
     class Solution {
         public String longestPalindrome(String s) {
+            int[] point = new int[3];
+            char[] arr = s.toCharArray();
+            boolean[] dp = new boolean[s.length()];
+            for (int x = 0; x < arr.length; x++) {
+                for (int y = 0; y <= x; y++) {
+                    if (x - y <= 1) {
+                        dp[y] = arr[x] == arr[y];
+                    } else {
+                        dp[y] = dp[y + 1] && (arr[x] == arr[y]);
+                    }
+                    if (dp[y] && ((x - y) > point[0])) {
+                        point[0] = x - y;
+                        point[1] = y;
+                        point[2] = x;
+                    }
+                }
+            }
+            return s.substring(point[1], point[2] + 1);
+        }
+    }
+
+    class Solution1_2 {
+        public String longestPalindrome(String s) {
             boolean[] dp = new boolean[s.length()];
             int max = 0;
             String res = "";
@@ -90,7 +113,7 @@ public class LongestPalindromicSubstring {
      * if y - x <= 1    DP[x][y] = DP[x+1][y-1] && equal(x, y)
      * else             DP[x][y] = equal(x, y)
      */
-    class Solution1 {
+    class Solution2_1 {
         public String longestPalindrome(String s) {
             boolean[][] dp = new boolean[s.length()][s.length()];
             int max = 0;
@@ -118,7 +141,7 @@ public class LongestPalindromicSubstring {
     /**
      * 二维DP，极限压缩
      */
-    class Solution2 {
+    class Solution2_2 {
         public String longestPalindrome(String s) {
             boolean[][] dp = new boolean[s.length()][s.length()];
             int max = 0;

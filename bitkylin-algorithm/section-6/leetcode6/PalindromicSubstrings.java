@@ -51,16 +51,16 @@ public class PalindromicSubstrings {
     class Solution {
         public int countSubstrings(String s) {
             int res = 0;
+            char[] arr = s.toCharArray();
             boolean[] dp = new boolean[s.length()];
-            for (int y = 0; y < s.length(); y++) {
-                for (int x = 0; x <= y; x++) {
-                    if ((y - x <= 1 && s.charAt(x) == s.charAt(y))
-                            || (y - x > 1 && dp[x + 1] && s.charAt(x) == s.charAt(y))) {
-                        dp[x] = true;
-                        res++;
+            for (int x = 0; x < arr.length; x++) {
+                for (int y = 0; y <= x; y++) {
+                    if (x - y <= 1) {
+                        dp[y] = arr[x] == arr[y];
                     } else {
-                        dp[x] = false;
+                        dp[y] = dp[y + 1] && (arr[x] == arr[y]);
                     }
+                    res += dp[y] ? 1 : 0;
                 }
             }
             return res;
@@ -74,7 +74,26 @@ public class PalindromicSubstrings {
      * if y - x <= 1    DP[x][y] = DP[x+1][y-1] && equal(x, y)
      * else             DP[x][y] = equal(x, y)
      */
-    class Solution1 {
+    class Solution2_1 {
+        public int countSubstrings(String s) {
+            int res = 0;
+            char[] arr = s.toCharArray();
+            boolean[][] dp = new boolean[s.length()][s.length()];
+            for (int x = 0; x < arr.length; x++) {
+                for (int y = x; y >= 0; y--) {
+                    if (x - y <= 1) {
+                        dp[x][y] = arr[x] == arr[y];
+                    } else {
+                        dp[x][y] = dp[x - 1][y + 1] && (arr[x] == arr[y]);
+                    }
+                    res += dp[x][y] ? 1 : 0;
+                }
+            }
+            return res;
+        }
+    }
+
+    class Solution2_2 {
         public int countSubstrings(String s) {
             int res = 0;
             boolean[][] dp = new boolean[s.length()][s.length()];
@@ -100,7 +119,7 @@ public class PalindromicSubstrings {
     /**
      * 二维DP，极限压缩
      */
-    class Solution2 {
+    class Solution2_3 {
         public int countSubstrings(String s) {
             int res = 0;
             boolean[][] dp = new boolean[s.length()][s.length()];
