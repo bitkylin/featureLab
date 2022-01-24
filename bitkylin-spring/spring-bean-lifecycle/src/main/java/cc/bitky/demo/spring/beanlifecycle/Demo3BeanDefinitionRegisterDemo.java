@@ -1,9 +1,7 @@
 package cc.bitky.demo.spring.beanlifecycle;
 
-import cc.bitky.demo.spring.beanlifecycle.entity.User;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 1. 直接将指定类注册BeanDefinition

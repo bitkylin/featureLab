@@ -1,10 +1,10 @@
 package cc.bitky.demo.spring.beanlifecycle;
 
-import cc.bitky.demo.spring.beanlifecycle.processor.MyDestructionAwareBeanPostProcessor;
-import cc.bitky.demo.spring.beanlifecycle.processor.MyInstantiationAwareBeanPostProcessor;
 import cc.bitky.demo.spring.beanlifecycle.entity.BaseUser;
 import cc.bitky.demo.spring.beanlifecycle.entity.User;
 import cc.bitky.demo.spring.beanlifecycle.entity.UserHolder;
+import cc.bitky.demo.spring.beanlifecycle.processor.MyDestructionAwareBeanPostProcessor;
+import cc.bitky.demo.spring.beanlifecycle.processor.MyInstantiationAwareBeanPostProcessor;
 import cc.bitky.demo.spring.beanlifecycle.util.KyLog;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
