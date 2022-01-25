@@ -31,30 +31,47 @@ package leetcode8;
 public class ReversePairs {
 
     public static void main(String[] args) {
-        new ReversePairs().new Solution();
+        new ReversePairs().new Solution().reversePairs(new int[]{1, 3, 2, 3, 1});
+        System.out.println();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     * 只是实现了归并排序，问题并未解决
+     * 先写出归并排序，上面加两笔就行了
      */
-    public class Solution {
+    class Solution {
 
         public int reversePairs(int[] nums) {
-            solve(nums, 0, nums.length - 1, new int[nums.length]);
-            return 0;
+            return solve(nums, 0, nums.length - 1, new int[nums.length]);
         }
 
-        public void solve(int[] nums, int left, int right, int[] tempArr) {
+        private int solve(int[] nums, int left, int right, int[] tempArr) {
+            int res = 0;
             if (right - left <= 1) {
+                res = calc(nums, left, left, right);
                 sort(nums, left, right);
-                return;
+                return res;
             }
             int mid = (right - left) / 2 + left;
-            solve(nums, left, mid, tempArr);
-            solve(nums, mid + 1, right, tempArr);
+            res += solve(nums, left, mid, tempArr);
+            res += solve(nums, mid + 1, right, tempArr);
+            res += calc(nums, left, mid, right);
             merge(nums, left, mid, right, tempArr);
+            return res;
+        }
+
+        private int calc(int[] nums, int left, int mid, int right) {
+            int res = 0;
+            int i = left;
+            int j = mid + 1;
+            while (i <= mid && j <= right) {
+                if (nums[i] / 2.0 > nums[j]) {
+                    res += mid - i + 1;
+                    j++;
+                } else {
+                    i++;
+                }
+            }
+            return res;
         }
 
         private void sort(int[] nums, int left, int right) {
@@ -87,6 +104,4 @@ public class ReversePairs {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
