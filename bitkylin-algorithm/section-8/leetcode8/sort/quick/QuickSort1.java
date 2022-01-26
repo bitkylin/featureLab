@@ -1,46 +1,46 @@
 package leetcode8.sort.quick;
 
-import leetcode8.sort.KySort;
+import leetcode8.sort.IKySort;
 
 import static leetcode8.sort.Utils.swap;
 
-public class QuickSort1 implements KySort {
+public class QuickSort1 implements IKySort {
 
     @Override
-    public void kySort(int[] a, int size) {
-        quickSort(a, 0, size - 1);
+    public void sort(int[] arr, int size) {
+        quickSort(arr, 0, size - 1);
     }
 
-    private void quickSort(int[] a, int left, int right) {
+    private void quickSort(int[] arr, int left, int right) {
         if (right - left < 2) {
-            if (a[left] > a[right])
-                swap(a, left, right);
+            if (arr[left] > arr[right])
+                swap(arr, left, right);
             return;
         }
-        int p = middleBy3(a, left, right);
+        int p = middleBy3(arr, left, right);
 
-        quickSort(a, left, p - 1);
-        quickSort(a, p + 1, right);
+        quickSort(arr, left, p - 1);
+        quickSort(arr, p + 1, right);
     }
 
-    private int middleBy3(int[] a, int left, int right) {
+    private int middleBy3(int[] arr, int left, int right) {
         int p = (left + right) / 2;
         int end = right;
 
-        if (a[left] > a[p]) swap(a, left, p);
-        if (a[left] > a[right]) swap(a, left, right);
-        if (a[p] > a[right]) swap(a, p, right);
+        if (arr[left] > arr[p]) swap(arr, left, p);
+        if (arr[left] > arr[right]) swap(arr, left, right);
+        if (arr[p] > arr[right]) swap(arr, p, right);
 
-        int temp = a[p];
-        swap(a, p, right);
+        int temp = arr[p];
+        swap(arr, p, right);
 
         while (true) {
-            while (a[++left] < temp) ;
-            while (a[--right] > temp) ;
+            while (arr[++left] < temp) ;
+            while (arr[--right] > temp) ;
             if (left >= right) break;
-            else swap(a, left, right);
+            else swap(arr, left, right);
         }
-        swap(a, left, end);
+        swap(arr, left, end);
         return left;
     }
 }

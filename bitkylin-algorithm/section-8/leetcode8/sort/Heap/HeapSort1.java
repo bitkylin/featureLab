@@ -1,19 +1,19 @@
 package leetcode8.sort.Heap;
 
-import leetcode8.sort.KySort;
+import leetcode8.sort.IKySort;
 
 import static leetcode8.sort.Utils.swap;
 
-public class HeapSort1 implements KySort {
+public class HeapSort1 implements IKySort {
 
     @Override
-    public void kySort(int[] a, int n) {
+    public void sort(int[] arr, int n) {
         for (int i = n / 2; i >= 0; i--) {
-            heapAdjust(a, i, n - 1);
+            heapAdjust(arr, i, n - 1);
         }
         for (int i = n - 1; i > 0; i--) {
-            swap(a, 0, i);
-            heapAdjust(a, 0, i - 1);
+            swap(arr, 0, i);
+            heapAdjust(arr, 0, i - 1);
         }
     }
 

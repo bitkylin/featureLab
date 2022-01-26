@@ -1,19 +1,19 @@
 package leetcode8.sort.bubble;
 
 
-import leetcode8.sort.KySort;
+import leetcode8.sort.IKySort;
 
 import static leetcode8.sort.Utils.swap;
 
 
-public class BubbleSort3 implements KySort {
+public class BubbleSort3 implements IKySort {
 
     @Override
-    public void kySort(int[] a, int size) {
+    public void sort(int[] arr, int size) {
         for (int i = size - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (a[j] > a[j + 1]) {
-                    swap(a, j, j + 1);
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
                 }
             }
         }

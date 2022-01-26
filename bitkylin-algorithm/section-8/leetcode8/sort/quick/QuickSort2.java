@@ -1,39 +1,39 @@
 package leetcode8.sort.quick;
 
-import leetcode8.sort.KySort;
+import leetcode8.sort.IKySort;
 
-public class QuickSort2 implements KySort {
+public class QuickSort2 implements IKySort {
 
     @Override
-    public void kySort(int[] a, int size) {
-        quickSort(a, 0, size - 1);
+    public void sort(int[] arr, int size) {
+        quickSort(arr, 0, size - 1);
     }
 
-    private void quickSort(int[] a, int left, int right) {
+    private void quickSort(int[] arr, int left, int right) {
         if (left >= right) return;
-        int temp = a[left];
+        int temp = arr[left];
         int i = left;
         int j = right;
 
         while (i < j) {
-            while (i < j && a[j] >= temp) {
+            while (i < j && arr[j] >= temp) {
                 j--;
             }
             if (i < j) {
-                a[i] = a[j];
+                arr[i] = arr[j];
                 i++;
             }
 
-            while (i < j && a[i] <= temp) {
+            while (i < j && arr[i] <= temp) {
                 i++;
             }
             if (i < j) {
-                a[j] = a[i];
+                arr[j] = arr[i];
                 j--;
             }
         }
-        a[i] = temp;
-        quickSort(a, left, i - 1);
-        quickSort(a, i + 1, right);
+        arr[i] = temp;
+        quickSort(arr, left, i - 1);
+        quickSort(arr, i + 1, right);
     }
 }

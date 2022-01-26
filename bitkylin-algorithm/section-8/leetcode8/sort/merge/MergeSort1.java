@@ -1,45 +1,45 @@
 package leetcode8.sort.merge;
 
-import leetcode8.sort.KySort;
+import leetcode8.sort.IKySort;
 
-public class MergeSort1 implements KySort {
+public class MergeSort1 implements IKySort {
 
     @Override
-    public void kySort(int[] a, int size) {
-        sort(a, 0, size - 1, new int[a.length]);
+    public void sort(int[] arr, int size) {
+        sort(arr, 0, size - 1, new int[arr.length]);
     }
 
-    private void sort(int[] a, int left, int right, int[] temp) {
+    private void sort(int[] arr, int left, int right, int[] temp) {
         if (left >= right) {
             return;
         }
         int mid = (left + right) / 2;
-        sort(a, left, mid, temp);
-        sort(a, mid + 1, right, temp);
-        merge(a, left, mid, right, temp);
+        sort(arr, left, mid, temp);
+        sort(arr, mid + 1, right, temp);
+        merge(arr, left, mid, right, temp);
     }
 
-    private void merge(int[] a, int left, int mid, int right, int[] temp) {
+    private void merge(int[] arr, int left, int mid, int right, int[] temp) {
         int k = left;
         int i = left;
         int j = mid + 1;
 
         while (i <= mid && j <= right) {
-            if (a[i] < a[j]) {
-                temp[k++] = a[i++];
+            if (arr[i] < arr[j]) {
+                temp[k++] = arr[i++];
             } else {
-                temp[k++] = a[j++];
+                temp[k++] = arr[j++];
             }
         }
         while (i <= mid) {
-            temp[k++] = a[i++];
+            temp[k++] = arr[i++];
         }
         while (j <= right) {
-            temp[k++] = a[j++];
+            temp[k++] = arr[j++];
         }
 
         while (left <= right) {
-            a[left] = temp[left];
+            arr[left] = temp[left];
             left++;
         }
     }
