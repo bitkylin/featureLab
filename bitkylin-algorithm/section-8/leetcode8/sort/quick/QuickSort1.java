@@ -2,8 +2,6 @@ package leetcode8.sort.quick;
 
 import leetcode8.sort.IKySort;
 
-import static leetcode8.sort.Utils.swap;
-
 public class QuickSort1 implements IKySort {
 
     @Override

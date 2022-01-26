@@ -28,8 +28,8 @@ public class SortMain {
 
     public static void main(String[] args) {
         randomDemoArr();
-//        sort(new ShellSort1());
-        sortAll();
+        sort(new DemoSort1());
+//        sortAll();
     }
 
     private static void sortAll() {

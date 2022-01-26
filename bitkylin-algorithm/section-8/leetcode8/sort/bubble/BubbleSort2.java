@@ -2,8 +2,9 @@ package leetcode8.sort.bubble;
 
 import leetcode8.sort.IKySort;
 
-import static leetcode8.sort.Utils.swap;
-
+/**
+ * 从后到前循环，将最小值往前排
+ */
 public class BubbleSort2 implements IKySort {
 
     @Override

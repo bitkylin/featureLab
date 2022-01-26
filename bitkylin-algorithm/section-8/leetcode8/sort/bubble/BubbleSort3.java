@@ -3,8 +3,6 @@ package leetcode8.sort.bubble;
 
 import leetcode8.sort.IKySort;
 
-import static leetcode8.sort.Utils.swap;
-
 
 public class BubbleSort3 implements IKySort {
 

@@ -2,8 +2,6 @@ package leetcode8.sort.Heap;
 
 import leetcode8.sort.IKySort;
 
-import static leetcode8.sort.Utils.swap;
-
 public class HeapSort1 implements IKySort {
 
     @Override
