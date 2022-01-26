@@ -78,6 +78,11 @@ public class DecodeWays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
 
+        /**
+         * DP:
+         * dp(n) = dp(n-1) * calc(n, n)
+         *       + dp(n-2) * calc(n-1, n)
+         */
         public int numDecodings(String s) {
             int[] dp = new int[s.length()];
             if (s.length() >= 1) dp[0] = solve(s, 0, 0);

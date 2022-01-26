@@ -1,26 +1,35 @@
-//编写一个函数来查找字符串数组中的最长公共前缀。
-//
-// 如果不存在公共前缀，返回空字符串 ""。
-//
-// 示例 1:
-//
-// 输入: ["flower","flow","flight"]
-//输出: "fl"
-//
-//
-// 示例 2:
-//
-// 输入: ["dog","racecar","car"]
-//输出: ""
-//解释: 输入不存在公共前缀。
-//
-//
-// 说明:
-//
-// 所有输入只包含小写字母 a-z 。
-// Related Topics 字符串
-// 👍 1341 👎 0
-
+/**
+ * <p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+ *
+ * <p>如果不存在公共前缀，返回空字符串&nbsp;<code>""</code>。</p>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>strs = ["flower","flow","flight"]
+ * <strong>输出：</strong>"fl"
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>strs = ["dog","racecar","car"]
+ * <strong>输出：</strong>""
+ * <strong>解释：</strong>输入不存在公共前缀。</pre>
+ *
+ * <p>&nbsp;</p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 &lt;= strs.length &lt;= 200</code></li>
+ * <li><code>0 &lt;= strs[i].length &lt;= 200</code></li>
+ * <li><code>strs[i]</code> 仅由小写英文字母组成</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>字符串</li></div></div><br><div><li>👍 1987</li><li>👎 0</li></div>
+ */
 
 package leetcode9;
 
@@ -30,8 +39,27 @@ public class LongestCommonPrefix {
         Solution solution = new LongestCommonPrefix().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        public String longestCommonPrefix(String[] strs) {
+            int max = Integer.MAX_VALUE;
+            for (String str : strs) {
+                max = Math.min(max, str.length());
+            }
+            int i = 0;
+            while (i < max) {
+                char c = strs[0].charAt(i);
+                for (String str : strs) {
+                    if (str.charAt(i) != c) {
+                        return strs[0].substring(0, i);
+                    }
+                }
+                i++;
+            }
+            return strs[0].substring(0, max);
+        }
+    }
+
+    class Solution2 {
         public String longestCommonPrefix(String[] strs) {
             if (strs == null || strs.length == 0) {
                 return "";
@@ -53,7 +81,4 @@ public class LongestCommonPrefix {
             return builder.toString();
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
-
 }
