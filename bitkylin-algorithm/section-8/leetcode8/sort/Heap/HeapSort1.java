@@ -21,11 +21,11 @@ public class HeapSort1 implements IKySort {
      */
     private void heapAdjust(int[] arr, int i, int n) {
         int temp = arr[i];
-        for (int child = i * 2 + 1; child <= n; child = i * 2 + 1) {
+        for (int child = 2 * i + 1; child <= n; child = 2 * i + 1) {
             if (child < n && arr[child] < arr[child + 1]) {
                 child++;
             }
-            if (temp > arr[child]) {
+            if (arr[child] < temp) {
                 break;
             }
             arr[i] = arr[child];

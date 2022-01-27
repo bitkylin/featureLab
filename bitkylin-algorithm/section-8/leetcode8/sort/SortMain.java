@@ -28,7 +28,7 @@ public class SortMain {
 
     public static void main(String[] args) {
         randomDemoArr();
-        sort(new QuickSort1());
+        sort(new DemoSort1());
 //        sortAll();
     }
 
