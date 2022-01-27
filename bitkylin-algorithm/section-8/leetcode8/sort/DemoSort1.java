@@ -4,39 +4,27 @@ public class DemoSort1 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {
-        if (size > 1) {
-            quickSort(arr, 0, size - 1);
+        for (int i = size / 2; i >= 0; i--) {
+            adjust(arr, i, size - 1);
+        }
+        for (int i = size - 1; i > 0; i--) {
+            swap(arr, i, 0);
+            adjust(arr, 0, i);
         }
     }
 
-    private void quickSort(int[] arr, int left, int right) {
-        if (right - left <= 1) {
-            if (arr[left] > arr[right]) {
-                swap(arr, left, right);
+    private void adjust(int[] arr, int i, int n) {
+        int temp = arr[i];
+        for (int child = 2 * i + 1; child <= n; child = 2 * i + 1) {
+            if (child < n && arr[child + 1] > arr[child]) {
+                child++;
             }
-            return;
+            if (arr[child] < arr[i]) {
+                break;
+            }
+            arr[i] = arr[child];
+            i = child;
         }
-        int mid = calc(arr, left, right);
-        quickSort(arr, left, mid - 1);
-        quickSort(arr, mid + 1, right);
-    }
-
-    private int calc(int[] arr, int left, int right) {
-        int mid = (right - left) / 2 + left;
-        if (arr[left] > arr[mid]) swap(arr, left, mid);
-        if (arr[mid] > arr[right]) swap(arr, mid, right);
-        if (arr[left] > arr[right]) swap(arr, left, right);
-        int temp = arr[mid];
-        int end = right;
-        swap(arr, mid, right);
-
-        while (true) {
-            while (arr[++left] < temp) ;
-            while (arr[--right] > temp) ;
-            if (left >= right) break;
-            else swap(arr, left, right);
-        }
-        swap(arr, left, end);
-        return left;
+        arr[i] = temp;
     }
 }
