@@ -6,14 +6,14 @@ public class MergeSort1 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {
-        sort(arr, 0, size - 1, new int[arr.length]);
+        sort(arr, 0, size - 1, new int[size]);
     }
 
     private void sort(int[] arr, int left, int right, int[] temp) {
-        if (left >= right) {
+        if (right == left) {
             return;
         }
-        int mid = (left + right) / 2;
+        int mid = (right - left) / 2 + left;
         sort(arr, left, mid, temp);
         sort(arr, mid + 1, right, temp);
         merge(arr, left, mid, right, temp);
@@ -37,10 +37,10 @@ public class MergeSort1 implements IKySort {
         while (j <= right) {
             temp[k++] = arr[j++];
         }
-
-        while (left <= right) {
-            arr[left] = temp[left];
-            left++;
-        }
+        System.arraycopy(temp, left, arr, left, right - left + 1);
+//        while (left <= right) {
+//            arr[left] = temp[left];
+//            left++;
+//        }
     }
 }

@@ -6,31 +6,34 @@ public class QuickSort1 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {
-        quickSort(arr, 0, size - 1);
+        if (size > 1) {
+            quickSort(arr, 0, size - 1);
+        }
     }
 
     private void quickSort(int[] arr, int left, int right) {
-        if (right - left < 2) {
-            if (arr[left] > arr[right])
+        if (right - left <= 1) {
+            if (arr[left] > arr[right]) {
                 swap(arr, left, right);
+            }
             return;
         }
-        int p = middleBy3(arr, left, right);
+        int mid = calc(arr, left, right);
 
-        quickSort(arr, left, p - 1);
-        quickSort(arr, p + 1, right);
+        quickSort(arr, left, mid - 1);
+        quickSort(arr, mid + 1, right);
     }
 
-    private int middleBy3(int[] arr, int left, int right) {
-        int p = (left + right) / 2;
-        int end = right;
+    private int calc(int[] arr, int left, int right) {
+        int mid = (right - left) / 2 + left;
 
-        if (arr[left] > arr[p]) swap(arr, left, p);
+        if (arr[left] > arr[mid]) swap(arr, left, mid);
         if (arr[left] > arr[right]) swap(arr, left, right);
-        if (arr[p] > arr[right]) swap(arr, p, right);
+        if (arr[mid] > arr[right]) swap(arr, mid, right);
 
-        int temp = arr[p];
-        swap(arr, p, right);
+        int temp = arr[mid];
+        int end = right;
+        swap(arr, mid, right);
 
         while (true) {
             while (arr[++left] < temp) ;

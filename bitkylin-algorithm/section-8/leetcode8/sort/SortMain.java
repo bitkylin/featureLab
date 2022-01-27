@@ -28,7 +28,7 @@ public class SortMain {
 
     public static void main(String[] args) {
         randomDemoArr();
-        sort(new DemoSort1());
+        sort(new QuickSort1());
 //        sortAll();
     }
 
@@ -55,10 +55,10 @@ public class SortMain {
 
     private static void sort(IKySort sorter) {
         log("\n\n\n\n\n\n排序开始: " + sorter.getClass().getSimpleName());
-        for (int[] actual : demoArr) {
-            int[] expected = Arrays.copyOf(actual, actual.length);
+        for (int[] arr : demoArr) {
+            int[] expected = Arrays.copyOf(arr, arr.length);
             Arrays.sort(expected);
-            if (doSort(sorter, expected, actual)) {
+            if (doSort(sorter, expected, arr)) {
                 log("成功" + display("", expected));
             } else {
                 return;
@@ -66,13 +66,13 @@ public class SortMain {
         }
     }
 
-    private static boolean doSort(IKySort sorter, int[] expected, int[] actual) {
-        int[] arr = Arrays.copyOf(actual, actual.length);
-        sorter.sort(arr, arr.length);
-        if (!Arrays.equals(expected, arr)) {
+    private static boolean doSort(IKySort sorter, int[] expected, int[] arr) {
+        int[] sorted = Arrays.copyOf(arr, arr.length);
+        sorter.sort(sorted, sorted.length);
+        if (!Arrays.equals(expected, sorted)) {
             log("\n---- " + "排序异常: " + sorter.getClass().getSimpleName() + " ----");
+            log(display("sorted", sorted));
             log(display("expected", expected));
-            log(display("arr", arr));
             log(display("actual", arr));
             throw new RuntimeException();
 //            return false;
