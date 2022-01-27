@@ -19,18 +19,18 @@ public class HeapSort1 implements IKySort {
      * @param i 父节点索引
      * @param n 尾节点索引
      */
-    private void heapAdjust(int[] a, int i, int n) {
-        int temp = a[i];
+    private void heapAdjust(int[] arr, int i, int n) {
+        int temp = arr[i];
         for (int child = i * 2 + 1; child <= n; child = i * 2 + 1) {
-            if (child < n && a[child] < a[child + 1]) {
+            if (child < n && arr[child] < arr[child + 1]) {
                 child++;
             }
-            if (temp > a[child]) {
+            if (temp > arr[child]) {
                 break;
             }
-            a[i] = a[child];
+            arr[i] = arr[child];
             i = child;
         }
-        a[i] = temp;
+        arr[i] = temp;
     }
 }
