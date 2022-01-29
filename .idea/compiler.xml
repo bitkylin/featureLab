@@ -15,11 +15,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bitkylin-mq-client-consumer" />
         <module name="spring-bean-lifecycle" />
+        <module name="bitkylin-mq-client-consumer" />
         <module name="bitkylin-mq-client-producer" />
-        <module name="bitkylin-mq-api" />
         <module name="bitky-demo-account-common" />
+        <module name="bitkylin-mq-api" />
         <module name="bitky-demo-common" />
         <module name="bitkylin-mq-server" />
         <module name="bitkylin-print-spring-boot-starter" />
