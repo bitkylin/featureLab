@@ -1,62 +1,121 @@
-//给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
-//
-// 一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
-//例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。
-//
-//
-// 若这两个字符串没有公共子序列，则返回 0。
-//
-//
-//
-// 示例 1:
-//
-// 输入：text1 = "abcde", text2 = "ace"
-//输出：3
-//解释：最长公共子序列是 "ace"，它的长度为 3。
-//
-//
-// 示例 2:
-//
-// 输入：text1 = "abc", text2 = "abc"
-//输出：3
-//解释：最长公共子序列是 "abc"，它的长度为 3。
-//
-//
-// 示例 3:
-//
-// 输入：text1 = "abc", text2 = "def"
-//输出：0
-//解释：两个字符串没有公共子序列，返回 0。
-//
-//
-//
-//
-// 提示:
-//
-//
-// 1 <= text1.length <= 1000
-// 1 <= text2.length <= 1000
-// 输入的字符串只含有小写英文字符。
-//
-// Related Topics 动态规划
-// 👍 250 👎 0
-
+/**
+ * <p>给定两个字符串 <code>text1</code> 和 <code>text2</code>，返回这两个字符串的最长 <strong>公共子序列</strong> 的长度。如果不存在 <strong>公共子序列</strong> ，返回 <code>0</code> 。</p>
+ *
+ * <p>一个字符串的 <strong>子序列</strong><em> </em>是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。</p>
+ *
+ * <ul>
+ * <li>例如，<code>"ace"</code> 是 <code>"abcde"</code> 的子序列，但 <code>"aec"</code> 不是 <code>"abcde"</code> 的子序列。</li>
+ * </ul>
+ *
+ * <p>两个字符串的 <strong>公共子序列</strong> 是这两个字符串所共同拥有的子序列。</p>
+ *
+ * <p> </p>
+ *
+ * <p><strong>示例 1：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>text1 = "abcde", text2 = "ace"
+ * <strong>输出：</strong>3
+ * <strong>解释：</strong>最长公共子序列是 "ace" ，它的长度为 3 。
+ * </pre>
+ *
+ * <p><strong>示例 2：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>text1 = "abc", text2 = "abc"
+ * <strong>输出：</strong>3
+ * <strong>解释：</strong>最长公共子序列是 "abc" ，它的长度为 3 。
+ * </pre>
+ *
+ * <p><strong>示例 3：</strong></p>
+ *
+ * <pre>
+ * <strong>输入：</strong>text1 = "abc", text2 = "def"
+ * <strong>输出：</strong>0
+ * <strong>解释：</strong>两个字符串没有公共子序列，返回 0 。
+ * </pre>
+ *
+ * <p> </p>
+ *
+ * <p><strong>提示：</strong></p>
+ *
+ * <ul>
+ * <li><code>1 <= text1.length, text2.length <= 1000</code></li>
+ * <li><code>text1</code> 和 <code>text2</code> 仅由小写英文字符组成。</li>
+ * </ul>
+ * <div><div>Related Topics</div><div><li>字符串</li><li>动态规划</li></div></div><br><div><li>👍 824</li><li>👎 0</li></div>
+ */
 
 package leetcode6;
 
 public class LongestCommonSubsequence {
 
     public static void main(String[] args) {
-        Solution solution = new LongestCommonSubsequence().new Solution();
+        new LongestCommonSubsequence().new Solution().longestCommonSubsequence("abcde", "ace");
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    /**
+     * DP:
+     * if arr[x] == arr[y]: dp[x][y] = dp[x-1][y-1] + 1
+     * else                 dp[x][y] = Max( dp[x-1][y], dp[x][y-1] )
+     */
+    class Solution {
+        public int longestCommonSubsequence(String text1, String text2) {
+            text1 = " " + text1;
+            text2 = " " + text2;
+            int[][] dp = new int[text1.length()][text2.length()];
+            for (int x = 1; x < text1.length(); x++) {
+                for (int y = 1; y < text2.length(); y++) {
+                    if (text1.charAt(x) == text2.charAt(y)) {
+                        dp[x][y] = dp[x - 1][y - 1] + 1;
+                    } else {
+                        dp[x][y] = Math.max(dp[x - 1][y], dp[x][y - 1]);
+                    }
+                }
+            }
+            return dp[text1.length() - 1][text2.length() - 1];
+        }
+    }
+
+    class Solution2 {
+        public int longestCommonSubsequence(String text1, String text2) {
+            int[][] dp = new int[text1.length()][text2.length()];
+            if (text1.charAt(0) == text2.charAt(0)) {
+                dp[0][0] = 1;
+            }
+            for (int x = 1; x < text1.length(); x++) {
+                if (text1.charAt(x) == text2.charAt(0)) {
+                    dp[x][0] = 1;
+                } else {
+                    dp[x][0] = dp[x - 1][0];
+                }
+            }
+            for (int y = 1; y < text2.length(); y++) {
+                if (text2.charAt(y) == text1.charAt(0)) {
+                    dp[0][y] = 1;
+                } else {
+                    dp[0][y] = dp[0][y - 1];
+
+                }
+            }
+            for (int x = 1; x < text1.length(); x++) {
+                for (int y = 1; y < text2.length(); y++) {
+                    if (text1.charAt(x) == text2.charAt(y)) {
+                        dp[x][y] = dp[x - 1][y - 1] + 1;
+                    } else {
+                        dp[x][y] = Math.max(dp[x - 1][y], dp[x][y - 1]);
+                    }
+                }
+            }
+            return dp[text1.length() - 1][text2.length() - 1];
+        }
+    }
 
     /**
      * 两个字符串的问题，都可以转化为二维DP数组的形式「做题经验」
      * dp状态矩阵始终跟踪arr[x-1][y-1]
      */
-    class Solution {
+    class Solution3 {
         public int longestCommonSubsequence(String text1, String text2) {
             if (text1.length() == 0 || text2.length() == 0) {
                 return 0;
@@ -78,12 +137,11 @@ public class LongestCommonSubsequence {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 对于边界条件进行额外判断
      */
-    class Solution2 {
+    class Solution4 {
         public int longestCommonSubsequence(String text1, String text2) {
             if (text1.length() == 0 || text2.length() == 0) {
                 return 0;
@@ -111,3 +169,4 @@ public class LongestCommonSubsequence {
         }
     }
 }
+
