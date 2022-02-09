@@ -22,21 +22,16 @@ public class QuickSort1 implements IKySort {
     }
 
     private int midBy3(int[] arr, int left, int right) {
-        int mid = (right - left) / 2 + left;
-
-        if (arr[left] > arr[right]) swap(arr, left, right);
-        if (arr[left] > arr[mid]) swap(arr, left, mid);
-        if (arr[mid] > arr[right]) swap(arr, mid, right);
-
-        int temp = arr[mid];
+        int temp = arr[right];
         int end = right;
-        swap(arr, mid, right);
+        right--;
 
         while (left < right) {
-            while (arr[++left] < temp) ;
-            while (arr[--right] > temp) ;
-            swap(arr, left, end);
+            while (arr[left] < temp) left++;
+            while (arr[right] > temp) right--;
+            swap(arr, left, right);
         }
+        swap(arr, left, end);
         return left;
     }
 }
