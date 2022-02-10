@@ -77,8 +77,6 @@ public class LinkedListCycleIi {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 快慢指针「比较难」
      * 快慢指针第一次相遇后：
@@ -105,7 +103,6 @@ public class LinkedListCycleIi {
             return null;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * hash法

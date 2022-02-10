@@ -78,6 +78,7 @@ public class LinkedListCycle {
 
     /**
      * 快慢指针
+     * 注：对相等条件的判断放在 while 循环的最后
      */
     public class Solution {
         public boolean hasCycle(ListNode head) {

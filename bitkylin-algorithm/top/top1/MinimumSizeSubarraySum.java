@@ -49,6 +49,9 @@
 
 package top1;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class MinimumSizeSubarraySum {
 
     public static void main(String[] args) {
@@ -73,5 +76,27 @@ public class MinimumSizeSubarraySum {
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
+
+    /**
+     * 滑动窗口模型
+     */
+    class Solution2 {
+        public int minSubArrayLen(int target, int[] nums) {
+            Deque<Integer> deque = new ArrayDeque<>();
+            int sum = 0;
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i < nums.length; i++) {
+                deque.offer(nums[i]);
+                sum += nums[i];
+                while (sum >= target) {
+                    min = Math.min(min, deque.size());
+                    if (deque.isEmpty()) break;
+                    int val = deque.poll();
+                    sum -= val;
+                }
+            }
+            return min == Integer.MAX_VALUE ? 0 : min;
+        }
+    }
 
 }

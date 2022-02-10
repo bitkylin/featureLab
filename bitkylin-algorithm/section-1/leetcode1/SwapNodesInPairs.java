@@ -76,6 +76,8 @@ public class SwapNodesInPairs {
                 prev.next = b;
                 b.next = a;
                 a.next = next;
+
+                // 下面这行代码极其容易写错
                 prev = a;
             }
             return head.next;
