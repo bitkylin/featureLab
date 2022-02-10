@@ -2,7 +2,7 @@ package leetcode8.sort.quick;
 
 import leetcode8.sort.IKySort;
 
-public class QuickSort1_1 implements IKySort {
+public class QuickSort2_1 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {
