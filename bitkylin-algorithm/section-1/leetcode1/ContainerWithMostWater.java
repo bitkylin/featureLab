@@ -55,14 +55,25 @@ public class ContainerWithMostWater {
         Solution solution = new ContainerWithMostWater().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxArea(int[] height) {
+            int max = 0;
+            for (int left = 0, right = height.length - 1; left < right; ) {
+                int h = Math.min(height[left], height[right]);
+                max = Math.max((right - left) * h, max);
+                if (height[left] < height[right]) left++;
+                else right--;
+            }
+            return max;
+        }
+    }
 
     /**
      * 左右夹逼 O(n)，易理解的解法
      * 双指针法，易理解的证明：
      * https://leetcode-cn.com/problems/container-with-most-water/solution/on-shuang-zhi-zhen-jie-fa-li-jie-zheng-que-xing-tu/
      */
-    class Solution {
+    class Solution1 {
         public int maxArea(int[] height) {
             int i = 0;
             int j = height.length - 1;
@@ -96,8 +107,6 @@ public class ContainerWithMostWater {
             return area;
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 暴力遍历 O(n2)

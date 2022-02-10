@@ -58,8 +58,6 @@ public class RotateArray {
         Solution solution = new RotateArray().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 数组多次翻转
      */
@@ -83,8 +81,6 @@ public class RotateArray {
             nums[j] = k;
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 使用额外的数组

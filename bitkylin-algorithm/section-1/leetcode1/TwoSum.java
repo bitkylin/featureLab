@@ -55,12 +55,23 @@ public class TwoSum {
         Solution solution = new TwoSum().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (map.containsKey(target - nums[i])) {
+                    return new int[]{i, map.get(target - nums[i])};
+                }
+                map.put(nums[i], i);
+            }
+            return new int[0];
+        }
+    }
 
     /**
      * hash法
      */
-    class Solution {
+    class Solution2 {
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
@@ -74,13 +85,10 @@ public class TwoSum {
         }
     }
 
-//leetcode submit region end(Prohibit modification and deletion)
-
-
     /**
      * 两层循环，暴力遍历
      */
-    class Solution2 {
+    class Solution3 {
         public int[] twoSum(int[] nums, int target) {
             for (int i = 0; i < nums.length - 1; i++) {
                 for (int j = i + 1; j < nums.length; j++) {

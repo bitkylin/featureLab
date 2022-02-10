@@ -67,8 +67,6 @@ public class ReverseLinkedList {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 懵逼的话，画个图，理解理解
      * 常规三指针法
@@ -85,6 +83,4 @@ public class ReverseLinkedList {
             return prev;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

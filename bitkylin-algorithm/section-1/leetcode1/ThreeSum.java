@@ -67,8 +67,6 @@ public class ThreeSum {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 此解法是三数之和的基础
      */

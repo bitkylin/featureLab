@@ -49,8 +49,6 @@ public class PlusOne {
         Solution solution = new PlusOne().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class Solution {
         public int[] plusOne(int[] digits) {
             for (int i = digits.length - 1; i >= 0; i--) {
@@ -65,6 +63,4 @@ public class PlusOne {
             return digits;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

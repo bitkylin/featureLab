@@ -23,8 +23,6 @@ public class MoveZeroes {
         Solution solution = new MoveZeroes().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 交换
      */
@@ -46,7 +44,6 @@ public class MoveZeroes {
             nums[j] = k;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 两遍循环

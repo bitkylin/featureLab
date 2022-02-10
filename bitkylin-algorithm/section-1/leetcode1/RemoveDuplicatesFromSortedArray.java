@@ -63,7 +63,6 @@ public class RemoveDuplicatesFromSortedArray {
         Solution solution = new RemoveDuplicatesFromSortedArray().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeDuplicates(int[] nums) {
             int j = 1;
@@ -75,6 +74,4 @@ public class RemoveDuplicatesFromSortedArray {
             return j;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

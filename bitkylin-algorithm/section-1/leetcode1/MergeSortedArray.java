@@ -61,8 +61,6 @@ public class MergeSortedArray {
         Solution solution = new MergeSortedArray().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 要细心，要一个一个变量检查，不要写错了
      */
@@ -77,6 +75,19 @@ public class MergeSortedArray {
             System.arraycopy(nums2, 0, nums1, 0, n + 1);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    class Solution2 {
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+            int k = nums1.length - 1;
+            m--;
+            n--;
+            while (m >= 0 && n >= 0) {
+                if (nums1[m] > nums2[n]) nums1[k--] = nums1[m--];
+                else nums1[k--] = nums2[n--];
+            }
+            while (n >= 0) {
+                nums1[k--] = nums2[n--];
+            }
+        }
+    }
 }
