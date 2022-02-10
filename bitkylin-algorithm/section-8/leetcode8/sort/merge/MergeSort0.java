@@ -1,6 +1,8 @@
-package leetcode8.sort;
+package leetcode8.sort.merge;
 
-public class DemoSort1 implements IKySort {
+import leetcode8.sort.IKySort;
+
+public class MergeSort0 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {

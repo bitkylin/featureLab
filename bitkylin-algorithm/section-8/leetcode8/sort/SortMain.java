@@ -6,9 +6,9 @@ import leetcode8.sort.bubble.BubbleSort2;
 import leetcode8.sort.bubble.BubbleSort3;
 import leetcode8.sort.insert.InsertSort1;
 import leetcode8.sort.insert.InsertSort2;
+import leetcode8.sort.merge.MergeSort0;
 import leetcode8.sort.merge.MergeSort1;
 import leetcode8.sort.quick.QuickSort1;
-import leetcode8.sort.quick.QuickSort2_1;
 import leetcode8.sort.quick.QuickSort2;
 import leetcode8.sort.select.SelectSort1;
 import leetcode8.sort.shell.ShellSort1;
@@ -29,7 +29,7 @@ public class SortMain {
 
     public static void main(String[] args) {
         randomDemoArr();
-        sort(new QuickSort1());
+        sort(new MergeSort0());
 //        sortAll();
     }
 
@@ -45,7 +45,7 @@ public class SortMain {
 
         sort(new MergeSort1());
 
-        sort(new QuickSort2_1());
+        sort(new QuickSort1());
         sort(new QuickSort2());
 
         sort(new SelectSort1());
