@@ -80,6 +80,8 @@ public class ValidAnagram {
         }
     }
 
+    // 只需要关注前两个解法
+
     /**
      * 解法二：
      * hash 法

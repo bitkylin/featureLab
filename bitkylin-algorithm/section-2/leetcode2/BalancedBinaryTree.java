@@ -71,10 +71,57 @@ public class BalancedBinaryTree {
         }
     }
 
+
+    /**
+     * 自底向上
+     */
+
+    class Solution {
+        boolean res = true;
+
+        public boolean isBalanced(TreeNode root) {
+            height(root);
+            return res;
+        }
+
+        private int height(TreeNode node) {
+            if (node == null) {
+                return 0;
+            }
+            int left = height(node.left);
+            int right = height(node.right);
+            if (Math.abs(left - right) > 1) {
+                res = false;
+            }
+            return Math.max(left, right) + 1;
+        }
+    }
+
+    class Solution1 {
+        public boolean isBalanced(TreeNode root) {
+            int val = height(root);
+            return val >= 0;
+        }
+
+        private int height(TreeNode node) {
+            if (node == null) {
+                return 0;
+            }
+            int left = height(node.left);
+            int right = height(node.right);
+            if (left < 0 || right < 0) return -1;
+            if (Math.abs(left - right) > 1) {
+                return -1;
+            }
+            return Math.max(left, right) + 1;
+        }
+    }
+
+
     /**
      * 自顶向下
      */
-    class Solution {
+    class Solution2 {
 
         public boolean isBalanced(TreeNode root) {
             Map<TreeNode, Integer> map = new HashMap<>();
@@ -105,31 +152,6 @@ public class BalancedBinaryTree {
             value = Math.max(left, right) + 1;
             map.put(node, value);
             return value;
-        }
-    }
-
-    /**
-     * 自底向上
-     */
-    class Solution2 {
-
-        private boolean res = true;
-
-        public boolean isBalanced(TreeNode root) {
-            solve(root);
-            return res;
-        }
-
-        private int solve(TreeNode root) {
-            if (root == null) {
-                return 0;
-            }
-            int left = solve(root.left);
-            int right = solve(root.right);
-            if (Math.abs(left - right) > 1) {
-                res = false;
-            }
-            return Math.max(left, right) + 1;
         }
     }
 }

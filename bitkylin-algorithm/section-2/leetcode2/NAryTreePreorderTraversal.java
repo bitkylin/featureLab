@@ -53,7 +53,6 @@ import java.util.List;
 public class NAryTreePreorderTraversal {
 
     public static void main(String[] args) {
-        Solution solution = new NAryTreePreorderTraversal().new Solution();
     }
 
     class Node {
@@ -74,34 +73,9 @@ public class NAryTreePreorderTraversal {
     }
 
     /**
-     * 栈 - 仅存放 node
-     * 对于每一个Node：res末尾添加val，子节点列表倒序后入栈
-     */
-    class Solution {
-        public List<Integer> preorder(Node root) {
-            List<Integer> res = new ArrayList<>();
-            ArrayDeque<Node> stack = new ArrayDeque<>();
-            if (root != null) {
-                stack.push(root);
-            }
-            while (!stack.isEmpty()) {
-                Node obj = stack.pop();
-                res.add(obj.val);
-                if (obj.children != null) {
-                    Collections.reverse(obj.children);
-                    for (Node child : obj.children) {
-                        stack.push(child);
-                    }
-                }
-            }
-            return res;
-        }
-    }
-
-    /**
      * 栈 - 存放 node + value
      */
-    class Solution2_1 {
+    class Solution1 {
         public List<Integer> preorder(Node root) {
             List<Integer> res = new ArrayList<>();
             if (root == null) {
@@ -128,7 +102,7 @@ public class NAryTreePreorderTraversal {
         }
     }
 
-    class Solution2_2 {
+    class Solution1_2 {
         public List<Integer> preorder(Node root) {
             List<Integer> res = new ArrayList<>();
             ArrayDeque<Object> stack = new ArrayDeque<>();
@@ -156,7 +130,7 @@ public class NAryTreePreorderTraversal {
     /**
      * 递归
      */
-    class Solution3 {
+    class Solution2 {
         public List<Integer> preorder(Node root) {
             List<Integer> res = new ArrayList<>();
             solve(root, res);
@@ -174,6 +148,31 @@ public class NAryTreePreorderTraversal {
             for (Node child : root.children) {
                 solve(child, res);
             }
+        }
+    }
+
+    /**
+     * 栈 - 仅存放 node
+     * 对于每一个Node：res末尾添加val，子节点列表倒序后入栈
+     */
+    class Solution3 {
+        public List<Integer> preorder(Node root) {
+            List<Integer> res = new ArrayList<>();
+            ArrayDeque<Node> stack = new ArrayDeque<>();
+            if (root != null) {
+                stack.push(root);
+            }
+            while (!stack.isEmpty()) {
+                Node obj = stack.pop();
+                res.add(obj.val);
+                if (obj.children != null) {
+                    Collections.reverse(obj.children);
+                    for (Node child : obj.children) {
+                        stack.push(child);
+                    }
+                }
+            }
+            return res;
         }
     }
 }

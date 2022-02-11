@@ -38,7 +38,7 @@ public class ZuiXiaoDeKgeShuLcof {
     //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
-     * 默认小顶堆，需转换为大顶堆：O(nlog(k))
+     * PriorityQueue 默认是小顶堆，需转换为大顶堆：O(nlog(k))
      * 其他解法：排序后取前K个，O(nlog(n))
      */
     class Solution {

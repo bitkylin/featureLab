@@ -32,8 +32,6 @@ public class ChouShuLcof {
         new ChouShuLcof().new Solution().nthUglyNumber(10);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 使用默认的小顶堆
      * 注：值太大时需用 long
@@ -59,7 +57,6 @@ public class ChouShuLcof {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 1. 所有丑数均是前序丑数乘以2、3、5得到

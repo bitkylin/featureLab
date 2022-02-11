@@ -51,7 +51,6 @@ import java.util.*;
 public class NAryTreePostorderTraversal {
 
     public static void main(String[] args) {
-        Solution solution = new NAryTreePostorderTraversal().new Solution();
     }
 
     class Node {
@@ -72,33 +71,9 @@ public class NAryTreePostorderTraversal {
     }
 
     /**
-     * 栈 - 仅存放 node
-     * 对于每一个Node：res开头添加val，子节点列表正序入栈
-     */
-    class Solution {
-        public List<Integer> postorder(Node root) {
-            LinkedList<Integer> res = new LinkedList<>();
-            ArrayDeque<Node> stack = new ArrayDeque<>();
-            if (root != null) {
-                stack.push(root);
-            }
-            while (!stack.isEmpty()) {
-                Node node = stack.pop();
-                res.addFirst(node.val);
-                if (node.children != null) {
-                    for (Node child : node.children) {
-                        stack.push(child);
-                    }
-                }
-            }
-            return res;
-        }
-    }
-
-    /**
      * 栈 - 存放 node + value
      */
-    class Solution2_1 {
+    class Solution1_1 {
         public List<Integer> postorder(Node root) {
             List<Integer> res = new ArrayList<>();
             if (root == null) {
@@ -125,7 +100,7 @@ public class NAryTreePostorderTraversal {
         }
     }
 
-    class Solution2_2 {
+    class Solution1_2 {
         public List<Integer> postorder(Node root) {
             List<Integer> res = new ArrayList<>();
             ArrayDeque<Object> stack = new ArrayDeque<>();
@@ -153,7 +128,7 @@ public class NAryTreePostorderTraversal {
     /**
      * 递归
      */
-    class Solution3 {
+    class Solution2 {
         public List<Integer> postorder(Node root) {
             List<Integer> res = new ArrayList<>();
             solve(root, res);
@@ -171,6 +146,30 @@ public class NAryTreePostorderTraversal {
                 solve(child, res);
             }
             res.add(root.val);
+        }
+    }
+
+    /**
+     * 栈 - 仅存放 node
+     * 对于每一个Node：res开头添加val，子节点列表正序入栈
+     */
+    class Solution3 {
+        public List<Integer> postorder(Node root) {
+            LinkedList<Integer> res = new LinkedList<>();
+            ArrayDeque<Node> stack = new ArrayDeque<>();
+            if (root != null) {
+                stack.push(root);
+            }
+            while (!stack.isEmpty()) {
+                Node node = stack.pop();
+                res.addFirst(node.val);
+                if (node.children != null) {
+                    for (Node child : node.children) {
+                        stack.push(child);
+                    }
+                }
+            }
+            return res;
         }
     }
 }

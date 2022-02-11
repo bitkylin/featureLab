@@ -86,6 +86,8 @@ public class NAryTreeLevelOrderTraversal {
         }
     }
 
+    // 仅需看上面的解法
+
     /**
      * 自实现的循环法，每次大循环需要创建新的Deque，性能较差
      * 注：该解法无需关注
