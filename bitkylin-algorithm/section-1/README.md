@@ -117,16 +117,16 @@ head -> node -> tail
 
 ### 栈和队列
 
-| 题目 | 项目链接 | leetcode | 备注 |
-|---|---|---|---|
-| 20. 有效的括号 | [ValidParentheses](leetcode1/ValidParentheses.java) | [valid-parentheses](https://leetcode-cn.com/problems/valid-parentheses/) ||
-| 678. 有效的括号字符串 | [ValidParenthesisString](leetcode1/ValidParenthesisString.java) | [valid-parenthesis-string](https://leetcode-cn.com/problems/valid-parenthesis-string/) ||
-| 155. 最小栈 | [MinStack](leetcode1/MinStack1.java) | [min-stack](https://leetcode-cn.com/problems/min-stack/) ||
-| 84. 柱状图中最大的矩形 | [LargestRectangleInHistogram](leetcode1/LargestRectangleInHistogram.java) | [largest-rectangle-in-histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/) |单调栈|
-| 239. 滑动窗口最大值 | [SlidingWindowMaximum](../section-2/leetcode2/SlidingWindowMaximum.java) | [sliding-window-maximum](https://leetcode-cn.com/problems/sliding-window-maximum/) ||
-| 71. 简化路径 | [SimplifyPath](leetcode1/SimplifyPath.java) | [simplify-path](https://leetcode-cn.com/problems/simplify-path/) ||
-| 150. 逆波兰表达式求值 | [EvaluateReversePolishNotation](leetcode1/EvaluateReversePolishNotation.java) | [evaluate-reverse-polish-notation](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/) ||
-| 42. 接雨水 | [TrappingRainWater](leetcode1/TrappingRainWater.java) | [trapping-rain-water](https://leetcode-cn.com/problems/trapping-rain-water/) |单调栈、DP|
+| 题目              | 项目链接 | leetcode | 备注 |
+|-----------------|---|---|---|
+| 20. 有效的括号       | [ValidParentheses](leetcode1/ValidParentheses.java) | [valid-parentheses](https://leetcode-cn.com/problems/valid-parentheses/) ||
+| 678. 有效的括号字符串*  | [ValidParenthesisString](leetcode1/ValidParenthesisString.java) | [valid-parenthesis-string](https://leetcode-cn.com/problems/valid-parenthesis-string/) ||
+| 155. 最小栈*       | [MinStack](leetcode1/MinStack1.java) | [min-stack](https://leetcode-cn.com/problems/min-stack/) ||
+| 84. 柱状图中最大的矩形** | [LargestRectangleInHistogram](leetcode1/LargestRectangleInHistogram.java) | [largest-rectangle-in-histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/) |单调栈|
+| 239. 滑动窗口最大值    | [SlidingWindowMaximum](../section-2/leetcode2/SlidingWindowMaximum.java) | [sliding-window-maximum](https://leetcode-cn.com/problems/sliding-window-maximum/) ||
+| 71. 简化路径        | [SimplifyPath](leetcode1/SimplifyPath.java) | [simplify-path](https://leetcode-cn.com/problems/simplify-path/) ||
+| 150. 逆波兰表达式求值   | [EvaluateReversePolishNotation](leetcode1/EvaluateReversePolishNotation.java) | [evaluate-reverse-polish-notation](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/) ||
+| 42. 接雨水*        | [TrappingRainWater](leetcode1/TrappingRainWater.java) | [trapping-rain-water](https://leetcode-cn.com/problems/trapping-rain-water/) |单调栈、DP|
 
 ## 参考资料
 

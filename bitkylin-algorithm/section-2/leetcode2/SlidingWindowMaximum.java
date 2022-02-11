@@ -73,6 +73,7 @@ public class SlidingWindowMaximum {
     }
 
     /**
+     * 最优解法，解法不难
      * 双端队列, O(n)
      * 1. 队首始终保持最大
      * 2. 遍历到第 k 个元素时，往结果数组中设值

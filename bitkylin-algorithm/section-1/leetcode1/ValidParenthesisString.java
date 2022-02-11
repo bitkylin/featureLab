@@ -53,8 +53,7 @@ public class ValidParenthesisString {
         public boolean checkValidString(String s) {
             int left = 0;
             int right = 0;
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
+            for (char c : s.toCharArray()) {
                 if (c == '(') {
                     left++;
                     right++;
@@ -65,11 +64,8 @@ public class ValidParenthesisString {
                     left--;
                     right++;
                 }
-
-                left = Math.max(left, 0);
-                if (left > right) {
-                    return false;
-                }
+                left = Math.max(0, left);
+                if (left > right) return false;
             }
             return left == 0;
         }
@@ -84,22 +80,18 @@ public class ValidParenthesisString {
         }
 
         private boolean solve(String s, int i, int left, int right) {
-            int n = s.length();
-            if (right > left) {
-                return false;
-            }
-            if (i == n) {
-                return left == right;
-            }
-            char c = s.charAt(i);
-            if ('(' == c) {
+
+            if (i >= s.length()) return left == right;
+            if (right > left) return false;
+
+            if (s.charAt(i) == '(') {
                 return solve(s, i + 1, left + 1, right);
-            } else if (')' == c) {
+            } else if (s.charAt(i) == ')') {
                 return solve(s, i + 1, left, right + 1);
             } else {
-                return solve(s, i + 1, left + 1, right)
-                        || solve(s, i + 1, left, right + 1)
-                        || solve(s, i + 1, left, right);
+                return solve(s, i + 1, left, right + 1) ||
+                        solve(s, i + 1, left + 1, right) ||
+                        solve(s, i + 1, left, right);
             }
         }
     }

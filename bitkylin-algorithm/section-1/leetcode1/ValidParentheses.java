@@ -52,9 +52,8 @@
  * <li><code>1 <= s.length <= 10<sup>4</sup></code></li>
  * <li><code>s</code> 仅由括号 <code>'()[]{}'</code> 组成</li>
  * </ul>
- * <div><div>Related Topics</div><div><li>栈</li><li>字符串</li></div></div><br><div><li>👍 2757</li><li>👎 0</li></div>
+ * <div><div>Related Topics</div><div><li>栈</li><li>字符串</li></div></div><br><div><li>👍 2952</li><li>👎 0</li></div>
  */
-
 
 package leetcode1;
 
@@ -69,42 +68,45 @@ public class ValidParentheses {
         Solution solution = new ValidParentheses().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class Solution {
-        Map<Character, Character> map = new HashMap<Character, Character>() {{
-            put('{', '}');put('[', ']');put('(', ')');
-        }};
+        private Map<Character, Character> map = new HashMap<>();
+
+        {
+            map.put('(', ')');
+            map.put('[', ']');
+            map.put('{', '}');
+        }
 
         public boolean isValid(String s) {
-            Deque<Character> deque = new ArrayDeque<>(s.length());
-            for (char c : s.toCharArray()) {
-                if (map.containsKey(c)) {
-                    deque.push(c);
-                } else {
-                    if (deque.isEmpty() || c != map.get(deque.pop())) {
-                        return false;
-                    }
+            Deque<Character> stack = new ArrayDeque<>();
+            char[] arr = s.toCharArray();
+            for (Character c : arr) {
+                if (stack.isEmpty() || map.containsKey(c)) {
+                    stack.push(c);
+                } else if (!c.equals(map.get(stack.pop()))) {
+                    return false;
                 }
             }
-            return deque.isEmpty();
+            return stack.isEmpty();
         }
     }
 
-    //leetcode submit region end(Prohibit modification and deletion)
-    class Solution1_1 {
-        private Map<Character, Character> map = new HashMap<Character, Character>() {{
-            put(')', '(');put(']', '[');put('}', '{');
-        }};
+    class Solution2 {
+        private Map<Character, Character> map = new HashMap<>();
+
+        {
+            map.put(')', '(');
+            map.put(']', '[');
+            map.put('}', '{');
+        }
 
         public boolean isValid(String s) {
-            ArrayDeque<Character> stack = new ArrayDeque<>(s.length());
-            for (char c : s.toCharArray()) {
-                if (!map.containsKey(c)) {
+            Deque<Character> stack = new ArrayDeque<>();
+            char[] arr = s.toCharArray();
+            for (char c : arr) {
+                if (stack.isEmpty() || !map.containsKey(c)) {
                     stack.push(c);
-                    continue;
-                }
-                if (stack.isEmpty() || !stack.pop().equals(map.get(c))) {
+                } else if (!map.get(c).equals(stack.pop())) {
                     return false;
                 }
             }
@@ -115,7 +117,7 @@ public class ValidParentheses {
     /**
      * 优化
      */
-    class Solution2 {
+    class Solution3 {
         public boolean isValid(String s) {
             Deque<Character> deque = new ArrayDeque<>(s.length());
             for (Character c : s.toCharArray()) {

@@ -49,8 +49,6 @@ public class MinStack1 {
     public static void main(String[] args) {
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     class MinStack {
 
         private ArrayDeque<Integer> stack = new ArrayDeque<>();
@@ -67,7 +65,7 @@ public class MinStack1 {
         }
 
         public void pop() {
-            if (stack.pop().equals(min.peek())) {
+            if (!stack.isEmpty() && stack.pop().equals(min.peek())) {
                 min.pop();
             }
         }
@@ -89,6 +87,5 @@ public class MinStack1 {
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
-//leetcode submit region end(Prohibit modification and deletion)
 
 }

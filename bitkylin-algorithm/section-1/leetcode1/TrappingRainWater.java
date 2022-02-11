@@ -92,6 +92,8 @@ public class TrappingRainWater {
         }
     }
 
+    // 只关注前两个方法
+
     /**
      * 方法三：
      * 按行求，几乎通过所有用例，最后的用例超时，O(n * maxHeight)
