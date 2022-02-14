@@ -74,13 +74,18 @@ public class ValidateBinarySearchTree {
      * 时间复杂度：O(n)
      */
     class Solution {
-
-        Integer min;
+        private Integer min = null;
 
         public boolean isValidBST(TreeNode root) {
-            if (root == null) return true;
-            if (!isValidBST(root.left)) return false;
-            if (min != null && root.val <= min) return false;
+            if (root == null) {
+                return true;
+            }
+            if (!isValidBST(root.left)) {
+                return false;
+            }
+            if (min != null && min >= root.val) {
+                return false;
+            }
             min = root.val;
             return isValidBST(root.right);
         }

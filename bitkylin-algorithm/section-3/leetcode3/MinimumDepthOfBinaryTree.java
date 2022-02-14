@@ -59,12 +59,27 @@ public class MinimumDepthOfBinaryTree {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int minDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            if (root.left == null) {
+                return minDepth(root.right) + 1;
+            }
+            if (root.right == null) {
+                return minDepth(root.left) + 1;
+            }
+            int left = minDepth(root.left);
+            int right = minDepth(root.right);
+            return Math.min(left, right) + 1;
+        }
+    }
 
     /**
      * 「递归」
      */
-    class Solution {
+    class Solution2_1 {
         public int minDepth(TreeNode root) {
             if (root == null) {
                 return 0;
@@ -78,12 +93,11 @@ public class MinimumDepthOfBinaryTree {
             return Math.min(left, right) + 1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 根据原解法，对代码再次进行精简
      */
-    class Solution2 {
+    class Solution2_2 {
         public int minDepth(TreeNode root) {
             if (root == null) return 0;
             int left = minDepth(root.left);

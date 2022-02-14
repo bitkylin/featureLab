@@ -49,9 +49,8 @@ public class Permutations {
         Solution solution = new Permutations().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
+     * 做法简单，只要能想到解法，就能写出来
      * 回溯算法，数组元素交换
      * 特点：进行改变 -> 进入下一层 -> 撤销改变
      * 推荐题解：
@@ -82,6 +81,4 @@ public class Permutations {
             nums[j] = temp;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

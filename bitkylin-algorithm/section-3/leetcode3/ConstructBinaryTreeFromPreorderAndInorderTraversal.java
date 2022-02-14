@@ -68,6 +68,7 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
     /**
      * 递归「DFS」
      * 技巧：二叉树的左子树在前序遍历、中序遍历中，占用连续的序号，且元素个数相同；右子树同样
+     * 画个简单的AVL树，写出他的前序和中序遍历，对照着写就行
      * 参考题解：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/dong-hua-yan-shi-105-cong-qian-xu-yu-zhong-xu-bian/
      */
     class Solution {
@@ -76,17 +77,17 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
             for (int i = 0; i < inorder.length; i++) {
                 memo.put(inorder[i], i);
             }
-            return solve(memo, preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
+            return solve(memo, preorder, 0, preorder.length - 1, 0, inorder.length - 1);
         }
 
-        private TreeNode solve(Map<Integer, Integer> memo, int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight) {
+        private TreeNode solve(Map<Integer, Integer> memo, int[] preorder, int preLeft, int preRight, int inLeft, int inRight) {
             if (preLeft > preRight || inLeft > inRight) {
                 return null;
             }
             TreeNode node = new TreeNode(preorder[preLeft]);
             int i = memo.get(preorder[preLeft]);
-            node.left = solve(memo, preorder, inorder, preLeft + 1, preLeft + i - inLeft, inLeft, i - 1);
-            node.right = solve(memo, preorder, inorder, preRight - inRight + i + 1, preRight, i + 1, inRight);
+            node.left = solve(memo, preorder, preLeft + 1, preLeft + i - inLeft, inLeft, i - 1);
+            node.right = solve(memo, preorder, preRight - inRight + i + 1, preRight, i + 1, inRight);
             return node;
         }
     }

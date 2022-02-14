@@ -42,8 +42,6 @@ public class Subsets {
         Solution solution = new Subsets().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 递归
      */
@@ -66,7 +64,6 @@ public class Subsets {
             solve(res, nums, list, i + 1);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 技巧性做法

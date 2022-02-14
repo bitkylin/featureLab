@@ -56,25 +56,25 @@ public class InvertBinaryTree {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 「递归」时间复杂度：O(n)
      */
     class Solution {
         public TreeNode invertTree(TreeNode root) {
-            if (root == null) return null;
-            TreeNode temp = root.left;
+            if (root == null) {
+                return null;
+            }
+            TreeNode node = root.left;
             root.left = root.right;
-            root.right = temp;
+            root.right = node;
             invertTree(root.left);
             invertTree(root.right);
             return root;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
+     * 简单来说，DFS、BFS方式仅仅是需要将所有节点遍历一遍，遍历到的节点执行Swap即可。
      * 「循环」「DFS『深度优先遍历』」时间复杂度：O(n)
      */
     class Solution2 {

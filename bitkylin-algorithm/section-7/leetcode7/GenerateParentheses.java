@@ -48,26 +48,25 @@ public class GenerateParentheses {
     class Solution {
         public List<String> generateParenthesis(int n) {
             List<String> res = new ArrayList<>();
-            solve(res, n, new char[2 * n], 0, 0);
+            solve(res, new char[2 * n], n, 0, 0);
             return res;
         }
 
-        private void solve(List<String> res, int n, char[] arr, int left, int right) {
-            if (right >= n) {
+        private void solve(List<String> res, char[] arr, int n, int left, int right) {
+            if (right == n) {
                 res.add(String.valueOf(arr));
                 return;
             }
             if (left < n) {
                 arr[left + right] = '(';
-                solve(res, n, arr, left + 1, right);
+                solve(res, arr, n, left + 1, right);
             }
             if (left > right) {
                 arr[left + right] = ')';
-                solve(res, n, arr, left, right + 1);
+                solve(res, arr, n, left, right + 1);
             }
         }
     }
-
 
     /**
      * 最佳实践（2）

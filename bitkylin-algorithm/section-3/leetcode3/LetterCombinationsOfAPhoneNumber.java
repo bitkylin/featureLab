@@ -41,10 +41,7 @@
 
 package leetcode3;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class LetterCombinationsOfAPhoneNumber {
 
@@ -52,12 +49,48 @@ public class LetterCombinationsOfAPhoneNumber {
         Solution solution = new LetterCombinationsOfAPhoneNumber().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 递归「回溯」，不需要进行当前层的清理，因为递归的结果不会直接作为结果集，后续递归会覆盖前面的
      */
     class Solution {
+
+        private Map<Character, List<Character>> map = new HashMap<>();
+
+        {
+            map.put('2', Arrays.asList('a', 'b', 'c'));
+            map.put('3', Arrays.asList('d', 'e', 'f'));
+            map.put('4', Arrays.asList('g', 'h', 'i'));
+            map.put('5', Arrays.asList('j', 'k', 'l'));
+            map.put('6', Arrays.asList('m', 'n', 'o'));
+            map.put('7', Arrays.asList('p', 'q', 'r', 's'));
+            map.put('8', Arrays.asList('t', 'u', 'v'));
+            map.put('9', Arrays.asList('w', 'x', 'y', 'z'));
+        }
+
+        public List<String> letterCombinations(String digits) {
+            List<String> res = new ArrayList<>();
+            if (digits.isEmpty()) {
+                return res;
+            }
+            char[] arr = new char[digits.length()];
+            solve(res, arr, digits, 0);
+            return res;
+        }
+
+        private void solve(List<String> res, char[] arr, String digits, int level) {
+            if (level >= arr.length) {
+                res.add(String.valueOf(arr));
+                return;
+            }
+            List<Character> list = map.get(digits.charAt(level));
+            for (Character c : list) {
+                arr[level] = c;
+                solve(res, arr, digits, level + 1);
+            }
+        }
+    }
+
+    class Solution1_1 {
         public List<String> letterCombinations(String digits) {
             String[] raw = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
             List<String> list = new ArrayList<>();
@@ -80,7 +113,6 @@ public class LetterCombinationsOfAPhoneNumber {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 回溯算法，全程不使用List，不适用Queue，效率最高

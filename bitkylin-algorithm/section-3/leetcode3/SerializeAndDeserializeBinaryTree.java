@@ -66,8 +66,6 @@ public class SerializeAndDeserializeBinaryTree {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 使用DFS「深度优先遍历『前序遍历』」
      * 注：序列化后字符串末尾会多一个","，不过不受影响
@@ -200,7 +198,5 @@ public class SerializeAndDeserializeBinaryTree {
 // Codec ser = new Codec();
 // Codec deser = new Codec();
 // TreeNode ans = deser.deserialize(ser.serialize(root));
-//leetcode submit region end(Prohibit modification and deletion)
-
 
 }

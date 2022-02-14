@@ -38,10 +38,7 @@
 
 package leetcode3;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Combinations {
 
@@ -49,12 +46,34 @@ public class Combinations {
         Solution solution = new Combinations().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    /**
+     * 最优解法
+     */
+    class Solution {
+        public List<List<Integer>> combine(int n, int k) {
+            List<List<Integer>> res = new ArrayList<>();
+            Integer[] arr = new Integer[k];
+            solve(res, arr, n, 0);
+            return res;
+        }
+
+        private void solve(List<List<Integer>> res, Integer[] arr, int n, int level) {
+            if (level >= arr.length) {
+                res.add(new ArrayList<>(Arrays.asList(arr)));
+                return;
+            }
+            int val = level == 0 ? 1 : arr[level - 1] + 1;
+            for (; val <= n; val++) {
+                arr[level] = val;
+                solve(res, arr, n, level + 1);
+            }
+        }
+    }
 
     /**
      * 递归，遍历出所有list并返回
      */
-    class Solution {
+    class Solution2 {
         public List<List<Integer>> combine(int n, int k) {
             List<List<Integer>> res = new ArrayList<>();
             solve(res, new ArrayList<>(), n, k, 1);
@@ -74,14 +93,13 @@ public class Combinations {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 递归，使用stack求出所有解，而后转为list输出
      * 剪枝优化：剩下数字不足以填充stack时，停止遍历
      * 备注：剪枝优化前，solution1耗时少；剪枝优化后，两种方法耗时等同
      */
-    class Solution2 {
+    class Solution3 {
         public List<List<Integer>> combine(int n, int k) {
             List<List<Integer>> res = new ArrayList<>();
             Deque<Integer> stack = new ArrayDeque<>(k);

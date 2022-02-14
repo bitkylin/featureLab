@@ -48,8 +48,6 @@ public class MaximumDepthOfBinaryTree {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 「递归」
      */
@@ -63,18 +61,14 @@ public class MaximumDepthOfBinaryTree {
             return Math.max(left, right) + 1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 「循环」「BFS」「广度优先遍历」
      */
     class Solution2 {
         public int maxDepth(TreeNode root) {
-            if (root == null) {
-                return 0;
-            }
             Deque<TreeNode> deque = new ArrayDeque<>();
-            deque.offer(root);
+            offer(deque, root);
             int max = 0;
             while (!deque.isEmpty()) {
                 max++;

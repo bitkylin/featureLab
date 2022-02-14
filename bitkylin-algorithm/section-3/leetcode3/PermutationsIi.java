@@ -41,9 +41,9 @@ public class PermutationsIi {
     public static void main(String[] args) {
         new PermutationsIi().new Solution().permuteUnique(new int[]{0, 1, 0, 0, 9});
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
 
     /**
+     * 只要理解原理，这道题就很简单
      * 递归过程中，对当前层涉及的元素去重
      * 相比于 {@link Permutations}，仅增加了一个Set记录当前层已处理过的元素
      * 注：不能简单比较相邻两元素，因为使用 swap 会导致乱序
@@ -79,7 +79,6 @@ public class PermutationsIi {
             nums[j] = temp;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 对结果集用Set去重

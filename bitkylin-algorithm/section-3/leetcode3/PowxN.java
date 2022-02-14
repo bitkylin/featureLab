@@ -46,7 +46,7 @@ public class PowxN {
     }
 
     /**
-     * 递归法
+     * 递归法，这题简单，蒙都能蒙对
      */
     class Solution {
         public double myPow(double x, int n) {
