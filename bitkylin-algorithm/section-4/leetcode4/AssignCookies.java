@@ -48,12 +48,26 @@ public class AssignCookies {
         Solution solution = new AssignCookies().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int findContentChildren(int[] g, int[] s) {
+            Arrays.sort(g);
+            Arrays.sort(s);
+            int res = 0;
+
+            for (int child = g.length - 1, cookie = s.length - 1; child >= 0 && cookie >= 0; child--) {
+                if (g[child] <= s[cookie]) {
+                    res++;
+                    cookie--;
+                }
+            }
+            return res;
+        }
+    }
 
     /**
      * 正序，直接使用贪心，局部最优即为全局最优
      */
-    class Solution {
+    class Solution1 {
         public int findContentChildren(int[] g, int[] s) {
             Arrays.sort(g);
             Arrays.sort(s);
@@ -68,7 +82,6 @@ public class AssignCookies {
             return j;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 倒序

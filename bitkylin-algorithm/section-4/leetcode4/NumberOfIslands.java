@@ -52,8 +52,6 @@ public class NumberOfIslands {
         Solution solution = new NumberOfIslands().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS，不会改变原数组
      */
@@ -83,8 +81,6 @@ public class NumberOfIslands {
             solve(grid, visit, i, j - 1);
         }
     }
-
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DFS，会改变原数组

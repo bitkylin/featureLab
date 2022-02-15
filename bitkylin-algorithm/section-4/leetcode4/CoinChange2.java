@@ -60,10 +60,26 @@ public class CoinChange2 {
         Solution solution = new CoinChange2().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 外层循环的是硬币，保证硬币不会被重用
+     */
+    class Solution1 {
+        public int change(int amount, int[] coins) {
+            int[] dp = new int[amount + 1];
+            dp[0] = 1;
+            for (int coin : coins) {
+                for (int i = 1; i <= amount; i++) {
+                    if (i >= coin) {
+                        dp[i] += dp[i - coin];
+                    }
+                }
+            }
+            return dp[amount];
+        }
+    }
+
+    /**
+     * 两种做法没差别，仅仅DP数组长度有差异
      */
     class Solution {
         public int change(int amount, int[] coins) {
@@ -82,26 +98,6 @@ public class CoinChange2 {
                 }
             }
             return dp[amount - 1];
-        }
-    }
-
-    //leetcode submit region end(Prohibit modification and deletion)
-
-    /**
-     * 两种做法没差别
-     */
-    class Solution1 {
-        public int change(int amount, int[] coins) {
-            int[] dp = new int[amount + 1];
-            dp[0] = 1;
-            for (int coin : coins) {
-                for (int i = 1; i <= amount; i++) {
-                    if (i >= coin) {
-                        dp[i] += dp[i - coin];
-                    }
-                }
-            }
-            return dp[amount];
         }
     }
 }

@@ -65,7 +65,6 @@ public class LemonadeChange {
         Solution solution = new LemonadeChange().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean lemonadeChange(int[] bills) {
             int y5 = 0;
@@ -89,6 +88,4 @@ public class LemonadeChange {
             return true;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

@@ -63,8 +63,6 @@ public class CoinChange {
         new CoinChange().new Solution().coinChange(new int[]{1, 2, 5}, 11);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 这题要多做
      * DP，完整版
@@ -96,8 +94,6 @@ public class CoinChange {
             return dp[amount] == 0 ? -1 : dp[amount];
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DP，稍微简化版

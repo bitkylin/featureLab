@@ -177,25 +177,25 @@ if (arr[mid] <= target) {
 
 ### 贪心算法
 
-| 题目 | 项目链接                                                                                   | leetcode | 心得   |
-|---|----------------------------------------------------------------------------------------|---|------|
-| 322. 零钱兑换 | [CoinChange](leetcode4/CoinChange.java)                                                | [coin-change](https://leetcode-cn.com/problems/coin-change/) | DFS  |
-| 518. 零钱兑换 II | [CoinChange2](leetcode4/CoinChange2.java)                                               | [coin-change-2](https://leetcode-cn.com/problems/coin-change-2/) | DP   |
-| 860. 柠檬水找零 | [LemonadeChange](leetcode4/LemonadeChange.java)                                        | [lemonade-change](https://leetcode-cn.com/problems/lemonade-change/) | DP   |
-| 455. 分发饼干 | [AssignCookies](leetcode4/AssignCookies.java)                                          | [assign-cookies](https://leetcode-cn.com/problems/assign-cookies/) | 贪心算法 |
+| 题目                | 项目链接                                                                                   | leetcode | 心得   |
+|-------------------|----------------------------------------------------------------------------------------|---|------|
+| 322. 零钱兑换         | [CoinChange](leetcode4/CoinChange.java)                                                | [coin-change](https://leetcode-cn.com/problems/coin-change/) | DFS  |
+| 518. 零钱兑换 II*     | [CoinChange2](leetcode4/CoinChange2.java)                                               | [coin-change-2](https://leetcode-cn.com/problems/coin-change-2/) | DP   |
+| 860. 柠檬水找零        | [LemonadeChange](leetcode4/LemonadeChange.java)                                        | [lemonade-change](https://leetcode-cn.com/problems/lemonade-change/) | DP   |
+| 455. 分发饼干         | [AssignCookies](leetcode4/AssignCookies.java)                                          | [assign-cookies](https://leetcode-cn.com/problems/assign-cookies/) | 贪心算法 |
 | 122. 买卖股票的最佳时机 II | [BestTimeToBuyAndSellStockIi](../section-6/leetcode6/BestTimeToBuyAndSellStockIi.java) | [best-time-to-buy-and-sell-stock-ii](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) | 贪心   |
-| 874. 模拟行走机器人 | [WalkingRobotSimulation](leetcode4/WalkingRobotSimulation.java)                        | [walking-robot-simulation](https://leetcode-cn.com/problems/walking-robot-simulation/) | 贪心   |
-| 55. 跳跃游戏 | [JumpGame](leetcode4/JumpGame.java)                                                    | [jump-game](https://leetcode-cn.com/problems/jump-game/) | 贪心   |
-| 45. 跳跃游戏 II | [JumpGameIi](leetcode4/JumpGameIi.java)                                                | [jump-game-ii](https://leetcode-cn.com/problems/jump-game-ii/) | 贪心   |
+| 874. 模拟行走机器人      | [WalkingRobotSimulation](leetcode4/WalkingRobotSimulation.java)                        | [walking-robot-simulation](https://leetcode-cn.com/problems/walking-robot-simulation/) | 贪心   |
+| 55. 跳跃游戏*         | [JumpGame](leetcode4/JumpGame.java)                                                    | [jump-game](https://leetcode-cn.com/problems/jump-game/) | 贪心   |
+| 45. 跳跃游戏 II       | [JumpGameIi](leetcode4/JumpGameIi.java)                                                | [jump-game-ii](https://leetcode-cn.com/problems/jump-game-ii/) | 贪心   |
 
 ### 二分查找
 
-| 题目 | 项目链接 | leetcode | 心得 |
-|---|---|---|---|
-| 69. x 的平方根 | [Sqrtx](leetcode4/Sqrtx.java) | [sqrtx](https://leetcode-cn.com/problems/sqrtx/) | 二分查找 |
-| 367. 有效的完全平方数 | [ValidPerfectSquare](leetcode4/ValidPerfectSquare.java) | [valid-perfect-square](https://leetcode-cn.com/problems/valid-perfect-square/) | 二分查找 |
-| 153. 寻找旋转排序数组中的最小值 | [FindMinimumInRotatedSortedArray](leetcode4/FindMinimumInRotatedSortedArray.java) | [find-minimum-in-rotated-sorted-array](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | 二分查找 |
-| 33. 搜索旋转排序数组| [SearchInRotatedSortedArray](leetcode4/SearchInRotatedSortedArray.java) | [search-in-rotated-sorted-array](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/) | 二分查找 |
-| 35. 搜索插入位置 | [SearchInsertPosition](leetcode4/SearchInsertPosition.java) | [search-insert-position](https://leetcode-cn.com/problems/search-insert-position/) | 二分查找 |
-| 74. 搜索二维矩阵 | [SearchA2dMatrix](leetcode4/SearchA2dMatrix.java) | [search-a-2d-matrix](https://leetcode-cn.com/problems/search-a-2d-matrix/) | 二分查找 |
+| 题目                                             | 项目链接 | leetcode | 心得 |
+|------------------------------------------------|---|---|---|
+| 69. x 的平方根*                                    | [Sqrtx](leetcode4/Sqrtx.java) | [sqrtx](https://leetcode-cn.com/problems/sqrtx/) | 二分查找 |
+| 367. 有效的完全平方数                                  | [ValidPerfectSquare](leetcode4/ValidPerfectSquare.java) | [valid-perfect-square](https://leetcode-cn.com/problems/valid-perfect-square/) | 二分查找 |
+| 153. 寻找旋转排序数组中的最小值*                            | [FindMinimumInRotatedSortedArray](leetcode4/FindMinimumInRotatedSortedArray.java) | [find-minimum-in-rotated-sorted-array](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/) | 二分查找 |
+| 33. 搜索旋转排序数组                                   | [SearchInRotatedSortedArray](leetcode4/SearchInRotatedSortedArray.java) | [search-in-rotated-sorted-array](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/) | 二分查找 |
+| 35. 搜索插入位置                                     | [SearchInsertPosition](leetcode4/SearchInsertPosition.java) | [search-insert-position](https://leetcode-cn.com/problems/search-insert-position/) | 二分查找 |
+| 74. 搜索二维矩阵                                     | [SearchA2dMatrix](leetcode4/SearchA2dMatrix.java) | [search-a-2d-matrix](https://leetcode-cn.com/problems/search-a-2d-matrix/) | 二分查找 |
 | 使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方 |  |  | 参考「153. 寻找旋转排序数组中的最小值」求得最小值，其与前值即为无序处 |

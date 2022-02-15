@@ -44,8 +44,6 @@ public class JumpGameIi {
         new JumpGameIi().new Solution().jump(new int[]{2, 3, 1, 1, 4});
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 画个图更好理解
      */
@@ -62,5 +60,4 @@ public class JumpGameIi {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 }

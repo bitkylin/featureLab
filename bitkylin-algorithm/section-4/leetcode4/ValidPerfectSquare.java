@@ -37,8 +37,6 @@ public class ValidPerfectSquare {
         Solution solution = new ValidPerfectSquare().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * mid值偏左偏右都是可以的
      */
@@ -75,8 +73,6 @@ public class ValidPerfectSquare {
             return false;
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
 
     class Solution2 {
         public boolean isPerfectSquare(int num) {

@@ -55,7 +55,6 @@ public class BestTimeToBuyAndSellStockIi {
      * DP
      * 详细题解参考 {@link BestTimeToBuyAndSellStockIv}
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices) {
             if (prices.length <= 1) {
@@ -70,7 +69,6 @@ public class BestTimeToBuyAndSellStockIi {
             return dp[prices.length - 1][0];
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 简单解法

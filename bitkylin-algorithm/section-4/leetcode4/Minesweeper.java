@@ -123,40 +123,42 @@ public class Minesweeper {
     /**
      * 另一种写法
      */
-    class Solution2 {
 
+    class Solution2 {
         private int[][] pointList = new int[][]{
+                {-1, 0},
+                {-1, -1},
+                {0, -1},
+                {1, -1},
                 {1, 0},
                 {1, 1},
                 {0, 1},
                 {-1, 1},
-                {-1, 0},
-                {-1, -1},
-                {0, -1},
-                {1, -1}
         };
 
         public char[][] updateBoard(char[][] board, int[] click) {
+            int xMax = board.length - 1;
+            int yMax = board[0].length - 1;
             int x = click[0];
             int y = click[1];
-            if (x < 0 || y < 0 || x >= board.length || y >= board[0].length) {
+            if (x < 0 || x > xMax || y < 0 || y > yMax) {
                 return board;
             }
             if (board[x][y] == 'M') {
                 board[x][y] = 'X';
                 return board;
             }
-            solve(board, x, y);
+            solve(board, x, y, xMax, yMax);
             return board;
         }
 
-        private void solve(char[][] board, int x, int y) {
-            if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || board[x][y] != 'E') {
+        private void solve(char[][] board, int x, int y, int xMax, int yMax) {
+            if (x < 0 || x > xMax || y < 0 || y > yMax || board[x][y] != 'E') {
                 return;
             }
             int val = 0;
             for (int[] point : pointList) {
-                val += calc(board, x, y, point);
+                val += calc(board, x + point[0], y + point[1], xMax, yMax);
             }
             if (val > 0) {
                 board[x][y] = (char) (val + 0x30);
@@ -164,17 +166,15 @@ public class Minesweeper {
             }
             board[x][y] = 'B';
             for (int[] point : pointList) {
-                solve(board, x + point[0], y + point[1]);
+                solve(board, x + point[0], y + point[1], xMax, yMax);
             }
         }
 
-        private int calc(char[][] board, int x, int y, int[] point) {
-            int x1 = x + point[0];
-            int y1 = y + point[1];
-            if (x1 < 0 || y1 < 0 || x1 >= board.length || y1 >= board[0].length) {
+        private int calc(char[][] board, int x, int y, int xMax, int yMax) {
+            if (x < 0 || x > xMax || y < 0 || y > yMax) {
                 return 0;
             }
-            return board[x1][y1] == 'M' ? 1 : 0;
+            return board[x][y] == 'M' ? 1 : 0;
         }
     }
 }

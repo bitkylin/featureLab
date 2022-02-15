@@ -87,8 +87,6 @@ public class WalkingRobotSimulation {
         new WalkingRobotSimulation().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * set性能远好于遍历
      */
@@ -114,6 +112,4 @@ public class WalkingRobotSimulation {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

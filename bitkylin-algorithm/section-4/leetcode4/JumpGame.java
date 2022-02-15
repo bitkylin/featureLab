@@ -42,7 +42,18 @@ public class JumpGame {
         Solution solution = new JumpGame().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    /**
+     * 双指针，挨个跳
+     */
+    class Solution0 {
+        public boolean canJump(int[] nums) {
+            int right = 0;
+            for (int left = 0; left <= right && left < nums.length; left++) {
+                right = Math.max(right, nums[left] + left);
+            }
+            return right >= nums.length - 1;
+        }
+    }
 
     /**
      * DP完整版：DP[n] = Max( DP[n - 1], arr[n] + n )
@@ -63,7 +74,6 @@ public class JumpGame {
             return true;
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DP优化空间复杂度
