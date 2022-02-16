@@ -57,31 +57,25 @@ public class UniquePaths {
         new UniquePaths().new Solution().uniquePaths(3, 7);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS + 记忆化搜索
      */
     class Solution {
         public int uniquePaths(int m, int n) {
             int[][] memo = new int[m][n];
-            return solve(memo, m, n);
+            return solve(m - 1, n - 1, memo);
         }
 
-        private int solve(int[][] memo, int i, int j) {
-            if (i == 1 || j == 1) {
+        private int solve(int x, int y, int[][] memo) {
+            if (x == 0 || y == 0) {
                 return 1;
             }
-            if (memo[i - 1][j - 1] > 0) {
-                return memo[i - 1][j - 1];
+            if (memo[x][y] == 0) {
+                memo[x][y] = solve(x - 1, y, memo) + solve(x, y - 1, memo);
             }
-            memo[i - 1][j - 1] = solve(memo, i - 1, j) + solve(memo, i, j - 1);
-            return memo[i - 1][j - 1];
+            return memo[x][y];
         }
     }
-
-    //leetcode submit region end(Prohibit modification and deletion)
-
 
     /**
      * DP完整版
@@ -90,15 +84,15 @@ public class UniquePaths {
     class Solution1 {
         public int uniquePaths(int m, int n) {
             int[][] dp = new int[m][n];
-            for (int i = 0; i < m; i++) {
-                dp[i][0] = 1;
+            for (int x = 0; x < m; x++) {
+                dp[x][0] = 1;
             }
-            for (int j = 0; j < n; j++) {
-                dp[0][j] = 1;
+            for (int y = 0; y < n; y++) {
+                dp[0][y] = 1;
             }
-            for (int i = 1; i < m; i++) {
-                for (int j = 1; j < n; j++) {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            for (int x = 1; x < m; x++) {
+                for (int y = 1; y < n; y++) {
+                    dp[x][y] = dp[x - 1][y] + dp[x][y - 1];
                 }
             }
             return dp[m - 1][n - 1];

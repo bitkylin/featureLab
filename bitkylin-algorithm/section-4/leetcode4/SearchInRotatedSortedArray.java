@@ -53,15 +53,12 @@ package leetcode4;
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {
-        new SearchInRotatedSortedArray().new Solution()
-                .search(new int[]{1}, 1);
     }
 
     /**
      * 直接二分查找，mid拆分的数组有序时查找目标值，有序数组查找失败则继续收缩左右边界
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
+    class Solution1_1 {
         public int search(int[] nums, int target) {
             int left = 0;
             int right = nums.length - 1;
@@ -107,7 +104,42 @@ public class SearchInRotatedSortedArray {
         }
     }
 
-    //leetcode submit region end(Prohibit modification and deletion)
+    class Solution1_2 {
+        public int search(int[] nums, int target) {
+            return solve(nums, target, 0, nums.length - 1);
+        }
+
+        private int solve(int[] nums, int target, int left, int right) {
+            if (left == right) {
+                return nums[left] == target ? left : -1;
+            }
+            int mid = (right - left) / 2 + left;
+            if (nums[left] <= target && target <= nums[mid]) {
+                return find(nums, target, left, mid);
+            } else if (nums[mid + 1] <= target && target <= nums[right]) {
+                return find(nums, target, mid + 1, right);
+            }
+
+            if (nums[left] <= nums[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+            return solve(nums, target, left, right);
+        }
+
+        private int find(int[] nums, int target, int left, int right) {
+            while (left < right) {
+                int mid = (right - left + 1) / 2 + left;
+                if (nums[mid] > target) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            return nums[left] == target ? left : -1;
+        }
+    }
 
     /**
      * 先求最小值，拆为两个有序数组再求值
@@ -150,6 +182,47 @@ public class SearchInRotatedSortedArray {
     }
 
     class Solution2_2 {
+        public int search(int[] nums, int target) {
+            int max = findMax(nums);
+            if (target >= nums[0] && target <= nums[max]) {
+                return find(nums, target, 0, max);
+            }
+            if (max >= nums.length - 1) {
+                return -1;
+            }
+            return find(nums, target, max + 1, nums.length - 1);
+        }
+
+        private int find(int[] nums, int target, int left, int right) {
+            while (left < right) {
+                int mid = (right - left + 1) / 2 + left;
+                if (nums[mid] > target) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            return nums[left] == target ? left : -1;
+        }
+
+        private int findMax(int[] nums) {
+            int left = 0;
+            int right = nums.length - 1;
+            while (left < right) {
+                int mid = (right - left + 1) / 2 + left;
+                if (nums[left] > nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            return left;
+        }
+    }
+
+    //--- 到这里就可以了 ---
+
+    class Solution3 {
         public int search(int[] nums, int target) {
             int left = 0;
             int right = nums.length - 1;

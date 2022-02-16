@@ -61,8 +61,6 @@ public class SearchInsertPosition {
         Solution solution = new SearchInsertPosition().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 需要考虑右边界的问题
      */
@@ -81,6 +79,4 @@ public class SearchInsertPosition {
             return left;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

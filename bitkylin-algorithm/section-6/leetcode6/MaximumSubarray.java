@@ -64,7 +64,6 @@ public class MaximumSubarray {
      * <p>
      * 精简版，压缩空间复杂度
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
             int dp0 = nums[0];
@@ -77,12 +76,23 @@ public class MaximumSubarray {
         }
     }
 
-//leetcode submit region end(Prohibit modification and deletion)
+    class Solution2_1 {
+        public int maxSubArray(int[] nums) {
+            int max = nums[0];
+            int[] dp = new int[nums.length];
+            dp[0] = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+                max = Math.max(max, dp[i]);
+            }
+            return max;
+        }
+    }
 
     /**
      * 完整版
      */
-    class Solution2 {
+    class Solution2_2 {
         public int maxSubArray(int[] nums) {
             int[] dp = new int[nums.length];
             dp[0] = nums[0];

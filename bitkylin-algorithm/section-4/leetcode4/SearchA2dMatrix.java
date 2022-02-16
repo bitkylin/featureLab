@@ -44,21 +44,25 @@ public class SearchA2dMatrix {
     }
 
     /**
+     * 这两种做法都很简单，只需要知道解法就行
+     * <p>
      * 把矩阵当做一位数组，直接二分查找
      */
     class Solution {
         public boolean searchMatrix(int[][] matrix, int target) {
-            int len = matrix[0].length;
-            int left = 0, right = matrix.length * len - 1;
+            int row = matrix.length;
+            int column = matrix[0].length;
+            int right = row * column - 1;
+            int left = 0;
             while (left < right) {
-                int mid = (right - left) / 2 + left;
-                if (matrix[mid / len][mid % len] < target) {
-                    left = mid + 1;
+                int mid = (right - left + 1) / 2 + left;
+                if (matrix[mid / column][mid % column] > target) {
+                    right = mid - 1;
                 } else {
-                    right = mid;
+                    left = mid;
                 }
             }
-            return matrix[left / len][left % len] == target;
+            return matrix[left / column][left % column] == target;
         }
     }
 
