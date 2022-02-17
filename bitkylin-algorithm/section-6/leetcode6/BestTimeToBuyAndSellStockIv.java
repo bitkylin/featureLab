@@ -64,22 +64,19 @@ public class BestTimeToBuyAndSellStockIv {
             if (prices == null || prices.length <= 1 || k == 0) {
                 return 0;
             }
-            int[][][] dp = new int[prices.length][k][2];
+            int[][][] dp = new int[k][2][prices.length];
             for (int j = 0; j < k; j++) {
-                dp[0][j][1] = -prices[0];
+                dp[j][1][0] = -prices[0];
             }
             for (int i = 1; i < prices.length; i++) {
-                for (int j = 0; j < k; j++) {
-                    if (j == 0) {
-                        dp[i][j][1] = Math.max(dp[i - 1][j][1], -prices[i]);
-                        dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
-                    } else {
-                        dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]);
-                        dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
-                    }
+                dp[0][1][i] = Math.max(dp[0][1][i - 1], -prices[i]);
+                dp[0][0][i] = Math.max(dp[0][0][i - 1], dp[0][1][i - 1] + prices[i]);
+                for (int j = 1; j < k; j++) {
+                    dp[j][1][i] = Math.max(dp[j][1][i - 1], dp[j - 1][0][i - 1] - prices[i]);
+                    dp[j][0][i] = Math.max(dp[j][0][i - 1], dp[j][1][i - 1] + prices[i]);
                 }
             }
-            return dp[prices.length - 1][k - 1][0];
+            return dp[k - 1][0][prices.length - 1];
         }
 
     }

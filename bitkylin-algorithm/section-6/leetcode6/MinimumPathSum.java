@@ -74,23 +74,22 @@ public class MinimumPathSum {
      */
     class Solution1 {
         public int minPathSum(int[][] grid) {
-            int[][] dp = new int[grid.length][grid[0].length];
-            int sum = 0;
-            for (int y = 0; y < grid[0].length; y++) {
-                sum += grid[0][y];
-                dp[0][y] = sum;
+            int xMax = grid.length - 1;
+            int yMax = grid[0].length - 1;
+            int[][] dp = new int[xMax + 1][yMax + 1];
+            dp[0][0] = grid[0][0];
+            for (int x = 1; x <= xMax; x++) {
+                dp[x][0] = dp[x - 1][0] + grid[x][0];
             }
-            sum = 0;
-            for (int x = 0; x < grid.length; x++) {
-                sum += grid[x][0];
-                dp[x][0] = sum;
+            for (int y = 1; y <= yMax; y++) {
+                dp[0][y] = dp[0][y - 1] + grid[0][y];
             }
-            for (int x = 1; x < grid.length; x++) {
-                for (int y = 1; y < grid[0].length; y++) {
+            for (int x = 1; x <= xMax; x++) {
+                for (int y = 1; y <= yMax; y++) {
                     dp[x][y] = Math.min(dp[x - 1][y], dp[x][y - 1]) + grid[x][y];
                 }
             }
-            return dp[grid.length - 1][grid[0].length - 1];
+            return dp[xMax][yMax];
         }
     }
 }

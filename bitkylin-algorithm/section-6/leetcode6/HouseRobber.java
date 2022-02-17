@@ -41,8 +41,6 @@ public class HouseRobber {
         Solution solution = new HouseRobber().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DP，完整版
      * DP(n) = Max( DP(n-1), DP(n-2) + arr(n) )
@@ -64,8 +62,6 @@ public class HouseRobber {
             return dp[nums.length - 1];
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
-
 
     /**
      * DP，精简版「版本1」

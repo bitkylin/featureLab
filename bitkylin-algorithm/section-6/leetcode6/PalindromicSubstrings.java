@@ -67,6 +67,31 @@ public class PalindromicSubstrings {
         }
     }
 
+    /**
+     * 重点注意：这种写法注意将历史的dp值置位；二维DP每值只用一次，可不关注历史值
+     */
+    class Solution1_2 {
+        public int countSubstrings(String s) {
+            boolean[] dp = new boolean[s.length()];
+            int res = 0;
+            for (int x = 0; x < s.length(); x++) {
+                for (int y = 0; y <= x; y++) {
+                    if (s.charAt(x) == s.charAt(y)) {
+                        if (x - y <= 1) {
+                            dp[y] = true;
+                        } else {
+                            dp[y] = dp[y + 1];
+                        }
+                        res += dp[y] ? 1 : 0;
+                    } else {
+                        dp[y] = false;
+                    }
+                }
+            }
+            return res;
+        }
+    }
+
     //leetcode submit region end(Prohibit modification and deletion)
 
     /**
@@ -95,21 +120,19 @@ public class PalindromicSubstrings {
 
     class Solution2_2 {
         public int countSubstrings(String s) {
-            int res = 0;
             boolean[][] dp = new boolean[s.length()][s.length()];
-            for (int y = 0; y < s.length(); y++) {
-                for (int x = 0; x <= y; x++) {
-                    if (y - x <= 1) {
-                        if (s.charAt(x) == s.charAt(y)) {
+            int res = 0;
+            for (int x = 0; x < s.length(); x++) {
+                for (int y = x; y >= 0; y--) {
+                    if (s.charAt(x) == s.charAt(y)) {
+                        if (x - y <= 1) {
                             dp[x][y] = true;
-                            res++;
+                        } else {
+                            dp[x][y] = dp[x - 1][y + 1];
                         }
-                    } else {
-                        if (dp[x + 1][y - 1] && s.charAt(x) == s.charAt(y)) {
-                            dp[x][y] = true;
-                            res++;
-                        }
+                        res += dp[x][y] ? 1 : 0;
                     }
+
                 }
             }
             return res;

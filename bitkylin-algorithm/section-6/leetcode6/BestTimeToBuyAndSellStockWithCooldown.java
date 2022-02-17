@@ -30,23 +30,18 @@ public class BestTimeToBuyAndSellStockWithCooldown {
      * 0空仓；1冷冻期；2持仓
      * 注：不要太自信，每一行代码都要检查
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices) {
-            if (prices.length <= 1) {
-                return 0;
-            }
-            int[][] dp = new int[prices.length][3];
-            dp[0][2] = -prices[0];
+            int[][] dp = new int[3][prices.length];
+            dp[1][0] = -prices[0];
             for (int i = 1; i < prices.length; i++) {
-                dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][2] + prices[i]);
-                dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0]);
-                dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][1] - prices[i]);
+                dp[1][i] = Math.max(dp[1][i - 1], dp[2][i - 1] - prices[i]);
+                dp[0][i] = Math.max(dp[0][i - 1], dp[1][i - 1] + prices[i]);
+                dp[2][i] = Math.max(dp[2][i - 1], dp[0][i - 1]);
             }
-            return Math.max(dp[prices.length - 1][0], dp[prices.length - 1][1]);
+            return Math.max(dp[0][prices.length - 1], dp[2][prices.length - 1]);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 优化解法，不予以研究

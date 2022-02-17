@@ -46,7 +46,6 @@ public class MaximumProductSubarray {
      * <p>
      * 精简版，压缩空间复杂度
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProduct(int[] nums) {
             int dpMin = nums[0];
@@ -69,8 +68,6 @@ public class MaximumProductSubarray {
             return max;
         }
     }
-
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 完整版

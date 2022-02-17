@@ -47,8 +47,6 @@ public class HouseRobberIi {
         Solution solution = new HouseRobberIi().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DP，精简版
      * 执行两次 {@link HouseRobber} 即可
@@ -72,7 +70,6 @@ public class HouseRobberIi {
             return dp1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * DP，完整版

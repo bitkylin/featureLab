@@ -67,7 +67,6 @@ public class Triangle {
      * DP:
      * dp(n) = arr(n) + Min( dp(n), dp(n+1) )
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minimumTotal(List<List<Integer>> triangle) {
             int[] dp = new int[triangle.get(triangle.size() - 1).size() + 1];
@@ -80,9 +79,10 @@ public class Triangle {
             return dp[0];
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
+     * 刁钻的用例执行超时了，优先用上面的方法吧
+     * <p>
      * 树状结构DFS：
      * 不能将上层计算结果叠加后传入下层「缓存中间结果」，下层每个cell会因为上层路径不同有不同的计算结果，故不能缓存
      * 应该由下层计算结果叠加后进行缓存，并交由上层使用，下层计算结果是终态，不会变化

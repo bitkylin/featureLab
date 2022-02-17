@@ -75,7 +75,6 @@ public class DecodeWays {
         Solution solution = new DecodeWays().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
 
         /**
@@ -139,6 +138,4 @@ public class DecodeWays {
             return 0;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
