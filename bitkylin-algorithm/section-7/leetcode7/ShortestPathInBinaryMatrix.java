@@ -57,8 +57,6 @@ public class ShortestPathInBinaryMatrix {
         new ShortestPathInBinaryMatrix().new Solution().shortestPathBinaryMatrix(new int[][]{{0, 1}, {1, 0}});
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * BFS
      */
@@ -121,6 +119,46 @@ public class ShortestPathInBinaryMatrix {
             grid[x][y] = 1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * DFS，执行超时，不过看起来没问题，正解是上面的 BFS 解法
+     */
+    class Solution2 {
+
+        private int[][] pointList = new int[][]{
+                {1, 0},
+                {1, 1},
+                {0, 1},
+                {-1, 1},
+                {-1, 0},
+                {-1, -1},
+                {0, -1},
+                {1, -1},
+        };
+
+        public int shortestPathBinaryMatrix(int[][] grid) {
+            return solve(grid, 0, 0, 1);
+        }
+
+        private int solve(int[][] grid, int x, int y, int level) {
+            int xMax = grid.length - 1;
+            int yMax = grid[0].length - 1;
+            if (x < 0 || y < 0 || x > xMax || y > yMax || grid[x][y] == 1) {
+                return -1;
+            }
+            if (x == xMax && y == yMax) {
+                return level;
+            }
+            int min = Integer.MAX_VALUE;
+            grid[x][y] = 1;
+            for (int[] point : pointList) {
+                int val = solve(grid, x + point[0], y + point[1], level + 1);
+                if (val > 0) {
+                    min = Math.min(val, min);
+                }
+            }
+            grid[x][y] = 0;
+            return min == Integer.MAX_VALUE ? -1 : min;
+        }
+    }
 }

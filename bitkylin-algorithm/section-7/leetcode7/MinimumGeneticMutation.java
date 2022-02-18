@@ -69,20 +69,20 @@ public class MinimumGeneticMutation {
     class Solution {
         public int minMutation(String start, String end, String[] bank) {
             Set<String> startSet = new HashSet<>();
-            List<String> bankList = new ArrayList<>(Arrays.asList(bank));
             startSet.add(start);
+            List<String> bankSet = new ArrayList<>(Arrays.asList(bank));
             int res = 0;
             while (!startSet.isEmpty()) {
-                res++;
-                startSet = update(startSet, bankList);
                 if (startSet.contains(end)) {
                     return res;
                 }
+                res++;
+                startSet = solve(startSet, bankSet);
             }
             return -1;
         }
 
-        private Set<String> update(Set<String> startSet, List<String> bankList) {
+        private Set<String> solve(Set<String> startSet, List<String> bankList) {
             Set<String> res = new HashSet<>();
             Iterator<String> iterator = bankList.iterator();
             while (iterator.hasNext()) {
@@ -101,7 +101,7 @@ public class MinimumGeneticMutation {
         private boolean calc(String w1, String w2) {
             int res = 0;
             for (int i = 0; i < w1.length(); i++) {
-                res += w1.charAt(i) == w2.charAt(i) ? 0 : 1;
+                res += w1.charAt(i) != w2.charAt(i) ? 1 : 0;
             }
             return res == 1;
         }

@@ -87,19 +87,18 @@ public class ValidSudoku {
             boolean[][] column = new boolean[len][len];
             boolean[][] row = new boolean[len][len];
             boolean[][] boxed = new boolean[len][len];
-
-            for (int i = 0; i < len; i++) {
-                for (int j = 0; j < len; j++) {
-                    if (board[i][j] == '.') {
+            for (int x = 0; x < len; x++) {
+                for (int y = 0; y < len; y++) {
+                    if (board[x][y] == '.') {
                         continue;
                     }
-                    int val = board[i][j] - '1';
-                    int boxIndex = i / 3 * 3 + j / 3;
-                    if (column[i][val] || row[j][val] || boxed[boxIndex][val]) {
+                    int val = board[x][y] - '1';
+                    int boxIndex = x / 3 * 3 + y / 3;
+                    if (column[y][val] || row[x][val] || boxed[boxIndex][val]) {
                         return false;
                     }
-                    column[i][val] = true;
-                    row[j][val] = true;
+                    row[x][val] = true;
+                    column[y][val] = true;
                     boxed[boxIndex][val] = true;
                 }
             }

@@ -50,9 +50,8 @@ public class NumberOfProvinces {
         Solution solution = new NumberOfProvinces().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
+     * 重点在于 y 轴变 x 轴重新遍历
      * DFS + 回溯
      */
     class Solution {
@@ -78,6 +77,33 @@ public class NumberOfProvinces {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * 两种解法没什么差别
+     */
+    class Solution1_1 {
+        public int findCircleNum(int[][] isConnected) {
+            int res = 0;
+            for (int x = 0; x < isConnected.length; x++) {
+                if (isConnected[x][x] == 1) {
+                    res++;
+                    dfs(isConnected, x, x);
+                }
+            }
+            return res;
+        }
+
+        private void dfs(int[][] isConnected, int x, int y) {
+            if (isConnected[x][y] != 1) {
+                return;
+            }
+            isConnected[x][y] = 0;
+            isConnected[y][x] = 0;
+            isConnected[x][x] = 0;
+            isConnected[y][y] = 0;
+            for (int i = 0; i < isConnected.length; i++) {
+                dfs(isConnected, y, i);
+            }
+        }
+    }
 }

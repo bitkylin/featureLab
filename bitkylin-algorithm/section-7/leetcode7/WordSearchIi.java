@@ -52,8 +52,6 @@ public class WordSearchIi {
                 new String[]{"oath", "pea", "eat", "rain"});
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS + 回溯
      * 时间复杂度高
@@ -106,7 +104,6 @@ public class WordSearchIi {
             return false;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 字典树

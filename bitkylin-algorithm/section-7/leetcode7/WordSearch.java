@@ -52,8 +52,6 @@ public class WordSearch {
         Solution solution = new WordSearch().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DFS + 剪枝
      */
@@ -90,6 +88,4 @@ public class WordSearch {
             return false;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

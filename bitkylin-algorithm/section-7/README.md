@@ -72,13 +72,13 @@ todo
 
 ### 字典树 Trie，还是使用了剪枝、回溯解法
 
-| 题目 | 项目链接 | leetcode | 心得 |
-|---|---|---|---|
+| 题目                      | 项目链接 | leetcode | 心得 |
+|-------------------------|---|---|---|
 | 208. 实现 Trie (字典树「前缀树」) | [ImplementTriePrefixTree](leetcode7/ImplementTriePrefixTree.java) | [implement-trie-prefix-tree](https://leetcode-cn.com/problems/implement-trie-prefix-tree/) | 标准实现 |
-| 79. 单词搜索 | [WordSearch](leetcode7/WordSearch.java) | [word-search](https://leetcode-cn.com/problems/word-search/) | DFS + 回溯 |
-| 212. 单词搜索 II | [WordSearchIi](leetcode7/WordSearchIi.java) | [word-search-ii](https://leetcode-cn.com/problems/word-search-ii/) | 字典树 |
-| 130. 被围绕的区域 | [SurroundedRegions](leetcode7/SurroundedRegions.java) | [surrounded-regions](https://leetcode-cn.com/problems/surrounded-regions/) | DFS |
-| 547. 省份数量 | [NumberOfProvinces](leetcode7/NumberOfProvinces.java) | [number-of-provinces](https://leetcode-cn.com/problems/number-of-provinces/) | DFS |
+| 79. 单词搜索                | [WordSearch](leetcode7/WordSearch.java) | [word-search](https://leetcode-cn.com/problems/word-search/) | DFS + 回溯 |
+| 212. 单词搜索 II            | [WordSearchIi](leetcode7/WordSearchIi.java) | [word-search-ii](https://leetcode-cn.com/problems/word-search-ii/) | 字典树 |
+| 130. 被围绕的区域             | [SurroundedRegions](leetcode7/SurroundedRegions.java) | [surrounded-regions](https://leetcode-cn.com/problems/surrounded-regions/) | DFS |
+| 547. 省份数量*              | [NumberOfProvinces](leetcode7/NumberOfProvinces.java) | [number-of-provinces](https://leetcode-cn.com/problems/number-of-provinces/) | DFS |
 
 ### 剪枝、回溯
 
