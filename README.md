@@ -12,7 +12,7 @@
 
 关键词：broker、topic、producer、consumer、zookeeper、docker 等
 
-## 2. [基于 dubbo + hmily 的外汇交易系统](dubbo-with-hmily)
+## 2. [基于 dubbo + hmily 的多应用交易系统](dubbo-with-hmily)
 
 1. 多应用分布式一致性保证
 2. 使用 hmily 实现 TCC 柔性事务
