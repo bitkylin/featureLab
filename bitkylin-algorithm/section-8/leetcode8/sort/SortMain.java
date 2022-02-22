@@ -29,7 +29,7 @@ public class SortMain {
 
     public static void main(String[] args) {
         randomDemoArr();
-        sort(new MergeSort0());
+        sort(new DemoSort1());
 //        sortAll();
     }
 
