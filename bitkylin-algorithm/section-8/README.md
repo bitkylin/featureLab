@@ -112,5 +112,5 @@ https://www.cnblogs.com/onepixel/p/7674659.html
 |---------------|-------------------------------------------------------|------------------------------------------------------------------------------|-----------------------|
 | 经典排序算法总结      | [SortMain](leetcode8/sort)                            | [经典排序算法及其 Java 实现](https://www.jianshu.com/p/8e708994e123)                   | 总结了所有的经典排序算法，此链接为入口方法 |
 | 1122. 数组的相对排序 | [RelativeSortArray](leetcode8/RelativeSortArray.java) | [relative-sort-array](https://leetcode-cn.com/problems/relative-sort-array/) | 计数排序                  |
-| 56. 合并区间      | [MergeIntervals](leetcode8/MergeIntervals.java)       | [merge-intervals](https://leetcode-cn.com/problems/merge-intervals/)         |                       |
-| 493. 翻转对      | [ReversePairs](leetcode8/ReversePairs.java)           | [reverse-pairs](https://leetcode-cn.com/problems/reverse-pairs/)             |                       |
+| 56. 合并区间*     | [MergeIntervals](leetcode8/MergeIntervals.java)       | [merge-intervals](https://leetcode-cn.com/problems/merge-intervals/)         |                       |
+| 493. 翻转对「放弃」  | [ReversePairs](leetcode8/ReversePairs.java)           | [reverse-pairs](https://leetcode-cn.com/problems/reverse-pairs/)             |                       |

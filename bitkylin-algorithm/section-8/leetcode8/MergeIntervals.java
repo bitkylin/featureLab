@@ -42,8 +42,6 @@ public class MergeIntervals {
         Solution solution = new MergeIntervals().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 1. 对数组中，每区间首位排序
      * 2. 遍历各区间，基于区间首位的包含关系进行合并
@@ -66,6 +64,5 @@ public class MergeIntervals {
             return list.toArray(new int[0][0]);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
 }

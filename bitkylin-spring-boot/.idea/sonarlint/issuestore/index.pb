@@ -11,7 +11,3 @@ Q
 !bitkylin-spring-boot-demo/pom.xml,6\5\65a5f856d8f0649637f9446f3ed17c0e692e503c
 ¤
 tbitkylin-print-spring-boot-starter/src/main/java/cc/bitky/demo/springbootstarter/bitkylinprint/api/EnableFormat.java,6\d\6d747e3d45bad68f840803b5b6dfb1c5a1251ac0
-¶
-…bitkylin-print-spring-boot-starter/src/main/java/cc/bitky/demo/springbootstarter/bitkylinprint/config/FormatterAutoConfiguration.java,0\7\07648dee0aaf328eca96752a1137f3bfa2f6079c
-“
-cbitkylin-spring-boot-demo/src/main/java/cc/bitky/demo/springboot/BitkylinSpringBootApplication.java,b\7\b78f56f117418a323fcefcd2674e868b8804909b
