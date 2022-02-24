@@ -34,22 +34,26 @@ public class ReverseWordsInAStringIii {
     class Solution {
         public String reverseWords(String s) {
             char[] arr = s.toCharArray();
-            int i = 0;
-            while (true) {
-                while (i < arr.length && arr[i] == ' ') i++;
-                int start = i;
-                while (i < arr.length && arr[i] != ' ') i++;
-                if (start == i) return new String(arr).substring(0, arr.length);
-                reverse(arr, start, i - 1);
+            for (int left = 0; left < s.length(); ) {
+                while (left < s.length() && s.charAt(left) == ' ') left++;
+                int right = left;
+                while (right < s.length() && s.charAt(right) != ' ') right++;
+                reverse(arr, left, right - 1);
+                left = right;
+            }
+            return new String(arr);
+        }
+
+        private void reverse(char[] arr, int left, int right) {
+            while (left < right) {
+                swap(arr, left++, right--);
             }
         }
 
-        private void reverse(char[] arr, int start, int end) {
-            for (; start < end; start++, end--) {
-                char temp = arr[start];
-                arr[start] = arr[end];
-                arr[end] = temp;
-            }
+        private void swap(char[] arr, int left, int right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
         }
     }
 

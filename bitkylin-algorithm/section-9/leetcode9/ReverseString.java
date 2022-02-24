@@ -37,7 +37,6 @@ public class ReverseString {
         Solution solution = new ReverseString().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void reverseString(char[] s) {
             for (int left = 0, right = s.length - 1; left < right; left++, right--) {
@@ -47,6 +46,4 @@ public class ReverseString {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

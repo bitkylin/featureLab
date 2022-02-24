@@ -25,37 +25,32 @@ import java.util.Deque;
 public class LongestValidParentheses {
 
     public static void main(String[] args) {
-        Solution solution = new LongestValidParentheses().new Solution();
+        new LongestValidParentheses().new Solution().longestValidParentheses(")((())())");
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
-     *
+     * DP
+     * 当搜索到')'时，往前加总所有的长度
      */
     class Solution {
         public int longestValidParentheses(String s) {
-            if (s == null || s.length() < 2) {
-                return 0;
-            }
             s = ")" + s;
             int max = 0;
             int[] dp = new int[s.length()];
-            for (int i = 2; i < s.length(); i++) {
-                if (s.charAt(i) == '(') {
+            for (int i = 1; i < s.length(); i++) {
+                if ('(' == (s.charAt(i))) {
                     continue;
                 }
-                if (s.charAt(i - 1) == '(') {
+                if ('(' == (s.charAt(i - 1))) {
                     dp[i] = dp[i - 2] + 2;
-                } else if (s.charAt(i - dp[i - 1] - 1) == '(') {
+                } else if ('(' == s.charAt(i - dp[i - 1] - 1)) {
                     dp[i] = dp[i - 1] + dp[i - dp[i - 1] - 2] + 2;
                 }
-                max = Math.max(dp[i], max);
+                max = Math.max(max, dp[i]);
             }
             return max;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 栈

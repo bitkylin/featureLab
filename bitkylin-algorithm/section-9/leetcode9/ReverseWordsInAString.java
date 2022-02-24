@@ -91,22 +91,19 @@ public class ReverseWordsInAString {
      */
     class Solution {
         public String reverseWords(String s) {
-            char[] arr = s.toCharArray();
-            StringBuilder builder = new StringBuilder();
-            int i = arr.length - 1;
-            while (true) {
-                while (i >= 0 && arr[i] == ' ') i--;
-                int end = i;
-                while (i >= 0 && arr[i] != ' ') i--;
-                int start = i + 1;
-                if (start < 0 || end < 0) {
-                    return builder.toString();
+            s = " " + s;
+            StringBuilder res = new StringBuilder();
+            int right = s.length() - 1;
+            while (right >= 0) {
+                while (right >= 0 && s.charAt(right) == ' ') right--;
+                int left = right;
+                while (left >= 0 && s.charAt(left) != ' ') left--;
+                if (right >= 0) {
+                    res.append(" ").append(s.substring(left + 1, right + 1));
                 }
-                if (builder.length() != 0) {
-                    builder.append(" ");
-                }
-                builder.append(s, start, end + 1);
+                right = left;
             }
+            return res.substring(1);
         }
     }
 

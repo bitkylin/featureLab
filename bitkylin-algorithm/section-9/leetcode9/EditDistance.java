@@ -54,11 +54,9 @@ public class EditDistance {
         Solution solution = new EditDistance().new Solution();
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DP，二维数组
-     * if ( i == j ) DP[i][j] = DP[i-1][j-1] + 1
+     * if ( i == j ) DP[i][j] = DP[i-1][j-1]
      * else          DP[i][j] = Min( DP[i-1][j-1], DP[i][j-1], DP[i-1][j] ) + 1
      */
     class Solution {
@@ -82,7 +80,6 @@ public class EditDistance {
             return dp[word1.length()][word2.length()];
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * 历史解法

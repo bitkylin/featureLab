@@ -43,10 +43,10 @@ public class LongestCommonPrefix {
         public String longestCommonPrefix(String[] strs) {
             int max = Integer.MAX_VALUE;
             for (String str : strs) {
-                max = Math.min(max, str.length());
+                max = Math.min(max, str.length() - 1);
             }
             int i = 0;
-            while (i < max) {
+            while (i <= max) {
                 char c = strs[0].charAt(i);
                 for (String str : strs) {
                     if (str.charAt(i) != c) {
@@ -55,7 +55,7 @@ public class LongestCommonPrefix {
                 }
                 i++;
             }
-            return strs[0].substring(0, max);
+            return i > 0 ? strs[0].substring(0, i) : "";
         }
     }
 

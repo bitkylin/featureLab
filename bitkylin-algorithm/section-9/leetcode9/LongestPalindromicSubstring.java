@@ -116,25 +116,24 @@ public class LongestPalindromicSubstring {
     class Solution2_1 {
         public String longestPalindrome(String s) {
             boolean[][] dp = new boolean[s.length()][s.length()];
-            int max = 0;
-            int temp = max;
-            String res = "";
-            for (int y = 0; y < s.length(); y++) {
-                for (int x = 0; x <= y; x++) {
-                    if (y - x <= 1 && s.charAt(x) == s.charAt(y)) {
-                        dp[x][y] = true;
-                        max = Math.max(max, y - x + 1);
-                    } else if (dp[x + 1][y - 1] && s.charAt(x) == s.charAt(y)) {
-                        dp[x][y] = true;
-                        max = Math.max(max, y - x + 1);
+            int left = 0;
+            int right = 0;
+            for (int x = 0; x < s.length(); x++) {
+                for (int y = x; y >= 0; y--) {
+                    if (s.charAt(x) == s.charAt(y)) {
+                        if (x - y <= 1) {
+                            dp[x][y] = true;
+                        } else {
+                            dp[x][y] = dp[x - 1][y + 1];
+                        }
                     }
-                    if (temp != max) {
-                        temp = max;
-                        res = s.substring(x, y + 1);
+                    if (dp[x][y] && x - y > right - left) {
+                        left = y;
+                        right = x;
                     }
                 }
             }
-            return res;
+            return s.substring(left, right + 1);
         }
     }
 

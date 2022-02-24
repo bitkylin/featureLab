@@ -41,8 +41,6 @@ public class PerfectSquares {
         new PerfectSquares().new Solution().numSquares(13);
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * DP:
      * 先求 sqrt(n) = m，生成初始组件集合「1 .. m」，然后参考题目 {零钱兑换}
@@ -83,6 +81,4 @@ public class PerfectSquares {
             return left;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

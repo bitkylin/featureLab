@@ -110,7 +110,34 @@ public class ValidPalindrome {
     /**
      * 不使用库函数，自己硬写
      */
-    class Solution3 {
+    class Solution3_1 {
+        public boolean isPalindrome(String s) {
+            char[] arr = s.toCharArray();
+            int left = 0;
+            int right = s.length() - 1;
+            while (left < right) {
+                while (left < right && !solve(arr, left)) left++;
+                while (left < right && !solve(arr, right)) right--;
+                if (arr[left++] != arr[right--]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private boolean solve(char[] arr, int index) {
+            if ((arr[index] >= 'a' && arr[index] <= 'z') || (arr[index] >= '0' && arr[index] <= '9')) {
+                return true;
+            }
+            if (arr[index] >= 'A' && arr[index] <= 'Z') {
+                arr[index] += 0x20;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class Solution3_2 {
         public boolean isPalindrome(String s) {
             if (s == null || s.length() == 0) {
                 return true;
