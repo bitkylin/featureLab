@@ -46,7 +46,6 @@ public class Sqrtx {
      * <p>
      * 注：注意溢出场景的处理，使用long类型：right - left + 1，当left为0时，就是right+1了
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int mySqrt(int x) {
             long left = 0, right = x;
@@ -61,6 +60,4 @@ public class Sqrtx {
             return (int) left;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

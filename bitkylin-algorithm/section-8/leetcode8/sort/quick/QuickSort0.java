@@ -29,3 +29,4 @@ public class QuickSort0 implements IKySort {
         return p;
     }
 }
+

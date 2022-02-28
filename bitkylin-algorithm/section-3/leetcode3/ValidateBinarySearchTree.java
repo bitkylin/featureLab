@@ -64,8 +64,6 @@ public class ValidateBinarySearchTree {
         }
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 「递归」二叉搜索树的中序遍历是单调递增的，直接使用中序遍历验证即可
      * 注：不可仅将节点值和其左右节点比较
@@ -90,6 +88,4 @@ public class ValidateBinarySearchTree {
             return isValidBST(root.right);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

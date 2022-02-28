@@ -4,16 +4,38 @@ public class DemoSort1 implements IKySort {
 
     @Override
     public void sort(int[] arr, int size) {
-        for (int i = 0; i < arr.length; i++) {
-            int temp = arr[i];
-            int j = i;
-            for (; j > 0; j--) {
-                if (arr[j - 1] > temp) {
-                    arr[j] = arr[j - 1];
-                }
-                else break;
+        mergeSort(arr, 0, size - 1, new int[size]);
+    }
+
+    private void mergeSort(int[] arr, int left, int right, int[] memo) {
+        if (right - left <= 0) {
+            return;
+        }
+        int mid = (right - left) / 2 + left;
+        mergeSort(arr, left, mid, memo);
+        mergeSort(arr, mid + 1, right, memo);
+        merge(arr, left, mid, right, memo);
+    }
+
+    private void merge(int[] arr, int left, int mid, int right, int[] memo) {
+        int head = left;
+        int i1 = left;
+        int i2 = mid + 1;
+        while (i1 <= mid && i2 <= right) {
+            if (arr[i1] < arr[i2]) {
+                memo[left++] = arr[i1++];
+            } else {
+                memo[left++] = arr[i2++];
             }
-            arr[j] = temp;
+        }
+        while (i1 <= mid) {
+            memo[left++] = arr[i1++];
+        }
+        while (i2 <= right) {
+            memo[left++] = arr[i2++];
+        }
+        while (head <= right) {
+            arr[head] = memo[head++];
         }
     }
 }

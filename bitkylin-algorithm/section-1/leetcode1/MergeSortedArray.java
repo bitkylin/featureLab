@@ -58,13 +58,31 @@ package leetcode1;
 public class MergeSortedArray {
 
     public static void main(String[] args) {
-        Solution solution = new MergeSortedArray().new Solution();
+        Solution0 solution = new MergeSortedArray().new Solution0();
     }
 
     /**
      * 要细心，要一个一个变量检查，不要写错了
      */
-    class Solution {
+    class Solution0 {
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+            int i1 = m - 1;
+            int i2 = n - 1;
+            int right = nums1.length - 1;
+            while (i1 >= 0 && i2 >= 0) {
+                if (nums1[i1] > nums2[i2]) {
+                    nums1[right--] = nums1[i1--];
+                } else {
+                    nums1[right--] = nums2[i2--];
+                }
+            }
+            while (i2 >= 0) {
+                nums1[right--] = nums2[i2--];
+            }
+        }
+    }
+
+    class Solution1 {
         public void merge(int[] nums1, int m, int[] nums2, int n) {
             int i = m + n - 1;
             m--;

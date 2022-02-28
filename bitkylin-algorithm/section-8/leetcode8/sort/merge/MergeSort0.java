@@ -33,3 +33,4 @@ public class MergeSort0 implements IKySort {
         while (left <= right) arr[left] = memo[left++];
     }
 }
+

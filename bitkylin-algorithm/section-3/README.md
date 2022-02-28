@@ -71,19 +71,19 @@ public class Test {
 
 ### 递归
 
-| 题目                    | 项目链接 | leetcode | 心得 |
-|-----------------------|---|---|---|
-| 22. 括号生成              | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 递归 + 剪枝  |
-| 226. 翻转二叉树            | [InvertBinaryTree](leetcode3/InvertBinaryTree.java) | [invert-binary-tree](https://leetcode-cn.com/problems/invert-binary-tree/) | 递归模板实现即可，还可以使用DFS、BFS两者代码基本一致  |
-| 98. 验证二叉搜索树           | [ValidateBinarySearchTree](leetcode3/ValidateBinarySearchTree.java) | [validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/) | 二叉搜索树的中序遍历是单调递增的 |
-| 104. 二叉树的最大深度         | [MaximumDepthOfBinaryTree](leetcode3/MaximumDepthOfBinaryTree.java) | [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | 由逐层计算深度，由上到下、由下到上均可  |
-| 111. 二叉树的最小深度*        | [MinimumDepthOfBinaryTree](leetcode3/MinimumDepthOfBinaryTree.java) | [minimum-depth-of-binary-tree](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) |   |
-| 297. 二叉树的序列化与反序列化*    | [SerializeAndDeserializeBinaryTree](leetcode3/SerializeAndDeserializeBinaryTree.java) | [serialize-and-deserialize-binary-tree](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/) | 不遵循示例，直接用DFS |
-| 236. 二叉树的最近公共祖先       | [LowestCommonAncestorOfABinaryTree](leetcode3/LowestCommonAncestorOfABinaryTree.java) | [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | DFS  |
+| 题目                   | 项目链接 | leetcode | 心得 |
+|----------------------|---|---|---|
+| 22. 括号生成             | [GenerateParentheses](../section-7/leetcode7/GenerateParentheses.java) | [generate-parentheses](https://leetcode-cn.com/problems/generate-parentheses/) | 递归 + 剪枝  |
+| 226. 翻转二叉树           | [InvertBinaryTree](leetcode3/InvertBinaryTree.java) | [invert-binary-tree](https://leetcode-cn.com/problems/invert-binary-tree/) | 递归模板实现即可，还可以使用DFS、BFS两者代码基本一致  |
+| 98. 验证二叉搜索树          | [ValidateBinarySearchTree](leetcode3/ValidateBinarySearchTree.java) | [validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/) | 二叉搜索树的中序遍历是单调递增的 |
+| 104. 二叉树的最大深度        | [MaximumDepthOfBinaryTree](leetcode3/MaximumDepthOfBinaryTree.java) | [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/) | 由逐层计算深度，由上到下、由下到上均可  |
+| 111. 二叉树的最小深度*       | [MinimumDepthOfBinaryTree](leetcode3/MinimumDepthOfBinaryTree.java) | [minimum-depth-of-binary-tree](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) |   |
+| 297. 二叉树的序列化与反序列化*   | [SerializeAndDeserializeBinaryTree](leetcode3/SerializeAndDeserializeBinaryTree.java) | [serialize-and-deserialize-binary-tree](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/) | 不遵循示例，直接用DFS |
+| 236. 二叉树的最近公共祖先      | [LowestCommonAncestorOfABinaryTree](leetcode3/LowestCommonAncestorOfABinaryTree.java) | [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) | DFS  |
 | 105. 从前序与中序遍历序列构造二叉树* | [ConstructBinaryTreeFromPreorderAndInorderTraversal](leetcode3/ConstructBinaryTreeFromPreorderAndInorderTraversal.java) | [construct-binary-tree-from-preorder-and-inorder-traversal](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | 递归「DFS」 |
-| 77. 组合*               | [Combinations](leetcode3/Combinations.java) | [combinations](https://leetcode-cn.com/problems/combinations/) | 递归 |
-| 46. 全排列*              | [Permutations](leetcode3/Permutations.java) | [permutations](https://leetcode-cn.com/problems/permutations/) | 回溯 |
-| 47. 全排列 II*           | [PermutationsIi](leetcode3/PermutationsIi.java) | [permutations-ii](https://leetcode-cn.com/problems/permutations-ii/) | 回溯+SET |
+| 77. 组合*              | [Combinations](leetcode3/Combinations.java) | [combinations](https://leetcode-cn.com/problems/combinations/) | 递归 |
+| 46. 全排列              | [Permutations](leetcode3/Permutations.java) | [permutations](https://leetcode-cn.com/problems/permutations/) | 回溯 |
+| 47. 全排列 II*          | [PermutationsIi](leetcode3/PermutationsIi.java) | [permutations-ii](https://leetcode-cn.com/problems/permutations-ii/) | 回溯+SET |
 
 ### 分治、回溯
 
