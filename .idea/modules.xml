@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/casper-lab.main.iml" filepath="$PROJECT_DIR$/.idea/modules/casper-lab.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/casper-lab.test.iml" filepath="$PROJECT_DIR$/.idea/modules/casper-lab.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/featurelab.iml" filepath="$PROJECT_DIR$/featurelab.iml" />
     </modules>
   </component>
