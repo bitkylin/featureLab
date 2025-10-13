@@ -128,10 +128,63 @@ button:disabled {
 .error-message {
   background-color: #f8d7da;
   color: #721c24;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: 4px;
   margin-bottom: 1.5rem;
   border: 1px solid #f5c6cb;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 错误图标样式 */
+.error-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* 错误关闭按钮样式 */
+.error-close-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #721c24;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.error-close-btn:hover {
+  background-color: rgba(114, 28, 36, 0.1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.error-close-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 文件列表样式 */

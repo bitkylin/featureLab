@@ -5,6 +5,42 @@ import './App.css'
 // 配置axios基础URL
 const API_BASE_URL = 'http://localhost:8888'
 
+// 统一错误处理函数
+const handleApiError = async (err) => {
+  // 网络错误处理
+  if (!err.response) {
+    if (err.request) {
+      // 请求已发送但没有收到响应
+      return '网络连接异常，请检查服务器是否正常运行'
+    } else {
+      // 请求配置出错
+      return '请求配置错误'
+    }
+  }
+  
+  // 对于blob类型的响应，需要特殊处理错误
+  let errorMessage = '操作失败'
+  if (err.response.data instanceof Blob) {
+    // 尝试将blob转换为文本以获取错误信息
+    try {
+      errorMessage = await new Response(err.response.data).text()
+    } catch (e) {
+      // 如果无法解析blob，则使用默认错误信息
+      errorMessage = `请求失败，状态码: ${err.response.status}`
+    }
+  } else {
+    // 对于普通文本响应，直接使用data
+    errorMessage = err.response.data || '操作失败'
+  }
+  
+  // 根据错误状态码提供更具体的错误信息
+  if (err.response.status === 400) {
+    return errorMessage // 如果没有匹配的映射，则使用原始错误信息
+  } else {
+    return `请求失败，状态码: ${err.response.status}`
+  }
+}
+
 function App() {
   // 状态管理
   const [guyName, setGuyName] = useState('')
@@ -24,7 +60,8 @@ function App() {
       })
       setFileList(response.data)
     } catch (err) {
-      setError(err.response?.data || '获取文件列表失败')
+      const errorMsg = await handleApiError(err)
+      setError(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -63,7 +100,8 @@ function App() {
       link.click()
       link.remove()
     } catch (err) {
-      setError(err.response?.data || '刺探伙计失败')
+      const errorMsg = await handleApiError(err)
+      setError(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -86,7 +124,8 @@ function App() {
       link.click()
       link.remove()
     } catch (err) {
-      setError(err.response?.data || '刺探医生失败')
+      const errorMsg = await handleApiError(err)
+      setError(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -109,7 +148,8 @@ function App() {
       link.click()
       link.remove()
     } catch (err) {
-      setError(err.response?.data || '刺探德芙失败')
+      const errorMsg = await handleApiError(err)
+      setError(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -141,7 +181,15 @@ function App() {
         {/* 错误信息显示 */}
         {error && (
           <div className="error-message">
+            <span className="error-icon">⚠️</span>
             {error}
+            <button 
+              className="error-close-btn" 
+              onClick={() => setError('')}
+              title="关闭错误提示"
+            >
+              ×
+            </button>
           </div>
         )}
 
