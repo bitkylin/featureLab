@@ -14,7 +14,10 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * 假想敌服务
@@ -96,6 +99,39 @@ public class ImaginaryEnemyController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+    }
+
+    /**
+     * 列出目录下的所有文件
+     */
+    @GetMapping("/spy/list")
+    public ResponseEntity<List<String>> listFiles(@RequestParam(required = false) String dir) {
+        return run(() -> {
+            String targetDir = dir != null ? dir : alley;
+            File directory = new File(targetDir);
+
+            if (!directory.exists()) {
+                throw new RuntimeException("目录不存在: " + targetDir);
+            }
+
+            if (!directory.isDirectory()) {
+                throw new RuntimeException("路径不是目录: " + targetDir);
+            }
+
+            File[] files = directory.listFiles();
+            if (files == null) {
+                throw new RuntimeException("无法读取目录内容: " + targetDir);
+            }
+
+            List<String> fileList = Arrays.stream(files)
+                    .map(file -> {
+                        String type = file.isDirectory() ? "[目录] " : "[文件] ";
+                        return type + file.getName();
+                    })
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(fileList);
+        });
     }
 
 }

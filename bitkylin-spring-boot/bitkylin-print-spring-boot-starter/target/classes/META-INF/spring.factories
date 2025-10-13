@@ -1,3 +1,0 @@
-# FormatterAutoConfiguration 自动装配声明
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cc.bitky.demo.springbootstarter.bitkylinprint.config.FormatterAutoConfiguration

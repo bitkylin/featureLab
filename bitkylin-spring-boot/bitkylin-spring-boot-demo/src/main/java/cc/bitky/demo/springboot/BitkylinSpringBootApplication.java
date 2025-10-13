@@ -29,6 +29,7 @@ public class BitkylinSpringBootApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println(formatter.format("hello world"));
 
+
 //        beanFactory.getBean("");
 
     }
