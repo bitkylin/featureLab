@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WebserverApplication {
 
     public static void main(String[] args) {
-        ImaginaryEnemyController.setAlley(args[0]);
+        ImaginaryEnemyController.setAlley("E:\\developer\\test");
         SpringApplication.run(WebserverApplication.class, args);
     }
 
