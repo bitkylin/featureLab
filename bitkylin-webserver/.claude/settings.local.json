@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(cat:*)",
+      "Bash(sudo apt install:*)",
+      "WebSearch",
+      "Bash(./gradlew *)"
+    ]
+  }
+}

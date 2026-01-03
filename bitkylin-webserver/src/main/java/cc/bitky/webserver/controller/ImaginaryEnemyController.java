@@ -1,15 +1,15 @@
 package cc.bitky.webserver.controller;
 
+import cc.bitky.webserver.dto.FileInfo;
+import cc.bitky.webserver.dto.PackDownloadReq;
+import cc.bitky.webserver.service.FilePackService;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -17,19 +17,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
  * 假想敌服务
- *
- * @author limingliang
  */
-
 @CrossOrigin(origins = "*")
-@Controller
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class ImaginaryEnemyController {
 
     /**
@@ -38,10 +36,12 @@ public class ImaginaryEnemyController {
     @Setter
     private static String alley = "";
 
+    private final FilePackService filePackService;
+
     /**
      * 伙计刺探
      */
-    @GetMapping("/spyGuy/" + "**")
+    @GetMapping("/spyGuy/**")
     public ResponseEntity<Resource> spyElement(@RequestParam String guy) {
         return run(() -> createResourceResponseEntity(searchGuy(alley, guy)));
     }
@@ -81,11 +81,10 @@ public class ImaginaryEnemyController {
         try {
             return runnable.get();
         } catch (Exception e) {
-            return ResponseEntity.status(400)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .contentType(MediaType.parseMediaType("text/plain; charset=utf-8"))
                     .body(e.getMessage());
         }
-
     }
 
     private ResponseEntity<Resource> createResourceResponseEntity(Path filePath) {
@@ -94,21 +93,30 @@ public class ImaginaryEnemyController {
             headers.setContentDisposition(ContentDisposition.attachment()
                     .filename(filePath.getFileName().toString(), StandardCharsets.UTF_8)
                     .build());
-            Resource resource = new UrlResource(filePath.toUri());
+            Resource resource = new FileSystemResource(filePath);
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .headers(headers)
                     .body(resource);
         } catch (Exception e) {
+            log.error("创建资源响应失败", e);
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
     /**
-     * 列出目录下的所有文件
+     * 获取当前基准路径
+     */
+    @GetMapping("/spy/current")
+    public ResponseEntity<Map<String, String>> getCurrentPath() {
+        return ResponseEntity.ok(Map.of("path", alley));
+    }
+
+    /**
+     * 列出目录下的所有文件（结构化数据）
      */
     @GetMapping("/spy/list")
-    public ResponseEntity<List<String>> listFiles(@RequestParam(required = false) String dir) {
+    public ResponseEntity<List<FileInfo>> listFiles(@RequestParam(required = false) String dir) {
         return run(() -> {
             String targetDir = dir != null ? dir : alley;
             File directory = new File(targetDir);
@@ -126,14 +134,70 @@ public class ImaginaryEnemyController {
                 throw new RuntimeException("无法读取目录内容: " + targetDir);
             }
 
-            List<String> fileList = Arrays.stream(files)
-                    .map(file -> {
-                        String type = file.isDirectory() ? "[目录] " : "[文件] ";
-                        return type + file.getName();
-                    })
+            List<FileInfo> fileList = Arrays.stream(files)
+                    .map(file -> FileInfo.builder()
+                            .name(file.getName())
+                            .path(file.getAbsolutePath())
+                            .directory(file.isDirectory())
+                            .size(file.isDirectory() ? 0 : file.length())
+                            .lastModified(file.lastModified())
+                            .build())
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok(fileList);
+        });
+    }
+
+    /**
+     * 打包下载文件/文件夹
+     */
+    @PostMapping("/spy/pack")
+    public ResponseEntity<Resource> packDownload(@RequestBody PackDownloadReq req) {
+        return run(() -> {
+            List<String> paths = req.getPaths();
+            if (paths == null || paths.isEmpty()) {
+                throw new RuntimeException("请选择要打包的文件或文件夹");
+            }
+
+            // 验证所有路径存在且可读
+            for (String pathStr : paths) {
+                Path path = Path.of(pathStr);
+                File file = path.toFile();
+                if (!file.exists()) {
+                    throw new RuntimeException("路径不存在: " + pathStr);
+                }
+                if (!file.canRead()) {
+                    throw new RuntimeException("无法读取: " + pathStr);
+                }
+            }
+
+            // 获取密码信息
+            FilePackService.PasswordInfo passwordInfo = filePackService.getZipPassword();
+
+            // 创建加密 ZIP
+            File zipFile;
+            try {
+                zipFile = filePackService.createEncryptedZip(paths);
+            } catch (Exception e) {
+                throw new RuntimeException("创建压缩包失败: " + e.getMessage());
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(ContentDisposition.attachment()
+                    .filename(zipFile.getName(), StandardCharsets.UTF_8)
+                    .build());
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            // 允许前端读取自定义响应头
+            headers.set("Access-Control-Expose-Headers", "X-Using-Default-Password");
+
+            // 添加是否使用默认密码的响应头
+            if (passwordInfo.usingDefault()) {
+                headers.set("X-Using-Default-Password", "true");
+            }
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(new FileSystemResource(zipFile));
         });
     }
 

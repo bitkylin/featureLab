@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Claude Code ###
+CLAUDE.md
