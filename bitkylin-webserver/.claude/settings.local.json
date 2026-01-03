@@ -6,7 +6,10 @@
       "Bash(sudo apt install:*)",
       "WebSearch",
       "Bash(./gradlew *)",
-      "Bash(./gradlew test:*)"
+      "Bash(./gradlew test:*)",
+      "Bash(./gradlew:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(grep:*)"
     ]
   }
 }

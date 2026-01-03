@@ -63,11 +63,10 @@ public class FilePackService implements IFilePackService {
         // 计算最近公共祖先目录
         Path commonAncestor = findCommonAncestor(sourcePaths);
 
-        try (ZipFile zip = new ZipFile(zipFile)) {
+        // 使用密码创建 ZipFile，密码通过构造函数传入
+        try (ZipFile zip = new ZipFile(zipFile, password.toCharArray())) {
             // 创建加密参数
             ZipParameters parameters = createEncryptionParameters();
-            // 设置密码（必须在添加文件前设置）
-            zip.setPassword(password.toCharArray());
 
             for (String pathStr : sourcePaths) {
                 Path sourcePath = Path.of(pathStr);
@@ -105,6 +104,9 @@ public class FilePackService implements IFilePackService {
      */
     private ZipParameters createEncryptionParameters() {
         ZipParameters parameters = new ZipParameters();
+        // 启用文件加密
+        parameters.setEncryptFiles(true);
+        // 使用 AES 加密
         parameters.setEncryptionMethod(EncryptionMethod.AES);
         parameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
         return parameters;
@@ -113,19 +115,20 @@ public class FilePackService implements IFilePackService {
     /**
      * 添加文件到 ZIP（带自定义路径）
      */
-    private void addFileToZip(ZipFile zip, File file, String entryName, ZipParameters baseParameters) throws IOException {
-        // 为每个文件创建新的 ZipParameters，确保加密设置生效
-        ZipParameters parameters = new ZipParameters();
-        parameters.setFileNameInZip(entryName);
-        parameters.setEncryptionMethod(baseParameters.getEncryptionMethod());
-        parameters.setAesKeyStrength(baseParameters.getAesKeyStrength());
-        zip.addFile(file, parameters);
+    private void addFileToZip(ZipFile zip, File file, String entryName, ZipParameters parameters) throws IOException {
+        // 为每个文件创建新的 ZipParameters，确保加密参数正确
+        ZipParameters fileParams = new ZipParameters();
+        fileParams.setFileNameInZip(entryName);
+        fileParams.setEncryptFiles(parameters.isEncryptFiles());
+        fileParams.setEncryptionMethod(parameters.getEncryptionMethod());
+        fileParams.setAesKeyStrength(parameters.getAesKeyStrength());
+        zip.addFile(file, fileParams);
     }
 
     /**
      * 递归添加文件夹到 ZIP
      */
-    private void addFolderToZip(ZipFile zip, File folder, String entryName, ZipParameters baseParameters) throws IOException {
+    private void addFolderToZip(ZipFile zip, File folder, String entryName, ZipParameters parameters) throws IOException {
         File[] files = folder.listFiles();
 
         if (files == null) {
@@ -136,9 +139,9 @@ public class FilePackService implements IFilePackService {
             String fileEntryName = entryName.isEmpty() ? file.getName() : entryName + "/" + file.getName();
 
             if (file.isDirectory()) {
-                addFolderToZip(zip, file, fileEntryName, baseParameters);
+                addFolderToZip(zip, file, fileEntryName, parameters);
             } else {
-                addFileToZip(zip, file, fileEntryName, baseParameters);
+                addFileToZip(zip, file, fileEntryName, parameters);
             }
         }
     }
