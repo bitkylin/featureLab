@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class FilePackService {
+public class FilePackService implements IFilePackService {
 
     private static final String ZIP_PASSWORD_ENV = "ZIP_DOWNLOAD_PASSWORD";
     private static final String DEFAULT_ZIP_PASSWORD = "bitkylin";
@@ -64,11 +64,10 @@ public class FilePackService {
         Path commonAncestor = findCommonAncestor(sourcePaths);
 
         try (ZipFile zip = new ZipFile(zipFile)) {
-            // 设置密码（zip4j 2.x 使用此方式）
-            zip.setPassword(password.toCharArray());
-
             // 创建加密参数
             ZipParameters parameters = createEncryptionParameters();
+            // 设置密码（必须在添加文件前设置）
+            zip.setPassword(password.toCharArray());
 
             for (String pathStr : sourcePaths) {
                 Path sourcePath = Path.of(pathStr);
@@ -82,6 +81,9 @@ public class FilePackService {
                 // 使用相对路径作为 ZIP 条目名称
                 Path relativePath = commonAncestor.relativize(sourcePath);
                 String entryName = relativePath.toString();
+
+                log.debug("添加文件到ZIP: entryName={}, 加密方式={}, 密钥强度={}",
+                        entryName, parameters.getEncryptionMethod(), parameters.getAesKeyStrength());
 
                 if (sourceFile.isDirectory()) {
                     addFolderToZip(zip, sourceFile, entryName, parameters);
@@ -111,15 +113,19 @@ public class FilePackService {
     /**
      * 添加文件到 ZIP（带自定义路径）
      */
-    private void addFileToZip(ZipFile zip, File file, String entryName, ZipParameters parameters) throws IOException {
+    private void addFileToZip(ZipFile zip, File file, String entryName, ZipParameters baseParameters) throws IOException {
+        // 为每个文件创建新的 ZipParameters，确保加密设置生效
+        ZipParameters parameters = new ZipParameters();
         parameters.setFileNameInZip(entryName);
+        parameters.setEncryptionMethod(baseParameters.getEncryptionMethod());
+        parameters.setAesKeyStrength(baseParameters.getAesKeyStrength());
         zip.addFile(file, parameters);
     }
 
     /**
      * 递归添加文件夹到 ZIP
      */
-    private void addFolderToZip(ZipFile zip, File folder, String entryName, ZipParameters parameters) throws IOException {
+    private void addFolderToZip(ZipFile zip, File folder, String entryName, ZipParameters baseParameters) throws IOException {
         File[] files = folder.listFiles();
 
         if (files == null) {
@@ -130,9 +136,9 @@ public class FilePackService {
             String fileEntryName = entryName.isEmpty() ? file.getName() : entryName + "/" + file.getName();
 
             if (file.isDirectory()) {
-                addFolderToZip(zip, file, fileEntryName, parameters);
+                addFolderToZip(zip, file, fileEntryName, baseParameters);
             } else {
-                addFileToZip(zip, file, fileEntryName, parameters);
+                addFileToZip(zip, file, fileEntryName, baseParameters);
             }
         }
     }
