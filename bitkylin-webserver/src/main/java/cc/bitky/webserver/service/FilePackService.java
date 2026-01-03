@@ -22,7 +22,7 @@ import java.util.List;
 public class FilePackService {
 
     private static final String ZIP_PASSWORD_ENV = "ZIP_DOWNLOAD_PASSWORD";
-    private static final String DEFAULT_ZIP_PASSWORD = "123lml123";
+    private static final String DEFAULT_ZIP_PASSWORD = "bitkylin";
 
     /**
      * 获取 ZIP 密码
